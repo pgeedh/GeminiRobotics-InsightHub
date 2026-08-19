@@ -28,10 +28,18 @@ class TestGeminiRoboticsHub(unittest.TestCase):
             'docs/architecture_3d_explainer.html',
             'assets/gemini_robotics_architecture.svg',
             'assets/benchmark_comparison.svg',
-            'assets/demo_apollo_wholebody.svg',
-            'assets/demo_spot_inspection.svg',
-            'assets/demo_franka_bimanual.svg',
-            'assets/demo_video_slip_recovery.svg',
+            'assets/clip_apollo_wholebody.gif',
+            'assets/clip_apollo_wholebody.png',
+            'assets/clip_franka_dexterity.gif',
+            'assets/clip_franka_dexterity.png',
+            'assets/clip_multi_robot.gif',
+            'assets/clip_multi_robot.png',
+            'assets/clip_er_embodied_reasoning.gif',
+            'assets/clip_er_embodied_reasoning.png',
+            'assets/clip_vla_motor.gif',
+            'assets/clip_vla_motor.png',
+            'assets/clip_ondevice_adaptation.gif',
+            'assets/clip_ondevice_adaptation.png',
             'BENCHMARKS.md',
             'EMBODIED_REASONING_TIPS.md',
             'cli.py',
@@ -40,6 +48,7 @@ class TestGeminiRoboticsHub(unittest.TestCase):
             'INTERESTING_PROMPTS.md',
             'RESOURCES.md'
         ]
+
         for f in required_files:
             path = os.path.join(ROOT_DIR, f)
             self.assertTrue(os.path.exists(path), f"Missing required file: {f}")

@@ -49,21 +49,26 @@ Gemini Robotics operates on a **Hierarchical Dual-Model Paradigm**:
 
 ---
 
-## 🎥 Official Video Demonstrations & Animated Robotic Telemetry Clips
+## 🎥 Official DeepMind Robotics Video Showcase & Live Clips
 
-Watch Gemini Robotics ER 2 in action across whole-body humanoids, quadrupeds, bi-arm manipulators, and real-time video audit pipelines:
+Direct video captures and high-fidelity demonstrations from Google DeepMind's [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) release:
 
 <div align="center">
 
-| 🦾 **1. Whole-Body Humanoid Manipulation (Apollo 2)** | 📟 **2. Industrial Metrology & Gauge Inspection (Spot)** |
+| 🦾 **1. Whole-Body Humanoid Manipulation (Apollo 2)** | 🤝 **2. High-Precision Bi-Arm Dexterity (Franka F3)** |
 | :---: | :---: |
-| [![Apollo 2 Whole Body](./assets/demo_apollo_wholebody.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Spot Gauge Reading](./assets/demo_spot_inspection.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Whole-body humanoid control: crouching, carrying heavy totes, balancing center-of-gravity, and handovers.* <br> [▶ Watch DeepMind Humanoid Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Spot inspects analog pressure gauges, digital meters, and fluid sight glasses with 98% reading accuracy.* <br> [▶ Watch Spot Metrology Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| [![Apollo 2 Whole Body](./assets/clip_apollo_wholebody.gif)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Franka Dexterity](./assets/clip_franka_dexterity.gif)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| *Apptronik Apollo 2 whole-body humanoid control: crouching, carrying totes, balancing center-of-gravity, and handovers.* <br> [▶ Watch DeepMind Humanoid Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Two Franka arms synchronize fine manipulation: screwing light bulbs, peg-in-hole insertion, and folding fabrics.* <br> [▶ Watch Franka Bimanual Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
 
-| 🤝 **3. High-Precision Bi-Arm Assembly (Franka Duo)** | 🎬 **4. Continuous Video Grasp Slip Recovery** |
+| 🤝 **3. Multi-Robot Heterogeneous Fleet Teamwork** | 🧠 **4. Embodied Reasoning (ER 2) Spatial Grounding** |
 | :---: | :---: |
-| [![Franka Duo Teamwork](./assets/demo_franka_bimanual.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Video Failure Detection](./assets/demo_video_slip_recovery.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Two Franka arms synchronize fine manipulation: screwing light bulbs, peg-in-hole insertion, and folding fabrics.* <br> [▶ Watch Franka Bimanual Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Ingests continuous 30fps video to catch tactile slippage, container tipping, or misalignments mid-execution.* <br> [▶ Watch Slip Recovery Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| [![Multi-Robot Teamwork](./assets/clip_multi_robot.gif)](https://deepmind.google/models/gemini-robotics/) | [![Embodied Reasoning](./assets/clip_er_embodied_reasoning.gif)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| *Synchronized collaborative workflows between Humanoids, AMR mobile rovers, and quadrupeds.* <br> [▶ Watch Multi-Robot Fleet Video](https://deepmind.google/models/gemini-robotics/) | *3D metric bounding boxes, continuous video slip detection, gauge reading, and long-horizon goal decomposition.* <br> [▶ Watch Embodied Reasoning Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+
+| ⚡ **5. Vision-Language-Action (VLA) Motor Control** | 🚀 **6. On-Device Edge Policy Adaptation (~2.5h)** |
+| :---: | :---: |
+| [![VLA Motor Control](./assets/clip_vla_motor.gif)](https://deepmind.google/models/gemini-robotics/) | [![On-Device Adaptation](./assets/clip_ondevice_adaptation.gif)](https://deepmind.google/models/gemini-robotics/) |
+| *High-frequency motor actions for full humanoid bodies and arms without "stop-and-think" latency.* <br> [▶ Watch VLA Policy Video](https://deepmind.google/models/gemini-robotics/) | *Rapid adaptation of Gemini Robotics edge policies for custom grippers and hardware in ~2.5 hours.* <br> [▶ Watch On-Device Video](https://deepmind.google/models/gemini-robotics/) |
 
 </div>
 
