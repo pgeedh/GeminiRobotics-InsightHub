@@ -49,30 +49,26 @@ Gemini Robotics operates on a **Hierarchical Dual-Model Paradigm**:
 
 ---
 
-## 🎥 Official Video Demonstration Showcase
+## 🎥 Official Video Demonstrations & Animated Robotic Telemetry Clips
 
-Official robotic demonstration showcases powered by Gemini Robotics ER 2 across diverse hardware platforms:
+Watch Gemini Robotics ER 2 in action across whole-body humanoids, quadrupeds, bi-arm manipulators, and real-time video audit pipelines:
 
 <div align="center">
 
-| 🐕 **1. Boston Dynamics Spot: Search & Retrieval** | 📟 **2. Boston Dynamics Spot: Industrial Gauge Inspection** |
+| 🦾 **1. Whole-Body Humanoid Manipulation (Apollo 2)** | 📟 **2. Industrial Metrology & Gauge Inspection (Spot)** |
 | :---: | :---: |
-| [![Spot Object Retrieval](https://img.shields.io/badge/▶_DeepMind_Demo-Spot_Autonomous_Search-FF0000?style=for-the-badge&logo=youtube)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Spot Gauge Reading](https://img.shields.io/badge/▶_DeepMind_Demo-Spot_Industrial_Metrology-FF0000?style=for-the-badge&logo=youtube)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Spot navigates unstructured environments, calls the Spot Arm API, and retrieves target objects via natural language.* | *Spot inspects analog pressure gauges, digital meters, and fluid sight glasses with 98% reading accuracy.* |
+| [![Apollo 2 Whole Body](./assets/demo_apollo_wholebody.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Spot Gauge Reading](./assets/demo_spot_inspection.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| *Whole-body humanoid control: crouching, carrying heavy totes, balancing center-of-gravity, and handovers.* <br> [▶ Watch DeepMind Humanoid Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Spot inspects analog pressure gauges, digital meters, and fluid sight glasses with 98% reading accuracy.* <br> [▶ Watch Spot Metrology Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
 
-| 🦾 **3. Apptronik Apollo 2: Whole-Body Humanoid** | 🤝 **4. Franka F3 Duo: Bi-Arm Dexterous Collaboration** |
+| 🤝 **3. High-Precision Bi-Arm Assembly (Franka Duo)** | 🎬 **4. Continuous Video Grasp Slip Recovery** |
 | :---: | :---: |
-| [![Apollo 2 Whole Body](https://img.shields.io/badge/▶_DeepMind_Demo-Apptronik_Apollo_2_Humanoid-FF0000?style=for-the-badge&logo=youtube)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Franka Duo Teamwork](https://img.shields.io/badge/▶_DeepMind_Demo-Franka_F3_Duo_Teamwork-FF0000?style=for-the-badge&logo=youtube)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Whole-body humanoid control: crouching, carrying heavy totes, balancing center-of-gravity, and handovers.* | *Two Franka arms synchronize fine manipulation: screwing light bulbs, peg-in-hole insertion, and folding fabrics.* |
-
-| 🍳 **5. ALOHA 2: Tabletop Bimanual Manipulation** | ⚡ **6. Gemini Live API: Real-Time Bidirectional Video** |
-| :---: | :---: |
-| [![ALOHA 2 Bimanual](https://img.shields.io/badge/▶_DeepMind_Demo-ALOHA_2_Tabletop_Dexterity-blue?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Gemini Live API](https://img.shields.io/badge/▶_DeepMind_Demo-Gemini_Live_Video_Stream-green?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Dual-arm teleoperation and autonomous manipulation for delicate kitchen tasks with dynamic perturbation recovery.* | *Ultra-low latency live video streaming showing real-time spatial pointing, segmentation, and voice guidance.* |
+| [![Franka Duo Teamwork](./assets/demo_franka_bimanual.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Video Failure Detection](./assets/demo_video_slip_recovery.svg)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| *Two Franka arms synchronize fine manipulation: screwing light bulbs, peg-in-hole insertion, and folding fabrics.* <br> [▶ Watch Franka Bimanual Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Ingests continuous 30fps video to catch tactile slippage, container tipping, or misalignments mid-execution.* <br> [▶ Watch Slip Recovery Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
 
 </div>
 
 ---
+
 
 ## 📊 Official Benchmarks: ER 1.5 vs. Gemini Robotics ER 2
 
