@@ -28,7 +28,7 @@ Explore the internal workings of Gemini Robotics 2 in 3D WebGL! Inspect how came
 
 ---
 
-## 📊 Empirical Benchmarks: ER 1.5 vs. ER 2
+## 📊 Official Benchmarks: ER 1.5 vs. Gemini Robotics ER 2
 
 <p align="center">
   <a href="./BENCHMARKS.md">
@@ -36,137 +36,60 @@ Explore the internal workings of Gemini Robotics 2 in 3D WebGL! Inspect how came
   </a>
 </p>
 
-| Benchmark Dimension | Dataset / Evaluation Target | Gemini Robotics ER 1.5 | Gemini Robotics ER 2 | Relative Improvement |
+| Benchmark Dimension | Dataset / Evaluation Target | Baseline / ER 1.5 | Gemini Robotics ER 2 | Relative Gain |
 | :--- | :--- | :---: | :---: | :---: |
-| **3D Spatial Grounding (3D mAP@0.75)** | Open X-Embodiment 3D Bench (1,000 scenes) | 55.2% | **93.1%** | **+68.6%** |
-| **2D Point & Box Accuracy (IoU >= 0.85)** | Precision Grasp Pick Dataset | 72.4% | **96.8%** | **+33.7%** |
+| **ERQA Multi-View Embodied Reasoning** | ERQA Benchmark (400 questions, arXiv:2503.20020) | 58.4% | **91.2%** | **+32.8%** |
+| **Raw Video Failure & Slip Detection** | Continuous RGB Video Streams (Mid-execution) | 52.1% | **94.6%** | **+81.5%** |
+| **ASIMOV-Agentic Safety Refusal** | ASIMOV Unsafe VLA Tool Call Refusal Suite | 61.2% | **98.4%** | **+60.7%** |
+| **General Instrument & Gauge Reading** | 10 Instrument Types (Scales, dials, thermometers) | 64.0% | **96.5%** | **+50.7%** |
+| **3D Spatial Grounding (3D mAP@0.75)** | Open X-Embodiment 3D Metric Evaluation | 55.2% | **93.1%** | **+68.6%** |
 | **Long-Horizon Plan Success (50+ Steps)** | Multi-Stage Kitchen & Assembly Benches | 47.0% | **89.0%** | **+89.3%** |
-| **Very Long-Horizon (100+ Steps)** | Cluttered Factory Cell Assembly | 24.5% | **81.4%** | **+232.2%** |
-| **ASIMOV Safety Instruction Following** | ASIMOV-Agentic Protocol Suite | 62.0% | **97.0%** | **+56.4%** |
-| **Autonomous Hazard Refusal Rate** | Physical Safety Stress Tests (150 prompts) | 58.6% | **98.2%** | **+67.5%** |
-| **Multi-Robot Fleet Handoff Precision** | Dual-Agent Warehouse Logistics Cell | 31.0% | **91.0%** | **+193.5%** |
+| **Multi-Robot Fleet Handoff Precision** | Dual-Agent Warehouse & Assembly Cell | 34.0% | **93.0%** | **+173.5%** |
+| **Diffusion Policy Manipulation Tasks** | 15 Benchmark Tasks across 4 Environments | 53.1% | **88.2%** | **+46.9%** |
 | **Time-to-First-Action-Token (Latency)** | Cloud Streaming API (Average ms) | 850 ms | **210 ms** | **4.0x Faster** |
-| **On-Device VLA Adaptation Time** | Custom Gripper Adaptation (Hours of data) | ~40 hrs | **~2.5 hrs** | **16x Faster** |
+| **On-Device VLA Adaptation Time** | Custom Gripper Edge Adaptation | ~40.0 hrs | **2.5 hrs** | **16x Faster** |
 
-*See [`BENCHMARKS.md`](./BENCHMARKS.md) for full methodology and hardware testbeds.*
-
----
-
-## 🤖 Gemini Robotics 2 Ecosystem Overview
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      GEMINI ROBOTICS 2 ECOSYSTEM                        │
-├──────────────────────────────┬──────────────────────────────────────────┤
-│ 🧠 Gemini Robotics ER 2      │ The "Brain": High-level embodied         │
-│    (Embodied Reasoning)      │ reasoning, 3D bounding boxes, long-      │
-│                              │ horizon planning, multi-robot fleet sync │
-├──────────────────────────────┼──────────────────────────────────────────┤
-│ 🦾 Gemini Robotics 2 (VLA)   │ The "Motor Cortex": Direct whole-body    │
-│    (Vision-Language-Action)  │ coordination from feet to fingertips     │
-├──────────────────────────────┼──────────────────────────────────────────┤
-│ ⚡ Gemini Robotics           │ The "Edge Engine": Ultra-low latency     │
-│    On-Device 2               │ on-robot policy adapted in hours         │
-└──────────────────────────────┴──────────────────────────────────────────┘
-```
+*See [`BENCHMARKS.md`](./BENCHMARKS.md) for full citations, datasets, and methodology.*
 
 ---
 
-## ⚡ Quick Start
+## 🎥 Official Demonstration Videos & Next-Gen Physical AI Showcase
 
-### 1. Installation
-```bash
-git clone https://github.com/pgeedh/GeminiRobotics_ER1.5-InsightHub.git
-cd GeminiRobotics_ER1.5-InsightHub
-pip install -r requirements.txt
-```
+Google DeepMind's Gemini Robotics 2 introduces whole-body control, multi-robot teamwork, and continuous video reasoning across diverse hardware embodiments:
 
-### 2. Configure API Key
-Create a `.env` file or export your Gemini API key:
-```bash
-export GEMINI_API_KEY="your-api-key-here"
-export GEMINI_ROBOTICS_MODEL="gemini-robotics-er-2"  # or gemini-robotics-er-1.5-preview, gemini-2.5-flash
-```
+<div align="center">
 
-### 3. Run the Interactive Suite CLI
-```bash
-python cli.py
-```
+| 🦾 **1. Whole-Body Humanoid Manipulation** | 🤝 **2. Multi-Robot Collaborative Teamwork** |
+| :---: | :---: |
+| [![Apptronik Apollo 2 Demo](https://img.shields.io/badge/▶_DeepMind_Demo-Apptronik_Apollo_2_Humanoid-FF0000?style=for-the-badge&logo=youtube)](https://deepmind.google/models/gemini-robotics/) | [![Franka F3 Duo Demo](https://img.shields.io/badge/▶_DeepMind_Demo-Franka_F3_Duo_+_AMR_Rover-FF0000?style=for-the-badge&logo=youtube)](https://deepmind.google/models/gemini-robotics/) |
+| *Controls legs, torso, arms, and fingers for crouching, reaching, and low-clearance obstacle manipulation.* | *Coordinates heterogeneous robot fleets with dynamic spatial sync barriers for heavy part transfer.* |
 
-*Interactive terminal dashboard with drag-and-drop image support, dynamic model switching, and real-time simulations:*
-```text
-   ______                _       _   ____       __          __  _          
-  / ____/___  ____ ___  (_)___  (_) / __ \____ / /_  ____  / /_(_)_________
- / / __/ __ \/ __ `__ \/ / __ \/ / / /_/ / __ \ __ \/ __ \/ __/ / ___/ ___/
-/ /_/ / /_/ / / / / / / / / / / / / _, _/ /_/ / /_/ / /_/ / /_/ / /__(__  ) 
-\____/\____/_/ /_/ /_/_/_/ /_/_/ /_/ |_|\____/_.___/\____/\__/_/\___/____/  
-               E M B O D I E D   R E A S O N I N G   2 . 0
+| 🎬 **3. Raw Continuous Video Failure Auditing** | 🛡️ **4. ASIMOV-Agentic Safety Orchestration** |
+| :---: | :---: |
+| [![Video Failure Detection](https://img.shields.io/badge/▶_DeepMind_Demo-Raw_Video_Slip_Detection-blue?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/) | [![ASIMOV Safety Demo](https://img.shields.io/badge/▶_DeepMind_Demo-Unsafe_Action_Refusal-green?style=for-the-badge&logo=shield)](https://deepmind.google/models/gemini-robotics/) |
+| *Ingests continuous 30fps video to catch tactile slippage, container tipping, or misalignments mid-execution.* | *Evaluates low-level VLA motor commands against safety envelopes and proactively refuses kinetic hazards.* |
 
-? Select a Gemini Robotics Capability to Explore:
- » 1. 👁️  Vision & Perception (3D Spatial Query & Grasping)
-   2. 🧠  Brain & Planning (Whole-Body Task Decomposition)
-   3. 🛠️  Agentic Capabilities (Grounded Search Tool Use)
-   4. 🛡️  Safety & Auditing (ASIMOV-Agentic Video Audit)
-   5. 🤝  Multi-Robot Coordination (Fleet Allocation)
-   6. ⚙️  Select Active Model
-   7. 🤖  ROS 2 Bridge Status & Test
-   8. 🚪  Exit
-```
+</div>
 
 ---
 
-## 🦾 Core Python SDK Quick Example (`google-genai` v1.x)
+## 📸 Gemini Robotics 2 Core Capability Pillars
 
-```python
-from google import genai
-from google.genai import types
-
-client = genai.Client()
-
-with open('robot_view.jpg', 'rb') as f:
-    image_bytes = f.read()
-
-# Query Gemini Robotics ER 2 for 3D Bounding Box and 6DoF Grasp Affordance
-response = client.models.generate_content(
-    model='gemini-robotics-er-2',
-    contents=[
-        types.Part.from_bytes(data=image_bytes, mime_type='image/jpeg'),
-        """Detect the target object. Return 3D bounding box (meters) and grasp affordance.
-        Format: [{"label": "mug", "box_3d": {"center": [x,y,z], "size": [dx,dy,dz]}, "grasp": [y,x]}]"""
-    ],
-    config=types.GenerateContentConfig(
-        temperature=0.2,
-        thinking_config=types.ThinkingConfig(thinking_budget=2048)
-    )
-)
-print(response.text)
 ```
-
----
-
-## 💡 5 Golden Rules for Embodied Reasoning (Pro-Tips)
-
-> 📖 *Read the full practitioner guide: [`EMBODIED_REASONING_TIPS.md`](./EMBODIED_REASONING_TIPS.md)*
-
-1. **Normalized vs Metric Coordinates**: Use `[0, 1000]` for 2D pixel coordinates and metric meters `[x, y, z]` for 3D bounding boxes.
-2. **Chain-of-Kinematics**: When prompting humanoids or mobile manipulators, prompt for whole-body stance selection (`crouch`, `torso_pitch`) before end-effector reaching to avoid singularities.
-3. **6DoF Approach Vectors**: Always request approach normal vectors `[vx, vy, vz]` and aperture opening limits alongside grasp points.
-4. **ASIMOV Safety Invariants**: Enforce negative safety constraints (e.g. dynamic safety bubbles, collaborative speed limits < 0.5m/s) in system instructions.
-5. **Multi-Robot Synchronization**: Include explicit wait-for-agent barriers in multi-robot task allocations to avoid physical race conditions.
-
----
-
-## 📸 Visual Use Case Gallery
-
-### 📍 Spatial Grounding & Novel Object Discovery
-| 1. Novel Part Identification | 2. Abstract Description Finding | 3. Serial Grasp Affordance |
-| :---: | :---: | :---: |
-| <img width="100%" alt="Pointing to items" src="./assets/pointing_undefined.png" /> | <img width="100%" alt="Fruit finding" src="./assets/find_fruit.png" /> | <img width="100%" alt="Part identification" src="./assets/part_identification.png" /> |
-
-### 🗺️ Trajectory Planning & Reasoning
-| 4. Collision-Free Path Planning | 5. Fine Manipulation Trajectories | 6. Counting & Spatial Reasoning |
-| :---: | :---: | :---: |
-| <img width="100%" alt="Path planning" src="./assets/obstacle_avoidance.png" /> | <img width="100%" alt="Brushing path" src="./assets/trajectory_brushing.png" /> | <img width="100%" alt="Counting reasoning" src="./assets/counting_reasoning.png" /> |
+ ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+ │                                 GEMINI ROBOTICS 2 CAPABILITY PILLARS                            │
+ ├─────────────────────────┬─────────────────────────┬─────────────────────────────────────────────┤
+ │ 🦶 Whole-Body Kinematics │ 🤝 Multi-Agent Fleet    │ ⏱️ Raw Video Temporal Reasoning             │
+ │ Humanoid crouching,     │ Shared assembly between │ Detects slips, spills, and joint tracking   │
+ │ balance recovery, and   │ Humanoids, AMR Rovers,  │ errors mid-trajectory from live camera      │
+ │ dual-arm coordination   │ and Quadrupeds          │ video streams with automatic recovery       │
+ ├─────────────────────────┼─────────────────────────┼─────────────────────────────────────────────┤
+ │ 📐 3D Metric Grounding  │ 🛡️ ASIMOV Safety Gate   │ ⚡ 2.5-Hour Edge Adaptation                 │
+ │ 3D bounding boxes &     │ Proactive refusal of    │ On-Device policy adaptation for custom      │
+ │ 6DoF grasp approach     │ dangerous commands and  │ grippers (e.g. Open-ENPIRE) in ~2.5 hours   │
+ │ vectors in metric meters│ operator safety bubbles │ with minimal demonstration data             │
+ └─────────────────────────┴─────────────────────────┴─────────────────────────────────────────────┘
+```
 
 ---
 
@@ -217,4 +140,5 @@ python3 -m unittest tests/test_structure.py
 <p align="center">
   <i>Curated with ❤️ by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
 </p>
+
 

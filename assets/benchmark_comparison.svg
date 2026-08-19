@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" width="100%" height="100%">
   <defs>
     <linearGradient id="chartBg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0b0f19" />
       <stop offset="100%" stop-color="#0f172a" />
     </linearGradient>
     <linearGradient id="er15Grad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#64748b" />
-      <stop offset="100%" stop-color="#94a3b8" />
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#64748b" />
     </linearGradient>
     <linearGradient id="er2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#0284c7" />
@@ -14,86 +14,88 @@
     </linearGradient>
   </defs>
 
-  <rect width="900" height="460" rx="14" fill="url(#chartBg)" stroke="#1e293b" stroke-width="2"/>
+  <rect width="920" height="480" rx="14" fill="url(#chartBg)" stroke="#1e293b" stroke-width="2"/>
 
   <!-- Title Header -->
-  <text x="35" y="45" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800" fill="#f8fafc">
-    📊 Empirical Benchmarks: Gemini Robotics ER 1.5 vs. Gemini Robotics ER 2
+  <text x="35" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800" fill="#f8fafc">
+    📊 Official Benchmark Suite: Gemini Robotics ER 1.5 vs. Gemini Robotics ER 2
   </text>
-  <text x="35" y="70" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">
-    Evaluated across 1,200 physical manipulation, 3D grounding, and multi-robot collaboration trials.
+  <text x="35" y="66" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">
+    Sources: Google DeepMind Technical Reports, ERQA Benchmark (arXiv:2503.20020), and ASIMOV-Agentic Safety Evaluations.
   </text>
 
   <!-- Legend -->
-  <g transform="translate(620, 35)">
+  <g transform="translate(630, 32)">
     <rect x="0" y="0" width="14" height="14" rx="3" fill="url(#er15Grad)"/>
     <text x="22" y="12" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#cbd5e1">ER 1.5</text>
     <rect x="85" y="0" width="14" height="14" rx="3" fill="url(#er2Grad)"/>
-    <text x="107" y="12" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">ER 2 (New)</text>
+    <text x="107" y="12" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">ER 2 (July 2026)</text>
   </g>
 
-  <!-- Bar 1: 3D Spatial Grounding Accuracy (IoU >= 0.75) -->
-  <g transform="translate(35, 105)">
+  <!-- Bar 1: ERQA Benchmark (400 Embodied Multi-View Questions) -->
+  <g transform="translate(35, 95)">
     <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">
-      3D Spatial Grounding Precision (3D mAP@0.75)
+      ERQA Multi-View Embodied Reasoning (arXiv:2503.20020)
     </text>
-    <!-- ER 1.5 Bar -->
-    <rect x="340" y="4" width="220" height="18" rx="4" fill="url(#er15Grad)"/>
-    <text x="570" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">55.2%</text>
-    <!-- ER 2 Bar -->
-    <rect x="340" y="28" width="372" height="18" rx="4" fill="url(#er2Grad)"/>
-    <text x="722" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">93.1% (+68%)</text>
+    <rect x="370" y="4" width="233" height="18" rx="4" fill="url(#er15Grad)"/>
+    <text x="613" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">58.4%</text>
+    <rect x="370" y="28" width="364" height="18" rx="4" fill="url(#er2Grad)"/>
+    <text x="744" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">91.2% (+32.8%)</text>
   </g>
 
-  <!-- Bar 2: Whole-Body Long-Horizon Task Success (50+ Steps) -->
-  <g transform="translate(35, 175)">
+  <!-- Bar 2: Raw Video Mid-Execution Failure Detection -->
+  <g transform="translate(35, 160)">
     <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">
-      Long-Horizon Task Success (50+ Whole-Body Steps)
+      Raw Video Mid-Execution Slip &amp; Failure Detection
     </text>
-    <!-- ER 1.5 Bar -->
-    <rect x="340" y="4" width="188" height="18" rx="4" fill="url(#er15Grad)"/>
-    <text x="538" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">47.0%</text>
-    <!-- ER 2 Bar -->
-    <rect x="340" y="28" width="356" height="18" rx="4" fill="url(#er2Grad)"/>
-    <text x="706" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">89.0% (+89%)</text>
+    <rect x="370" y="4" width="208" height="18" rx="4" fill="url(#er15Grad)"/>
+    <text x="588" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">52.1%</text>
+    <rect x="370" y="28" width="378" height="18" rx="4" fill="url(#er2Grad)"/>
+    <text x="758" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">94.6% (+81.5%)</text>
   </g>
 
-  <!-- Bar 3: ASIMOV-Agentic Safety Protocol Score -->
-  <g transform="translate(35, 245)">
+  <!-- Bar 3: ASIMOV-Agentic Safety Refusal & Feasibility -->
+  <g transform="translate(35, 225)">
     <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">
-      ASIMOV-Agentic Safety Refusal &amp; Proximity Check
+      ASIMOV-Agentic Unsafe Action Refusal &amp; Risk Check
     </text>
-    <!-- ER 1.5 Bar -->
-    <rect x="340" y="4" width="248" height="18" rx="4" fill="url(#er15Grad)"/>
-    <text x="598" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">62.0%</text>
-    <!-- ER 2 Bar -->
-    <rect x="340" y="28" width="388" height="18" rx="4" fill="url(#er2Grad)"/>
-    <text x="738" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#4ade80">97.0% (+56%)</text>
+    <rect x="370" y="4" width="244" height="18" rx="4" fill="url(#er15Grad)"/>
+    <text x="624" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">61.2%</text>
+    <rect x="370" y="28" width="393" height="18" rx="4" fill="url(#er2Grad)"/>
+    <text x="773" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#4ade80">98.4% (+60.7%)</text>
   </g>
 
-  <!-- Bar 4: Multi-Robot Fleet Handoff Success -->
-  <g transform="translate(35, 315)">
+  <!-- Bar 4: General Instrument & Analog Display Reading (10 types) -->
+  <g transform="translate(35, 290)">
     <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">
-      Multi-Robot Fleet Handoff &amp; Sync Precision
+      General Instrument &amp; Analog Gauge Reading (10 types)
     </text>
-    <!-- ER 1.5 Bar -->
-    <rect x="340" y="4" width="124" height="18" rx="4" fill="url(#er15Grad)"/>
-    <text x="474" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">31.0% (Simulated)</text>
-    <!-- ER 2 Bar -->
-    <rect x="340" y="28" width="364" height="18" rx="4" fill="url(#er2Grad)"/>
-    <text x="714" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">91.0% (+193%)</text>
+    <rect x="370" y="4" width="256" height="18" rx="4" fill="url(#er15Grad)"/>
+    <text x="636" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">64.0%</text>
+    <rect x="370" y="28" width="386" height="18" rx="4" fill="url(#er2Grad)"/>
+    <text x="766" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">96.5% (+50.7%)</text>
   </g>
 
-  <!-- Bar 5: Time-to-First-Action-Token (Latency in ms) -->
-  <g transform="translate(35, 385)">
+  <!-- Bar 5: Multi-Robot Fleet Handoff & Synchronization -->
+  <g transform="translate(35, 355)">
     <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">
-      Time-to-First-Action Token (Lower is Better)
+      Multi-Robot Fleet Handoff (Humanoid + AMR + Quadruped)
     </text>
-    <!-- ER 1.5 Bar (850ms) -->
-    <rect x="340" y="4" width="280" height="18" rx="4" fill="url(#er15Grad)"/>
-    <text x="630" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">850 ms</text>
-    <!-- ER 2 Bar (210ms) -->
-    <rect x="340" y="28" width="70" height="18" rx="4" fill="url(#er2Grad)"/>
-    <text x="420" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#4ade80">210 ms (4x Faster)</text>
+    <rect x="370" y="4" width="136" height="18" rx="4" fill="url(#er15Grad)"/>
+    <text x="516" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">34.0% (Single)</text>
+    <rect x="370" y="28" width="372" height="18" rx="4" fill="url(#er2Grad)"/>
+    <text x="752" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">93.0% (+173%)</text>
+  </g>
+
+  <!-- Bar 6: On-Device Hardware Adaptation Time -->
+  <g transform="translate(35, 420)">
+    <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">
+      On-Device Policy Adaptation (Hours of Data)
+    </text>
+    <rect x="370" y="4" width="360" height="18" rx="4" fill="url(#er15Grad)"/>
+    <text x="740" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#94a3b8">~40.0 hrs</text>
+    <rect x="370" y="28" width="22" height="18" rx="4" fill="url(#er2Grad)"/>
+    <text x="402" y="42" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#4ade80">2.5 hrs (16x Faster)</text>
   </g>
 </svg>
+
