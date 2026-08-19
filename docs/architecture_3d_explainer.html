@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Robotics 2 — Interactive 3D Architecture & Spatial Explainer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .hud-panel {
+            position: absolute;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        #header-panel {
+            top: 20px;
+            left: 20px;
+            max-width: 420px;
+        }
+        #header-panel h1 {
+            font-size: 1.25rem;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        #header-panel p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+        #controls-panel {
+            bottom: 20px;
+            left: 20px;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        button:hover {
+            background: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+        button.active {
+            background: #0284c7;
+            color: white;
+            border-color: #38bdf8;
+        }
+        #token-panel {
+            top: 20px;
+            right: 20px;
+            width: 380px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        #token-panel h2 {
+            font-size: 0.95rem;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .code-block {
+            background: #090d16;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.75rem;
+            color: #a5f3fc;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        .stage-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #22c55e;
+            color: #0f172a;
+            font-weight: bold;
+        }
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            display: flex;
+            gap: 16px;
+            z-index: 10;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-color {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+    </style>
+    <!-- Three.js & OrbitControls from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <!-- Header Panel -->
+    <div class="hud-panel" id="header-panel">
+        <h1>
+            <span>🤖 Gemini Robotics 2</span>
+            <span class="badge">ER 2.0 3D</span>
+        </h1>
+        <p>Interactive 3D Physical AI & Spatial Grounding Explainer. Click pipeline stages to inspect how visual scene tokens map to 3D bounding boxes and whole-body arm trajectories.</p>
+    </div>
+
+    <!-- Stage Controls Panel -->
+    <div class="hud-panel" id="controls-panel">
+        <span class="stage-pill">PIPELINE EXECUTION STAGE</span>
+        <div class="btn-group">
+            <button id="stage-1" class="active" onclick="setStage(1)">👁️ 1. RGB-D Scan</button>
+            <button id="stage-2" onclick="setStage(2)">📦 2. 3D Grounding</button>
+            <button id="stage-3" onclick="setStage(3)">🧠 3. ER 2 Planning</button>
+            <button id="stage-4" onclick="setStage(4)">🦾 4. VLA Execution</button>
+            <button id="stage-5" onclick="setStage(5)">🛡️ 5. ASIMOV Safety</button>
+        </div>
+        <div class="btn-group" style="margin-top: 4px;">
+            <button onclick="toggleMotion()">▶️ Animate Grasp Trajectory</button>
+            <button onclick="resetCamera()">🔄 Reset 3D View</button>
+        </div>
+    </div>
+
+    <!-- Live Token Telemetry Panel -->
+    <div class="hud-panel" id="token-panel">
+        <h2>
+            <span id="token-title">1. RGB-D Scene Perception</span>
+            <span style="font-size: 0.75rem; color: #22c55e;">● 20 Hz</span>
+        </h2>
+        <div class="code-block" id="token-content">// Camera RGB-D Stream Received
+{
+  "camera_frame_id": "head_rgbd_sensor",
+  "resolution": "1920x1080 @ 30fps",
+  "point_cloud_points": 307200,
+  "intrinsics_matrix": [
+    [915.2, 0.0, 960.0],
+    [0.0, 914.8, 540.0],
+    [0.0, 0.0, 1.0]
+  ]
+}</div>
+    </div>
+
+    <!-- Legend -->
+    <div id="legend">
+        <div class="legend-item"><div class="legend-color" style="background: #38bdf8;"></div><span>Robot Arm</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #f43f5e;"></div><span>3D Target Bounding Box</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #eab308;"></div><span>6DoF Grasp Affordance</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #22c55e;"></div><span>ASIMOV Safety Bubble</span></div>
+    </div>
+
+    <script>
+        // --- 1. THREE.JS SCENE SETUP ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x0b0f19, 0.04);
+
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(3.2, 2.8, 3.5);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 + 0.05;
+        controls.target.set(0, 0.8, 0);
+
+        // --- 2. LIGHTING & ENVIRONMENT ---
+        const ambientLight = new THREE.AmbientLight(0x1e293b, 1.5);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0x38bdf8, 2.0);
+        dirLight.position.set(5, 8, 5);
+        dirLight.castShadow = true;
+        scene.add(dirLight);
+
+        const pointLight = new THREE.PointLight(0x818cf8, 2, 10);
+        pointLight.position.set(-2, 3, -1);
+        scene.add(pointLight);
+
+        // Grid Floor
+        const gridHelper = new THREE.GridHelper(10, 20, 0x0284c7, 0x1e293b);
+        gridHelper.position.y = 0;
+        scene.add(gridHelper);
+
+        // Table / Workstation
+        const tableGeo = new THREE.BoxGeometry(2.0, 0.08, 1.2);
+        const tableMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.6 });
+        const table = new THREE.Mesh(tableGeo, tableMat);
+        table.position.set(0.4, 0.74, 0);
+        table.receiveShadow = true;
+        scene.add(table);
+
+        const legGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.74, 16);
+        const legMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 });
+        [[-0.5, -0.5], [1.3, -0.5], [-0.5, 0.5], [1.3, 0.5]].forEach(([lx, lz]) => {
+            const leg = new THREE.Mesh(legGeo, legMat);
+            leg.position.set(lx, 0.37, lz);
+            scene.add(leg);
+        });
+
+        // --- 3. TARGET OBJECT & 3D BOUNDING BOX ---
+        const targetGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.14, 16);
+        const targetMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.3, metalness: 0.5 });
+        const targetObject = new THREE.Mesh(targetGeo, targetMat);
+        targetObject.position.set(0.45, 0.85, 0);
+        targetObject.castShadow = true;
+        scene.add(targetObject);
+
+        // Wireframe 3D Bounding Box
+        const bboxGeo = new THREE.BoxGeometry(0.18, 0.20, 0.18);
+        const bboxEdges = new THREE.EdgesGeometry(bboxGeo);
+        const bboxMat = new THREE.LineBasicMaterial({ color: 0xf43f5e, linewidth: 2 });
+        const bboxMesh = new THREE.LineSegments(bboxEdges, bboxMat);
+        bboxMesh.position.copy(targetObject.position);
+        scene.add(bboxMesh);
+
+        // 3D Grasp Point & Axis Indicator
+        const graspGroup = new THREE.Group();
+        const graspSphere = new THREE.Mesh(
+            new THREE.SphereGeometry(0.025, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0xeab308 })
+        );
+        graspGroup.add(graspSphere);
+
+        const graspArrow = new THREE.ArrowHelper(
+            new THREE.Vector3(0, 1, 0),
+            new THREE.Vector3(0, 0, 0),
+            0.12,
+            0xeab308,
+            0.04,
+            0.025
+        );
+        graspGroup.add(graspArrow);
+        graspGroup.position.set(0.45, 0.94, 0);
+        scene.add(graspGroup);
+
+        // --- 4. ROBOT MODEL (7-DoF Articulated Kinematic Chain) ---
+        const robotBase = new THREE.Group();
+        robotBase.position.set(-0.5, 0.78, 0);
+        scene.add(robotBase);
+
+        const baseCylinder = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.12, 0.14, 0.10, 24),
+            new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.8, roughness: 0.2 })
+        );
+        robotBase.add(baseCylinder);
+
+        // Joint 1
+        const j1 = new THREE.Group();
+        j1.position.y = 0.08;
+        robotBase.add(j1);
+
+        const link1 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.06, 0.06, 0.35, 16),
+            new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.7, roughness: 0.3 })
+        );
+        link1.position.y = 0.175;
+        j1.add(link1);
+
+        // Joint 2
+        const j2 = new THREE.Group();
+        j2.position.y = 0.35;
+        j1.add(j2);
+
+        const link2 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.05, 0.05, 0.40, 16),
+            new THREE.MeshStandardMaterial({ color: 0x0ea5e9, metalness: 0.7, roughness: 0.3 })
+        );
+        link2.position.y = 0.20;
+        j2.add(link2);
+
+        // Joint 3 (Wrist)
+        const j3 = new THREE.Group();
+        j3.position.y = 0.40;
+        j2.add(j3);
+
+        const link3 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.04, 0.04, 0.20, 16),
+            new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.7, roughness: 0.3 })
+        );
+        link3.position.y = 0.10;
+        j3.add(link3);
+
+        // Open-ENPIRE Gripper Hand Model
+        const gripperGroup = new THREE.Group();
+        gripperGroup.position.y = 0.20;
+        j3.add(gripperGroup);
+
+        const gripperPalm = new THREE.Mesh(
+            new THREE.BoxGeometry(0.09, 0.04, 0.06),
+            new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.9 })
+        );
+        gripperGroup.add(gripperPalm);
+
+        const fingerMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.2 });
+        const fingerL = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.08, 0.03), fingerMat);
+        fingerL.position.set(-0.035, 0.05, 0);
+        gripperGroup.add(fingerL);
+
+        const fingerR = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.08, 0.03), fingerMat);
+        fingerR.position.set(0.035, 0.05, 0);
+        gripperGroup.add(fingerR);
+
+        // --- 5. ASIMOV SAFETY RADAR BUBBLE ---
+        const safetyBubbleGeo = new THREE.SphereGeometry(1.2, 32, 24);
+        const safetyBubbleMat = new THREE.MeshBasicMaterial({
+            color: 0x22c55e,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.18
+        });
+        const safetyBubble = new THREE.Mesh(safetyBubbleGeo, safetyBubbleMat);
+        safetyBubble.position.set(0, 0.9, 0);
+        safetyBubble.visible = false;
+        scene.add(safetyBubble);
+
+        // --- 6. ANIMATION & TELEMETRY STAGES ---
+        let isAnimatingGrasp = false;
+        let animProgress = 0;
+
+        const stageData = {
+            1: {
+                title: "1. RGB-D Scene Perception",
+                json: `// Camera RGB-D Stream Received\n{\n  "camera_frame_id": "head_rgbd_sensor",\n  "resolution": "1920x1080 @ 30fps",\n  "point_cloud_points": 307200,\n  "intrinsics_matrix": [\n    [915.2, 0.0, 960.0],\n    [0.0, 914.8, 540.0],\n    [0.0, 0.0, 1.0]\n  ]\n}`
+            },
+            2: {
+                title: "2. Gemini ER 2 3D Grounding",
+                json: `// Gemini Robotics ER 2 Spatial Grounding\n[\n  {\n    "label": "target_manipulable_cup",\n    "confidence": 0.985,\n    "box_2d": [420, 480, 610, 560],\n    "box_3d": {\n      "center": [0.45, 0.85, 0.00],\n      "size": [0.18, 0.20, 0.18],\n      "rotation_rpy": [0.0, 0.0, 15.0]\n    },\n    "grasp_affordance": {\n      "point_3d": [0.45, 0.94, 0.00],\n      "approach_normal": [0.0, 1.0, 0.0],\n      "opening_width_mm": 55\n    }\n  }\n]`
+            },
+            3: {
+                title: "3. Whole-Body ER 2 Task Plan",
+                json: `// ER 2 Whole-Body Action Sequence\n{\n  "task": "Retrieve target object and place in bin",\n  "estimated_time_s": 14,\n  "primitives": [\n    {\n      "step": 1,\n      "action": "check_human_safety",\n      "params": {"clearance_m": 1.2}\n    },\n    {\n      "step": 2,\n      "action": "reach_arm",\n      "target_3d": [0.45, 0.94, 0.00],\n      "kinematics": {"torso_pitch_deg": 12.5}\n    },\n    {\n      "step": 3,\n      "action": "grasp",\n      "params": {"gripper": "open_enpire", "force_n": 16.0}\n    }\n  ]\n}`
+            },
+            4: {
+                title: "4. VLA 20Hz Joint Trajectory",
+                json: `// Gemini Robotics 2 VLA Action Tokens\n{\n  "control_frequency_hz": 20,\n  "action_tokens": {\n    "q0_base_yaw_rad": 0.38,\n    "q1_shoulder_pitch_rad": -0.62,\n    "q2_elbow_pitch_rad": 1.15,\n    "q3_wrist_pitch_rad": -0.48,\n    "gripper_stroke_mm": 24.5,\n    "velocity_limit_compliant": true\n  }\n}`
+            },
+            5: {
+                title: "5. ASIMOV-Agentic Safety Audit",
+                json: `// ASIMOV Safety Protocol Status\n{\n  "safety_status": "CERTIFIED_SAFE",\n  "dynamic_safety_bubble_m": 1.20,\n  "human_proximity_detected": false,\n  "joint_torque_margins": "OK (64% max)",\n  "slip_margin_score": 0.96\n}`
+            }
+        };
+
+        function setStage(stageNum) {
+            document.querySelectorAll('#controls-panel button').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById('stage-' + stageNum);
+            if (btn) btn.classList.add('active');
+
+            const d = stageData[stageNum];
+            document.getElementById('token-title').innerText = d.title;
+            document.getElementById('token-content').innerText = d.json;
+
+            // Visual scene adjustments per stage
+            bboxMesh.visible = (stageNum >= 2);
+            graspGroup.visible = (stageNum >= 2);
+            safetyBubble.visible = (stageNum === 5);
+
+            if (stageNum === 3 || stageNum === 4) {
+                j1.rotation.z = -0.4;
+                j2.rotation.z = 0.8;
+                j3.rotation.z = -0.4;
+            } else if (stageNum === 1 || stageNum === 2) {
+                j1.rotation.z = 0.2;
+                j2.rotation.z = 0.3;
+                j3.rotation.z = 0.0;
+            }
+        }
+
+        function toggleMotion() {
+            isAnimatingGrasp = !isAnimatingGrasp;
+            animProgress = 0;
+        }
+
+        function resetCamera() {
+            camera.position.set(3.2, 2.8, 3.5);
+            controls.target.set(0, 0.8, 0);
+        }
+
+        // Render Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Grasp trajectory animation
+            if (isAnimatingGrasp) {
+                animProgress += 0.015;
+                const t = Math.sin(animProgress);
+                j1.rotation.y = THREE.MathUtils.lerp(0.0, 0.3, t);
+                j1.rotation.z = THREE.MathUtils.lerp(0.1, -0.6, t);
+                j2.rotation.z = THREE.MathUtils.lerp(0.2, 1.1, t);
+                j3.rotation.z = THREE.MathUtils.lerp(0.0, -0.5, t);
+
+                fingerL.position.x = THREE.MathUtils.lerp(-0.035, -0.015, t);
+                fingerR.position.x = THREE.MathUtils.lerp(0.035, 0.015, t);
+
+                if (animProgress > Math.PI) {
+                    animProgress = 0;
+                }
+            }
+
+            // Subtle hovering for 3D boxes
+            bboxMesh.rotation.y += 0.005;
+            graspGroup.rotation.y += 0.01;
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Initialize stage 1
+        setStage(1);
+    </script>
+</body>
+</html>

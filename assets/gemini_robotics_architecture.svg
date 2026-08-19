@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e" />
+      <stop offset="100%" stop-color="#4ade80" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <style>
+      .pulse-line {
+        stroke-dasharray: 8 6;
+        animation: dash 1.5s linear infinite;
+      }
+      @keyframes dash {
+        to {
+          stroke-dashoffset: -28;
+        }
+      }
+      .node-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; fill: #94a3b8; }
+      .title-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; font-weight: 700; fill: #f8fafc; }
+      .code-font { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #38bdf8; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="500" rx="16" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Top Title Banner -->
+  <text x="40" y="45" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="800" fill="#f8fafc">
+    🤖 Gemini Robotics 2 — End-to-End Physical AI Architecture
+  </text>
+  <text x="40" y="70" class="node-text">
+    Multi-Layer Embodied Reasoning (ER 2) • 3D Grounding • Whole-Body VLA Coordination • ASIMOV Safety
+  </text>
+
+  <!-- Flow Connectors (Animated Pulse Lines) -->
+  <!-- 1 to 2 -->
+  <path d="M 230 240 L 290 240" stroke="#0284c7" stroke-width="3" fill="none" class="pulse-line" filter="url(#glow)"/>
+  <!-- 2 to 3 -->
+  <path d="M 480 240 L 530 240" stroke="#38bdf8" stroke-width="3" fill="none" class="pulse-line" filter="url(#glow)"/>
+  <!-- 3 to 4 -->
+  <path d="M 720 240 L 770 240" stroke="#818cf8" stroke-width="3" fill="none" class="pulse-line" filter="url(#glow)"/>
+  <!-- 3 to 5 (Safety Loop) -->
+  <path d="M 625 350 L 625 400 L 860 400 L 860 350" stroke="#22c55e" stroke-width="2" fill="none" class="pulse-line" stroke-dasharray="6 4"/>
+
+  <!-- Node 1: Multimodal Perception Ingestion -->
+  <g transform="translate(40, 110)">
+    <rect width="190" height="240" rx="12" fill="url(#cardGrad1)" stroke="#0284c7" stroke-width="1.5"/>
+    <rect x="0" y="0" width="190" height="6" rx="3" fill="url(#blueGlow)"/>
+    <text x="16" y="32" class="title-text">1. Perception Ingestion</text>
+    <text x="16" y="55" class="node-text">RGB-D Camera Stream</text>
+    <text x="16" y="73" class="node-text">Natural Language Goals</text>
+    <text x="16" y="91" class="node-text">Tactile Force Sensors</text>
+
+    <!-- Visual Badge Graphic -->
+    <rect x="16" y="115" width="158" height="105" rx="8" fill="#090d16" stroke="#1e293b"/>
+    <text x="26" y="140" class="code-font">Frame: 1080p RGB-D</text>
+    <text x="26" y="160" class="code-font">Goal: "Retrieve Part"</text>
+    <text x="26" y="180" class="code-font">Hz: 30 FPS Stream</text>
+    <text x="26" y="200" class="code-font" fill="#4ade80">Depth Cloud: 307K</text>
+  </g>
+
+  <!-- Node 2: 3D Spatial Tokenizer & Grounding -->
+  <g transform="translate(290, 110)">
+    <rect width="190" height="240" rx="12" fill="url(#cardGrad1)" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="190" height="6" rx="3" fill="url(#accentGrad)"/>
+    <text x="16" y="32" class="title-text">2. Spatial Grounding</text>
+    <text x="16" y="55" class="node-text">3D Bounding Volumes</text>
+    <text x="16" y="73" class="node-text">6DoF Grasp Affordances</text>
+    <text x="16" y="91" class="node-text">0-1000 Coordinate Norm</text>
+
+    <rect x="16" y="115" width="158" height="105" rx="8" fill="#090d16" stroke="#1e293b"/>
+    <text x="26" y="138" class="code-font" fill="#f43f5e">box_3d: [x, y, z, dx, dy, dz]</text>
+    <text x="26" y="158" class="code-font" fill="#eab308">grasp: [roll, pitch, yaw]</text>
+    <text x="26" y="178" class="code-font" fill="#38bdf8">approach: normal vector</text>
+    <text x="26" y="198" class="code-font" fill="#a5f3fc">grip_width: 45mm</text>
+  </g>
+
+  <!-- Node 3: Gemini Robotics ER 2 Planner Core -->
+  <g transform="translate(530, 95)">
+    <rect width="190" height="255" rx="12" fill="url(#cardGrad1)" stroke="#818cf8" stroke-width="2" filter="url(#glow)"/>
+    <rect x="0" y="0" width="190" height="8" rx="4" fill="url(#accentGrad)"/>
+    <text x="16" y="32" class="title-text" fill="#a5b4fc">3. Gemini ER 2 Brain</text>
+    <text x="16" y="55" class="node-text">Whole-Body Task Planning</text>
+    <text x="16" y="73" class="node-text">Multi-Robot Fleet Sync</text>
+    <text x="16" y="91" class="node-text">Dynamic Replanning Loop</text>
+    <text x="16" y="109" class="node-text">Search Grounding Tools</text>
+
+    <rect x="16" y="125" width="158" height="110" rx="8" fill="#090d16" stroke="#312e81"/>
+    <text x="26" y="148" class="code-font" fill="#c084fc">1. crouch(height=0.4)</text>
+    <text x="26" y="168" class="code-font" fill="#c084fc">2. reach_arm(right, 3d)</text>
+    <text x="26" y="188" class="code-font" fill="#c084fc">3. grasp(power, 18N)</text>
+    <text x="26" y="208" class="code-font" fill="#38bdf8">4. sync(amr_rover_1)</text>
+    <text x="26" y="226" class="code-font" fill="#4ade80">5. verify_state()</text>
+  </g>
+
+  <!-- Node 4: VLA Execution & Robot Actuation -->
+  <g transform="translate(770, 110)">
+    <rect width="190" height="240" rx="12" fill="url(#cardGrad1)" stroke="#22c55e" stroke-width="1.5"/>
+    <rect x="0" y="0" width="190" height="6" rx="3" fill="url(#greenGrad)"/>
+    <text x="16" y="32" class="title-text">4. VLA Hardware Node</text>
+    <text x="16" y="55" class="node-text">ROS 2 ros2_gemini_bridge</text>
+    <text x="16" y="73" class="node-text">20Hz Action Tokens</text>
+    <text x="16" y="91" class="node-text">Open-ENPIRE Gripper</text>
+
+    <rect x="16" y="115" width="158" height="105" rx="8" fill="#090d16" stroke="#1e293b"/>
+    <text x="26" y="138" class="code-font" fill="#4ade80">Joint Angles: [q0..q6]</text>
+    <text x="26" y="158" class="code-font" fill="#4ade80">Torque Limits: Safe</text>
+    <text x="26" y="178" class="code-font" fill="#4ade80">Topics: /gemini/plan</text>
+    <text x="26" y="198" class="code-font" fill="#38bdf8">Hardware: Real/Sim</text>
+  </g>
+
+  <!-- Safety Banner along bottom -->
+  <rect x="530" y="390" width="430" height="40" rx="8" fill="#090d16" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="546" y="415" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#4ade80">
+    🛡️ ASIMOV-AGENTIC PROTOCOL: Dynamic Safety Bubble Active (1.2m) • Zero Near-Miss Violations
+  </text>
+</svg>
