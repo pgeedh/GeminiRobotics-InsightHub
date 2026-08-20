@@ -22,46 +22,45 @@ Gemini Robotics 2.0 은 **계층적 이중 모델 아키텍처**로 동작합니
 
 ## 목차
 
-- [플레이북 활용 가이드](#플레이북-활용-가이드)
+- [이 플레이북 활용 방법](#이-플레이북-활용-방법)
 - [쿡북 실전 테스트 트랙 (`cookbook/`)](#쿡북-실전-테스트-트랙-cookbook)
-- [빠른 시작 (`google-genai` SDK v1.x)](#빠른-시작)
-- [핵심 활용 사례 및 프롬프트 갤러리 (35개 카드)](#핵심-활용-사례-및-프롬프트-갤러리-35개-카드)
-  - [1. 공간 인식 및 2D/3D 포인팅](#1-공간-인식-및-2d3d-포인팅)
-  - [2. 바운딩 박스 및 6DoF 파지](#2-바운딩-박스-및-6dof-파지)
+- [빠른 시작](#빠른-시작)
+- [핵심 활용 시나리오 및 프롬프트 갤러리 (31개 카드)](#핵심-활용-시나리오-및-프롬프트-갤러리-31개-카드)
+  - [1. 공간 그라운딩 및 2D/3D 포인팅](#1-공간-그라운딩-및-2d3d-포인팅)
+  - [2. 바운딩 볼륨 및 6DoF 파지](#2-바운딩-볼륨-및-6dof-파지)
   - [3. 궤적 생성 및 전신 모션 계획](#3-궤적-생성-및-전신-모션-계획)
   - [4. 장기 과업 분해 및 환경 정리](#4-장기-과업-분해-및-환경-정리)
   - [5. 어포던스 및 ASIMOV 안전 거버넌스](#5-어포던스-및-asimov-안전-거버넌스)
   - [6. 연속 비디오 이해 및 시계열 추론](#6-연속-비디오-이해-및-시계열-추론)
-  - [7. 산업 계측, 게이지 인식 및 고밀도 세그멘테이션](#7-산업-계측-게이지-인식-및-고밀도-세그멘테이션)
-  - [8. 도구 활용 및 다중 로봇 협업](#8-도구-활용-및-다중-로봇-협업)
-  - [9. Vision-Language-Action (VLA) 모터 제어](#9-vision-language-action-vla-모터-제어)
+  - [7. 도구 활용 및 다중 로봇 협업](#7-도구-활용-및-다중-로봇-협업)
+  - [8. Vision-Language-Action (VLA) 모터 제어](#8-vision-language-action-vla-모터-제어)
 - [공식 DeepMind 벤치마크 (ER 2 vs SOTA)](#공식-deepmind-벤치마크)
-- [ROS 2 브리지 연동](#ros-2-브리지-연동)
-- [체화된 추론을 위한 5대 황금 법칙](#체화된-추론을-위한-5대-황금-법칙)
-- [기여 안내](#기여-안내)
+- [ROS 2 브리지 노드 연동](#ros-2-브리지-노드-연동)
+- [체화 추론 5대 황금 원칙](#체화-추론-5대-황금-원칙)
+- [기여 가이드](#기여-가이드)
 
 ---
 
-## 플레이북 활용 가이드
+## 이 플레이북 활용 방법
 
-1. **대화형 터미널 대시보드 (`python cli.py`):** 35개 프롬프트 카드 및 6대 쿡북 레시피를 실시간으로 테스트.
-2. **모듈식 쿡북 레시피 (`cookbook/`):** 공간 인식, 전신 자세, 비디오 슬립 감지, 안전 정책, 다중 로봇 협업 독립 실행.
-3. **커스텀 테스트 샌드박스 (`python cookbook/interactive_sandbox.py`):** 임의의 이미지 및 커스텀 프롬프트를 즉시 평가.
-4. **ROS 2 브리지 연동 (`ros2_gemini_bridge`):** 로봇 카메라 토픽을 직접 Gemini 인식 및 계획 노드에 연결.
+1. **대화형 터미널 CLI (`python cli.py`):** 31개 프롬프트 카드와 6대 핵심 쿡북 레시피를 원클릭으로 검증합니다.
+2. **모듈형 쿡북 레시피 (`cookbook/`):** 공간 인식, 전신 자세, 비디오 슬립 감지, 안전 정책, 다중 로봇 협업 스크립트.
+3. **사용자 테스트 샌드박스 (`python cookbook/interactive_sandbox.py`):** 임의 이미지 경로와 프롬프트로 실시간 모델 동작을 시험합니다.
+4. **ROS 2 브리지 (`ros2_gemini_bridge`):** 실제 로봇 카메라 토픽 및 컨트롤러 노드에 즉시 연결 가능합니다.
 
 ---
 
 ## 쿡북 실전 테스트 트랙 (`cookbook/`)
 
-| 트랙 / 레시피 | 레시피 파일 | 설명 | 빠른 실행 명령어 |
+| 테스트 트랙 / 레시피 | 레시피 파일 | 상세 설명 | 빠른 실행 명령어 |
 | :--- | :--- | :--- | :--- |
-| **1. 공간 인식 & 6DoF 파지** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2D 포인팅, 3D 미터법 볼륨, 접근 법선 벡터. | `python cookbook/01_spatial_perception_recipe.py` |
-| **2. 기구학적 과업 계획** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic 전신 자세 선택 및 무충돌 순서 생성. | `python cookbook/02_kinematic_planning_recipe.py` |
-| **3. 비디오 슬립 & 이상 감지** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 연속 프레임 접촉 분석 및 폐루프 보정. | `python cookbook/03_continuous_video_slip_recipe.py` |
-| **4. ASIMOV 안전 거버넌스** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066 안전 기준 강제 및 자율 거부. | `python cookbook/04_asimov_safety_guard_recipe.py` |
-| **5. 다중 로봇 협업** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 명시적 대기 배리어를 통한 이종 로봇 스케줄링. | `python cookbook/05_multi_agent_fleet_recipe.py` |
-| **6. 20Hz VLA 동작 청킹** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz 연속 7DoF 모터 동작 청크 생성. | `python cookbook/06_vla_action_chunking_recipe.py` |
-| **대화형 샌드박스** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 임의 이미지 및 프롬프트 테스트 하네스. | `python cookbook/interactive_sandbox.py` |
+| **1. 공간 인식 & 6DoF 파지** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2D 포인팅, 3D 미터 바운딩 박스 및 접근 벡터 산출. | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. 전신 기구학 모션 계획** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic 스키마 기반 웅크림/기구학 충돌 회피 시퀀스. | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. 비디오 슬립 & 이상 추적** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 연속 비디오 스트림 내 미끄러짐 감지 및 폐루프 보정. | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV 안전 거버넌스** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066 안전 정책 강제 및 위험 명령 거부. | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. 이종 다중 로봇 협업** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 명시적 동기화 배리어를 활용한 휴머노이드+AMR 협동. | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA 모터 액션 청킹** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz 7DoF 관절 델타 액션 생성 및 지연시간 벤치마크. | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **대화형 샌드박스** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 사용자 지정 이미지와 프롬프트 대화형 실시간 테스트. | `python cookbook/interactive_sandbox.py` |
 
 ---
 
@@ -193,46 +192,30 @@ print(response.text)
 #### 25) 물리 과업 성공/실패 판정 및 이상 감사 `[Verified]`
 - **프롬프트:** `Inspect episode start vs end frames to verify task completion and explain any failure mode.`
 
-#### 26) 파지 미끄러짐 감지 및 실시간 재계획 `[Verified]`
-- **프롬프트:** `Detect payload slip mid-execution and output closed-loop recovery command (force + delta trim).`
-
 ---
 
-### 7. 산업 계측, 게이지 인식 및 고밀도 세그멘테이션
+### 7. 도구 활용 및 다중 로봇 협업
 
-#### 27) 아날로그 압력 게이지 초정밀 판독 (98% 정확도) `[Verified]`
-- **프롬프트:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
-
-#### 28) Python 코드 실행 기반 바코드 영역 국소 확대 `[Verified]`
-- **프롬프트:** `Use code execution to crop barcode region and verify serial number.`
-
-#### 29) 그리퍼 핑거 및 대상 객체 고밀도 세그멘테이션 마스크 `[Verified]`
-- **프롬프트:** `Output base64 PNG instance segmentation masks for left/right gripper fingers and payload.`
-
----
-
-### 8. 도구 활용 및 다중 로봇 협업
-
-#### 30) Google 검색 도구 기반 지역 분리수거 규칙 적용 `[Verified]`
+#### 26) Google 검색 도구 기반 지역 분리수거 규칙 적용 `[Verified]`
 - **프롬프트:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Python 코드 실행 카메라-베이스 좌표계 변환 `[Verified]`
+#### 27) Python 코드 실행 카메라-베이스 좌표계 변환 `[Verified]`
 - **프롬프트:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
-#### 32) 이종 로봇(휴머노이드+AMR+4족보행) 협동 스케줄링 `[Verified]`
+#### 28) 이종 로봇(휴머노이드+AMR+4족보행) 협동 스케줄링 `[Verified]`
 - **프롬프트:** `Assign roles across Spot quadruped, Apollo 2 humanoid, and AMR rover with sync barriers.`
 
-#### 33) 양팔 협업 트레이 수평 리프팅 제어 `[Verified]`
+#### 29) 양팔 협업 트레이 수평 리프팅 제어 `[Verified]`
 - **프롬프트:** `Coordinate dual Franka arms to lift liquid tray keeping tilt < 2.0 degrees.`
 
 ---
 
-### 9. Vision-Language-Action (VLA) 모터 제어
+### 8. Vision-Language-Action (VLA) 모터 제어
 
-#### 34) 20Hz VLA 관절 모터 동작 토큰 직접 생성 `[Verified]`
+#### 30) 20Hz VLA 관절 모터 동작 토큰 직접 생성 `[Verified]`
 - **프롬프트:** `Instruction: 'Grasp handle and pull outward.' Output: 20Hz 7DoF continuous delta actions.`
 
-#### 35) 엣지 디바이스 초고속 정책 적응 (~2.5시간 교정) `[Verified]`
+#### 31) 엣지 디바이스 초고속 정책 적응 (~2.5시간 교정) `[Verified]`
 - **파이프라인:** `adapt_edge_policy(base_model='gemini-robotics-2-ondevice', target_hardware='enpire_gripper')`
 
 ---

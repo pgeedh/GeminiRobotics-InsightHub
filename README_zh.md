@@ -25,16 +25,15 @@ Gemini Robotics 2.0 采用**分层双模型架构**：
 - [如何使用本开发实战手册](#如何使用本开发实战手册)
 - [Cookbook 实战测试轨道 (`cookbook/`)](#cookbook-实战测试轨道-cookbook)
 - [快速上手 (`google-genai` SDK v1.x)](#快速上手)
-- [核心应用场景与提示词画廊（35个卡片）](#核心应用场景与提示词画廊35个卡片)
+- [核心应用场景与提示词画廊（31个卡片）](#核心应用场景与提示词画廊31个卡片)
   - [1. 空间定位与 2D/3D 指向](#1-空间定位与-2d3d-指向)
   - [2. 包围体积与 6DoF 抓取](#2-包围体积与-6dof-抓取)
   - [3. 轨迹规划与全身动作推理](#3-轨迹规划与全身动作推理)
   - [4. 长程任务规划与场景整理](#4-长程任务规划与场景整理)
   - [5. 物理可操作性与 ASIMOV 安全治理](#5-物理可操作性与-asimov-安全治理)
   - [6. 连续视频理解与时序推理](#6-连续视频理解与时序推理)
-  - [7. 工业计量、表盘识别与精细分割](#7-工业计量表盘识别与精细分割)
-  - [8. 工具调用与多机器人协同](#8-工具调用与多机器人协同)
-  - [9. Vision-Language-Action (VLA) 控制](#9-vision-language-action-vla-控制)
+  - [7. 工具调用与多机器人协同](#7-工具调用与多机器人协同)
+  - [8. Vision-Language-Action (VLA) 控制](#8-vision-language-action-vla-控制)
 - [官方DeepMind基准评测（ER 2 对比 SOTA）](#官方deepmind基准评测)
 - [ROS 2 桥接节点集成](#ros-2-桥接节点集成)
 - [具身推理五大黄金法则](#具身推理五大黄金法则)
@@ -44,7 +43,7 @@ Gemini Robotics 2.0 采用**分层双模型架构**：
 
 ## 如何使用本开发实战手册
 
-1. **交互式终端测试面板 (`python cli.py`):** 启动命令行交互套件，一键测试35个提示词卡片与6大实战配方。
+1. **交互式终端测试面板 (`python cli.py`):** 启动命令行交互套件，一键测试31个提示词卡片与6大实战配方。
 2. **模块化 Cookbook 配方 (`cookbook/`):** 包含空间感知、全身姿态、视频滑移检测、安全监管与多机器人协同独立脚本。
 3. **自定义测试沙盒 (`python cookbook/interactive_sandbox.py`):** 允许传入任意图像或自定义提示词进行快速测试。
 4. **ROS 2 桥接集成 (`ros2_gemini_bridge`):** 直接对接机器人相机话题与规划控制节点。
@@ -94,7 +93,7 @@ print(response.text)
 
 ---
 
-## 核心应用场景与提示词画廊（35个卡片）
+## 核心应用场景与提示词画廊（31个卡片）
 
 ### 1. 空间定位与 2D/3D 指向
 
@@ -194,46 +193,30 @@ print(response.text)
 #### 25) 物理任务成败判定与异常审计 `[Verified]`
 - **Prompt:** `Inspect episode start vs end frames to verify task completion and explain any failure mode.`
 
-#### 26) 运行中物体滑移检测与闭环重规划 `[Verified]`
-- **Prompt:** `Detect payload slip mid-execution and output closed-loop recovery command (force + delta trim).`
-
 ---
 
-### 7. 工业计量、表盘识别与精细分割
+### 7. 工具调用与多机器人协同
 
-#### 27) 工业指针压力表高精度读数（98%精度） `[Verified]`
-- **Prompt:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
-
-#### 28) Python 代码执行局部放大与条码识别 `[Verified]`
-- **Prompt:** `Use code execution to crop barcode region and verify serial number.`
-
-#### 29) 夹爪指尖与目标物体稠密分割掩码 `[Verified]`
-- **Prompt:** `Output base64 PNG instance segmentation masks for left/right gripper fingers and payload.`
-
----
-
-### 8. 工具调用与多机器人协同
-
-#### 30) Google 搜索工具结合本地垃圾分类规则 `[Verified]`
+#### 26) Google 搜索工具结合本地垃圾分类规则 `[Verified]`
 - **Prompt:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Python 代码执行实时相机-底盘坐标变换 `[Verified]`
+#### 27) Python 代码执行实时相机-底盘坐标变换 `[Verified]`
 - **Prompt:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
-#### 32) 异构多机器人（人形+移动底盘+四足）调度 `[Verified]`
+#### 28) 异构多机器人（人形+移动底盘+四足）调度 `[Verified]`
 - **Prompt:** `Assign roles across Spot quadruped, Apollo 2 humanoid, and AMR rover with sync barriers.`
 
-#### 33) 双臂协同水平托举防倾翻控制 `[Verified]`
+#### 29) 双臂协同水平托举防倾翻控制 `[Verified]`
 - **Prompt:** `Coordinate dual Franka arms to lift liquid tray keeping tilt < 2.0 degrees.`
 
 ---
 
-### 9. Vision-Language-Action (VLA) 控制
+### 8. Vision-Language-Action (VLA) 控制
 
-#### 34) 20Hz VLA 关节动作令牌直接输出 `[Verified]`
+#### 30) 20Hz VLA 关节动作令牌直接输出 `[Verified]`
 - **Prompt:** `Instruction: 'Grasp handle and pull outward.' Output: 20Hz 7DoF continuous delta actions.`
 
-#### 35) 边缘端极速策略适配（~2.5小时微调） `[Verified]`
+#### 31) 边缘端极速策略适配（~2.5小时微调） `[Verified]`
 - **Pipeline:** `adapt_edge_policy(base_model='gemini-robotics-2-ondevice', target_hardware='enpire_gripper')`
 
 ---

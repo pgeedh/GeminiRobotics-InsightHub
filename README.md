@@ -25,16 +25,15 @@ Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
 - [How to Use This Playbook](#how-to-use-this-playbook)
 - [Cookbook Testing Tracks (`cookbook/`)](#cookbook-testing-tracks-cookbook)
 - [Quick Start (`google-genai` SDK v1.x)](#quick-start)
-- [Use Cases and Prompt Gallery (35 Cards)](#use-cases-and-prompt-gallery-35-cards)
+- [Use Cases and Prompt Gallery (31 Cards)](#use-cases-and-prompt-gallery-31-cards)
   - [1. Spatial Grounding and 2D/3D Pointing (Cards 1–7)](#1-spatial-grounding-and-2d3d-pointing)
   - [2. Bounding Volumes and 6DoF Grasping (Cards 8–10)](#2-bounding-volumes-and-6dof-grasping)
   - [3. Trajectory and Whole-Body Motion Planning (Cards 11–14)](#3-trajectory-and-whole-body-motion-planning)
   - [4. Long-Horizon Task Decomposition (Cards 15–18)](#4-long-horizon-task-decomposition)
   - [5. Physical Affordance and ASIMOV Safety Governance (Cards 19–22)](#5-physical-affordance-and-asimov-safety-governance)
-  - [6. Continuous Video and Temporal Reasoning (Cards 23–26)](#6-continuous-video-and-temporal-reasoning)
-  - [7. Industrial Metrology, Gauges, and Dense Segmentation (Cards 27–29)](#7-industrial-metrology-gauges-and-dense-segmentation)
-  - [8. Agentic Tool Use and Multi-Robot Fleet Coordination (Cards 30–33)](#8-agentic-tool-use-and-multi-robot-fleet-coordination)
-  - [9. Vision-Language-Action (VLA) Motor Control (Cards 34–35)](#9-vision-language-action-vla-motor-control)
+  - [6. Continuous Video and Temporal Reasoning (Cards 23–25)](#6-continuous-video-and-temporal-reasoning)
+  - [7. Agentic Tool Use and Multi-Robot Fleet Coordination (Cards 26–29)](#7-agentic-tool-use-and-multi-robot-fleet-coordination)
+  - [8. Vision-Language-Action (VLA) Motor Control (Cards 30–31)](#8-vision-language-action-vla-motor-control)
 - [Official DeepMind Robotics Demonstrations](#official-deepmind-robotics-demonstrations)
 - [Official DeepMind Benchmarks (Gemini Robotics ER 2)](#official-deepmind-benchmarks)
 - [ROS 2 Bridge Integration](#ros-2-bridge-integration-ros2_gemini_bridge)
@@ -111,7 +110,7 @@ print(response.text)
 
 ---
 
-## Use Cases and Prompt Gallery (35 Cards)
+## Use Cases and Prompt Gallery (31 Cards)
 
 > **Status Legend:**
 > - `[Verified]` = Production-tested prompt pattern and structured schema verified for Gemini Robotics 2.0
@@ -623,95 +622,9 @@ Inspect the multi-camera episode start frames vs episode final frames. Did the r
 
 ---
 
-#### 26) Mid-Execution Grasp Slip Detection and Dynamic Replanning `[Verified]`
-<p align="center"><img src="./assets/demo_video_slip_recovery.svg" alt="Slip Detection" width="500px"/></p>
+### 7. Agentic Tool Use and Multi-Robot Fleet Coordination
 
-**Prompt:**
-```json
-Monitor live streaming frames. At timestamp 00:03.4, the payload slips 15mm downward in the gripper. 1. Detect slip event. 2. Calculate remaining grasp margin. 3. Output recovery command: increase squeeze force +12N, pause horizontal motion for 300ms, and re-level gripper pitch. Return JSON.
-```
-
-**Model Output:**
-```json
-{
-  "slip_detected": true,
-  "timestamp_sec": 3.42,
-  "slip_displacement_mm": 14.8,
-  "recovery_action": {
-    "delta_squeeze_force_n": 12.0,
-    "trajectory_pause_ms": 300,
-    "pitch_trim_deg": -3.5
-  }
-}
-```
-
----
-
-### 7. Industrial Metrology, Gauges, and Dense Segmentation
-
-#### 27) Industrial Gauge and Analog Dial Needle Metrology `[Verified]`
-<p align="center"><img src="./assets/demo_spot_inspection.svg" alt="Gauge Inspection" width="500px"/></p>
-
-**Prompt:**
-```json
-Read the industrial pressure gauge dial in the inspection image. Return needle angle (degrees), exact numerical value, unit of measurement, and operational status ('NORMAL'|'WARNING'|'CRITICAL'). Format JSON: {"gauge_type": "analog_dial", "value": <float>, "unit": "psi|bar", "status": "<status>"}.
-```
-
-**Model Output:**
-```json
-{
-  "gauge_type": "analog_dial",
-  "needle_angle_deg": 142.5,
-  "value": 4.85,
-  "unit": "bar",
-  "status": "NORMAL"
-}
-```
-
----
-
-#### 28) Code Execution Sub-Region Zoom for High-Resolution Inspection `[Verified]`
-
-**Prompt:**
-```json
-What is the exact serial number on the tiny barcode label? Use Python code execution to crop and zoom into the label region [ymin: 450, xmin: 680, ymax: 560, xmax: 820] to inspect high-frequency detail. Output JSON: {"serial_number": "<str>", "crop_box": [...]}.
-```
-
-**Model Output:**
-```json
-{
-  "serial_number": "SN-8492-REV3B",
-  "crop_box": [452, 684, 558, 818],
-  "reading_quality": "verified"
-}
-```
-
----
-
-#### 29) Dense Base64 Multi-Class Segmentation Masks (Gripper and Target) `[Verified]`
-<p align="center"><img src="./assets/part_identification.png" alt="Dense Segmentation" width="500px"/></p>
-
-**Prompt:**
-```json
-Provide exact instance segmentation masks for: 'left gripper finger', 'right gripper finger', and 'target fruit'. Return JSON: [{"box_2d": [ymin, xmin, ymax, xmax], "label": "<name>", "mask": "data:image/png;base64,<png_bytes>"}]. Coordinates in 0-1000 integers.
-```
-
-**Model Output:**
-```json
-[
-  {
-    "box_2d": [380, 210, 620, 480],
-    "label": "target fruit",
-    "mask": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-  }
-]
-```
-
----
-
-### 8. Agentic Tool Use and Multi-Robot Fleet Coordination
-
-#### 30) Agentic Tool Grounding: Google Search for Facility Rules `[Verified]`
+#### 26) Agentic Tool Grounding: Google Search for Facility Rules `[Verified]`
 <p align="center"><img src="./assets/find_fruit.png" alt="Tool Grounding" width="500px"/></p>
 
 **Prompt:**
@@ -729,7 +642,7 @@ Use Google Search to fetch the municipality municipal waste guidelines for Santa
 
 ---
 
-#### 31) Python Code Execution for Real-Time Frame Transforms `[Verified]`
+#### 27) Python Code Execution for Real-Time Frame Transforms `[Verified]`
 
 **Prompt:**
 ```json
@@ -747,7 +660,7 @@ Given the detected object center [0.12, 0.45, 0.30] in camera optical frame and 
 
 ---
 
-#### 32) Heterogeneous Multi-Robot Coordination (Humanoid + AMR + Quadruped) `[Verified]`
+#### 28) Heterogeneous Multi-Robot Coordination (Humanoid + AMR + Quadruped) `[Verified]`
 <p align="center"><img src="./assets/clip_multi_robot.gif" alt="Multi-Robot Fleet" width="500px"/></p>
 
 **Prompt:**
@@ -769,7 +682,7 @@ Assign and synchronize tasks across the heterogeneous fleet: Spot Quadruped (ins
 
 ---
 
-#### 33) Dual-Arm Synchronized Cooperative Lifting `[Verified]`
+#### 29) Dual-Arm Synchronized Cooperative Lifting `[Verified]`
 <p align="center"><img src="./assets/clip_franka_dexterity.gif" alt="Dual-Arm Coordination" width="500px"/></p>
 
 **Prompt:**
@@ -790,9 +703,9 @@ Coordinate Left Arm (Franka L) and Right Arm (Franka R) to lift the wide tray co
 
 ---
 
-### 9. Vision-Language-Action (VLA) Motor Control
+### 8. Vision-Language-Action (VLA) Motor Control
 
-#### 34) Direct 20Hz VLA Joint Action Token Generation `[Verified]`
+#### 30) Direct 20Hz VLA Joint Action Token Generation `[Verified]`
 <p align="center"><img src="./assets/clip_vla_motor.gif" alt="VLA Motor Action" width="500px"/></p>
 
 **Prompt:**
@@ -826,7 +739,7 @@ action_chunk = vla_client.predict_actions(
 
 ---
 
-#### 35) On-Device Edge Policy Fast Adaptation (~2.5 Hours Calibration) `[Verified]`
+#### 31) On-Device Edge Policy Fast Adaptation (~2.5 Hours Calibration) `[Verified]`
 <p align="center"><img src="./assets/clip_ondevice_adaptation.gif" alt="On-Device Adaptation" width="500px"/></p>
 
 **Pipeline Call:**

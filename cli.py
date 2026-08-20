@@ -241,7 +241,7 @@ def browse_prompt_gallery():
     categories = sorted(list(set(card.get("category", "General") for card in use_cases)))
     cat_choice = questionary.select(
         "Filter by Category (or view all):",
-        choices=["All Categories (35 Cards)"] + categories + ["[Search by Keyword]", "[Back to Main Menu]"]
+        choices=["All Categories (31 Cards)"] + categories + ["[Search by Keyword]", "[Back to Main Menu]"]
     ).ask()
 
     if cat_choice is None or "Back" in cat_choice:
@@ -254,7 +254,7 @@ def browse_prompt_gallery():
             c for c in use_cases 
             if kw in c.get("title", "").lower() or kw in c.get("prompt", "").lower() or any(kw in t.lower() for t in c.get("tags", []))
         ]
-    elif cat_choice != "All Categories (35 Cards)":
+    elif cat_choice != "All Categories (31 Cards)":
         selected_cards = [c for c in use_cases if c.get("category") == cat_choice]
 
     if not selected_cards:
@@ -355,7 +355,7 @@ def main():
     
     console.print(Panel.fit(
         f"Interactive Testing Sandbox & Developer Cookbook for Gemini Robotics 2.0\n"
-        f"Active Model: {ACTIVE_MODEL} | Catalog: 35 Cards | Recipes: 6 Production Tracks | SDK: google-genai v1.x",
+        f"Active Model: {ACTIVE_MODEL} | Catalog: 31 Cards | Recipes: 6 Production Tracks | SDK: google-genai v1.x",
         subtitle="Awesome Gemini Robotics 2.0 Playbook"
     ))
 
@@ -366,7 +366,7 @@ def main():
             choice = questionary.select(
                 "Select a Playbook Track or Capability to Test:",
                 choices=[
-                    "0. Prompt Gallery (Browse 35 Production Use Cases)",
+                    "0. Prompt Gallery (Browse 31 Production Use Cases)",
                     "1. Interactive Testing Sandbox (Test Custom Images & Prompts)",
                     "2. Recipe 1: Spatial Perception & 6DoF Grasping",
                     "3. Recipe 2: Whole-Body Kinematic Task Planning",

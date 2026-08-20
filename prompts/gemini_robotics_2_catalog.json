@@ -897,109 +897,6 @@
     },
     {
       "id": 26,
-      "title": "Mid-Execution Grasp Slip Detection & Dynamic Closed-Loop Replanning",
-      "category": "Video & Temporal Reasoning",
-      "status": "Verified",
-      "image_path": "assets/demo_video_slip_recovery.svg",
-      "model_id": "gemini-robotics-er-2",
-      "tags": [
-        "slip_detection",
-        "closed_loop",
-        "recovery"
-      ],
-      "prompt": "Monitor live streaming frames. At timestamp 00:03.4, the payload slips 15mm downward in the gripper. 1. Detect slip event. 2. Calculate remaining grasp margin. 3. Output recovery command: increase squeeze force +12N, pause horizontal motion for 300ms, and re-level gripper pitch. Return JSON.",
-      "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[video_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=1024))\n)",
-      "sample_output": {
-        "slip_detected": true,
-        "timestamp_sec": 3.42,
-        "slip_displacement_mm": 14.8,
-        "recovery_action": {
-          "delta_squeeze_force_n": 12.0,
-          "trajectory_pause_ms": 300,
-          "pitch_trim_deg": -3.5
-        }
-      },
-      "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
-    },
-    {
-      "id": 27,
-      "title": "Industrial Gauge & Analog Dial Needle Metrology (98% Precision)",
-      "category": "Metrology & Inspection",
-      "status": "Verified",
-      "image_path": "assets/demo_spot_inspection.svg",
-      "model_id": "gemini-robotics-er-2",
-      "tags": [
-        "gauge_reading",
-        "metrology",
-        "industrial_inspection"
-      ],
-      "prompt": "Read the industrial pressure gauge dial in the inspection image. Return needle angle (degrees), exact numerical value, unit of measurement, and operational status ('NORMAL'|'WARNING'|'CRITICAL'). Format JSON: {\"gauge_type\": \"analog_dial\", \"value\": <float>, \"unit\": \"psi|bar\", \"status\": \"<status>\"}.",
-      "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
-      "sample_output": {
-        "gauge_type": "analog_dial",
-        "needle_angle_deg": 142.5,
-        "value": 4.85,
-        "unit": "bar",
-        "status": "NORMAL"
-      },
-      "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
-    },
-    {
-      "id": 28,
-      "title": "Code Execution Sub-Region Zoom for Low-Resolution Markings",
-      "category": "Metrology & Inspection",
-      "status": "Verified",
-      "image_path": "assets/demo_spot_inspection.svg",
-      "model_id": "gemini-robotics-er-2",
-      "tags": [
-        "code_execution",
-        "zoom",
-        "sub_region_crop"
-      ],
-      "prompt": "What is the exact serial number on the tiny barcode label? Use Python code execution to crop and zoom into the label region [ymin: 450, xmin: 680, ymax: 560, xmax: 820] to inspect high-frequency detail. Output JSON: {\"serial_number\": \"<str>\", \"crop_box\": [...]}",
-      "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(tools=[types.Tool(code_execution=types.ToolCodeExecution())])\n)",
-      "sample_output": {
-        "serial_number": "SN-8492-REV3B",
-        "crop_box": [
-          452,
-          684,
-          558,
-          818
-        ],
-        "reading_quality": "verified"
-      },
-      "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
-    },
-    {
-      "id": 29,
-      "title": "Dense Base64 Multi-Class Segmentation Masks (Gripper + Target)",
-      "category": "Metrology & Inspection",
-      "status": "Verified",
-      "image_path": "assets/part_identification.png",
-      "model_id": "gemini-robotics-er-2",
-      "tags": [
-        "segmentation_mask",
-        "base64_png",
-        "dense_pixel"
-      ],
-      "prompt": "Provide exact instance segmentation masks for: 'left gripper finger', 'right gripper finger', and 'target fruit'. Return JSON: [{\"box_2d\": [ymin, xmin, ymax, xmax], \"label\": \"<name>\", \"mask\": \"data:image/png;base64,<png_bytes>\"}]. Coordinates in 0-1000 integers.",
-      "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
-      "sample_output": [
-        {
-          "box_2d": [
-            380,
-            210,
-            620,
-            480
-          ],
-          "label": "target fruit",
-          "mask": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-        }
-      ],
-      "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
-    },
-    {
-      "id": 30,
       "title": "Agentic Tool Grounding: Google Search for Local Waste Sorting Rules",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
       "status": "Verified",
@@ -1035,7 +932,7 @@
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
     {
-      "id": 31,
+      "id": 27,
       "title": "Python Code Execution for Real-Time Frame Transforms",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
       "status": "Verified",
@@ -1065,7 +962,7 @@
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
     {
-      "id": 32,
+      "id": 28,
       "title": "Heterogeneous Multi-Robot Coordination (Humanoid + AMR + Quadruped)",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
       "status": "Verified",
@@ -1089,7 +986,7 @@
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
     {
-      "id": 33,
+      "id": 29,
       "title": "Dual-Arm Synchronized Cooperative Lifting",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
       "status": "Verified",
@@ -1124,7 +1021,7 @@
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
     {
-      "id": 34,
+      "id": 30,
       "title": "Direct 20Hz VLA Joint Action Token Generation",
       "category": "Vision-Language-Action (VLA)",
       "status": "Verified",
@@ -1172,7 +1069,7 @@
       "reference_url": "https://deepmind.google/models/gemini-robotics/"
     },
     {
-      "id": 35,
+      "id": 31,
       "title": "On-Device Edge Policy Fast Adaptation (~2.5 Hours Calibration)",
       "category": "Vision-Language-Action (VLA)",
       "status": "Verified",

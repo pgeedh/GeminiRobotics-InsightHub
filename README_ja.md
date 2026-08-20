@@ -25,16 +25,15 @@ Gemini Robotics 2.0 は**階層的デュアルモデル・アーキテクチャ*
 - [本プレイブックの使い方](#本プレイブックの使い方)
 - [クックブック・テストトラック (`cookbook/`)](#クックブックテストトラック-cookbook)
 - [クイックスタート (`google-genai` SDK v1.x)](#クイックスタート)
-- [ユースケース＆プロンプトギャラリー（35カード）](#ユースケースプロンプトギャラリー35カード)
+- [ユースケース＆プロンプトギャラリー（31カード）](#ユースケースプロンプトギャラリー31カード)
   - [1. 空間認識・2D/3Dポインティング](#1-空間認識2d3dポインティング)
   - [2. バウンディングボックス・3Dメトリック把握・6DoF把持](#2-バウンディングボックス3dメトリック把握6dof把持)
   - [3. 軌道生成・全身動作計画](#3-軌道生成全身動作計画)
   - [4. 長期タスク分解・環境整理](#4-長期タスク分解環境整理)
   - [5. アフォーダンス・物理制約・ASIMOV安全制御](#5-アフォーダンス物理制約asimov安全制御)
   - [6. 連続動画解析・時間軸推論](#6-連続動画解析時間軸推論)
-  - [7. 工業計測・計器読み取り・高密度セグメンテーション](#7-工業計測計器読み取り高密度セグメンテーション)
-  - [8. ツール活用・複数ロボット協調](#8-ツール活用複数ロボット協調)
-  - [9. Vision-Language-Action (VLA) モータ制御](#9-vision-language-action-vla-モータ制御)
+  - [7. ツール活用・複数ロボット協調](#7-ツール活用複数ロボット協調)
+  - [8. Vision-Language-Action (VLA) モータ制御](#8-vision-language-action-vla-モータ制御)
 - [公式DeepMindベンチマーク（ER 2 vs SOTA）](#公式deepmindベンチマーク)
 - [ROS 2 ブリッジ統合](#ros-2-ブリッジ統合)
 - [身体化推論のための5大原則](#身体化推論のための5大原則)
@@ -94,7 +93,7 @@ print(response.text)
 
 ---
 
-## ユースケース＆プロンプトギャラリー（35カード）
+## ユースケース＆プロンプトギャラリー（31カード）
 
 ### 1. 空間認識・2D/3Dポインティング
 
@@ -194,46 +193,30 @@ print(response.text)
 #### 25) タスク成否判定と実行異常監査 `[Verified]`
 - **プロンプト:** `Inspect episode start vs end frames to verify task completion and explain any failure mode.`
 
-#### 26) 把持滑り検知とリアルタイム再計画 `[Verified]`
-- **プロンプト:** `Detect payload slip mid-execution and output closed-loop recovery command (force + delta trim).`
-
 ---
 
-### 7. 工業計測・計器読み取り・高密度セグメンテーション
+### 7. ツール活用・複数ロボット協調
 
-#### 27) アナログ圧力計・計器の超高精度読み取り（98%精度） `[Verified]`
-- **プロンプト:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
-
-#### 28) Pythonコード実行による局所領域拡大・微細文字読み取り `[Verified]`
-- **プロンプト:** `Use code execution to crop barcode region and verify serial number.`
-
-#### 29) グリッパー指先・把持対象の高密度セグメンテーションマスク `[Verified]`
-- **プロンプト:** `Output base64 PNG instance segmentation masks for left/right gripper fingers and payload.`
-
----
-
-### 8. ツール活用・複数ロボット協調
-
-#### 30) Google検索ツールを活用した地域ゴミ分別ルールの自動適用 `[Verified]`
+#### 26) Google検索ツールを活用した地域ゴミ分別ルールの自動適用 `[Verified]`
 - **プロンプト:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Pythonコード実行によるカメラ・ロボット座標系変換 `[Verified]`
+#### 27) Pythonコード実行によるカメラ・ロボット座標系変換 `[Verified]`
 - **プロンプト:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
-#### 32) 異種ロボット（ヒューマノイド＋AMR＋4足歩行）フリート協調 `[Verified]`
+#### 28) 異種ロボット（ヒューマノイド＋AMR＋4足歩行）フリート協調 `[Verified]`
 - **プロンプト:** `Assign roles across Spot quadruped, Apollo 2 humanoid, and AMR rover with sync barriers.`
 
-#### 33) 双腕協調トレイ水平持ち上げ `[Verified]`
+#### 29) 双腕協調トレイ水平持ち上げ `[Verified]`
 - **プロンプト:** `Coordinate dual Franka arms to lift liquid tray keeping tilt < 2.0 degrees.`
 
 ---
 
-### 9. Vision-Language-Action (VLA) モータ制御
+### 8. Vision-Language-Action (VLA) モータ制御
 
-#### 34) 20Hz VLA関節動作トークン直接生成 `[Verified]`
+#### 30) 20Hz VLA関節動作トークン直接生成 `[Verified]`
 - **プロンプト:** `Instruction: 'Grasp handle and pull outward.' Output: 20Hz 7DoF continuous delta actions.`
 
-#### 35) エッジデバイスへの高速ポリシー適応（約2.5時間） `[Verified]`
+#### 31) エッジデバイスへの高速ポリシー適応（約2.5時間） `[Verified]`
 - **パイプライン:** `adapt_edge_policy(base_model='gemini-robotics-2-ondevice', target_hardware='enpire_gripper')`
 
 ---

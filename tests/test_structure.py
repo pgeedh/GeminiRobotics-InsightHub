@@ -67,7 +67,7 @@ class TestGeminiRoboticsPlaybook(unittest.TestCase):
             data = json.load(f)
 
         self.assertIn("use_cases", data)
-        self.assertEqual(len(data["use_cases"]), 35)
+        self.assertEqual(len(data["use_cases"]), 31)
 
         required_keys = ["id", "title", "category", "status", "prompt", "python_code", "sample_output", "tags"]
         for idx, card in enumerate(data["use_cases"], 1):
@@ -122,7 +122,7 @@ class TestGeminiRoboticsPlaybook(unittest.TestCase):
         with open(catalog_path, "r", encoding="utf-8") as f:
             catalog = json.load(f)
         self.assertIn("use_cases", catalog)
-        self.assertEqual(len(catalog["use_cases"]), 35)
+        self.assertEqual(len(catalog["use_cases"]), 31)
 
     def test_basic_spatial_query_sim(self):
         """Test basic_spatial_query simulation logic."""

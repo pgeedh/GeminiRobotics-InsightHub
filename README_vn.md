@@ -25,16 +25,15 @@ Gemini Robotics 2.0 hoạt động theo **Kiến trúc Phân tầng Kép**:
 - [Hướng dẫn sử dụng Playbook](#hướng-dẫn-sử-dụng-playbook)
 - [Các bài kiểm tra thực hành Cookbook (`cookbook/`)](#các-bài-kiểm-tra-thực-hành-cookbook-cookbook)
 - [Bắt đầu nhanh (`google-genai` SDK v1.x)](#bắt-đầu-nhanh)
-- [Thư viện 35 Thẻ Prompt Ứng Dụng](#thư-viện-35-thẻ-prompt-ứng-dụng)
+- [Thư viện 31 Thẻ Prompt Ứng Dụng](#thư-viện-31-thẻ-prompt-ứng-dụng)
   - [1. Định vị không gian & Điểm trỏ 2D/3D](#1-định-vị-không-gian--điểm-trỏ-2d3d)
   - [2. Hộp bao thể tích & Gắp 6DoF](#2-hộp-bao-thể-tích--gắp-6dof)
   - [3. Lập kế hoạch quỹ đạo & Tư thế toàn thân](#3-lập-kế-hoạch-quỹ-đạo--tư-thế-toàn-thân)
   - [4. Phân rã nhiệm vụ dài hạn & Dọn dẹp không gian](#4-phân-rã-nhiệm-vụ-dài-hạn--dọn-dẹp-không-gian)
   - [5. Khả năng tương tác & Quản trị an toàn ASIMOV](#5-khả-năng-tương-tác--quản-trị-an-toàn-asimov)
   - [6. Phân tích video liên tục & Suy luận thời gian](#6-phân-tích-video-liên-tục--suy-luận-thời-gian)
-  - [7. Đo lường công nghiệp, Đồng hồ đo & Phân đoạn chi tiết](#7-đo-lường-công-nghiệp-đồng-hồ-đo--phân-đoạn-chi-tiết)
-  - [8. Sử dụng công cụ & Phối hợp hạm đội robot](#8-sử-dụng-công-cụ--phối-hợp-hạm-đội-robot)
-  - [9. Điều khiển động cơ Vision-Language-Action (VLA)](#9-điều-khiển-động-cơ-vision-language-action-vla)
+  - [7. Sử dụng công cụ & Phối hợp hạm đội robot](#7-sử-dụng-công-cụ--phối-hợp-hạm-đội-robot)
+  - [8. Điều khiển động cơ Vision-Language-Action (VLA)](#8-điều-khiển-động-cơ-vision-language-action-vla)
 - [Bảng so chuẩn chính thức DeepMind (ER 2 vs SOTA)](#bảng-so-chuẩn-chính-thức-deepmind)
 - [Tích hợp cầu nối ROS 2](#tích-hợp-cầu-nối-ros-2)
 - [5 Quy tắc vàng cho Suy luận thể nhập](#5-quy-tắc-vàng-cho-suy-luận-thể-nhập)
@@ -44,7 +43,7 @@ Gemini Robotics 2.0 hoạt động theo **Kiến trúc Phân tầng Kép**:
 
 ## Hướng dẫn sử dụng Playbook
 
-1. **Giao diện dòng lệnh tương tác (`python cli.py`):** Khởi chạy bộ CLI để kiểm tra 35 thẻ prompt và 6 công thức thực hành theo thời gian thực.
+1. **Giao diện dòng lệnh tương tác (`python cli.py`):** Khởi chạy bộ CLI để kiểm tra 31 thẻ prompt và 6 công thức thực hành theo thời gian thực.
 2. **Các công thức Cookbook dạng module (`cookbook/`):** Chạy các tệp script Python độc lập để thử nghiệm nhận thức 3D, lập kế hoạch tư thế, theo dõi trượt qua video và quản trị an toàn.
 3. **Sandbox thử nghiệm tùy chỉnh (`python cookbook/interactive_sandbox.py`):** Nhập ảnh bất kỳ từ camera hoặc câu lệnh tùy chỉnh để đánh giá kết quả mô hình.
 4. **Tích hợp ROS 2 (`ros2_gemini_bridge`):** Kết nối trực tiếp các topic camera robot với các node nhận thức và lập kế hoạch.
@@ -94,7 +93,7 @@ print(response.text)
 
 ---
 
-## Thư viện 35 Thẻ Prompt Ứng Dụng
+## Thư viện 31 Thẻ Prompt Ứng Dụng
 
 ### 1. Định vị không gian & Điểm trỏ 2D/3D
 
@@ -193,46 +192,30 @@ print(response.text)
 #### 25) Xác minh thành công/thất bại nhiệm vụ và kiểm toán bất thường `[Verified]`
 - **Prompt:** `Inspect episode start vs end frames to verify task completion and explain any failure mode.`
 
-#### 26) Phát hiện vật trượt khi đang kẹp & Tái lập kế hoạch tức thời `[Verified]`
-- **Prompt:** `Detect payload slip mid-execution and output closed-loop recovery command (force + delta trim).`
-
 ---
 
-### 7. Đo lường công nghiệp, Đồng hồ đo & Phân đoạn chi tiết
+### 7. Sử dụng công cụ & Phối hợp hạm đội robot
 
-#### 27) Đọc chỉ số đồng hồ áp suất công nghiệp (Độ chính xác 98%) `[Verified]`
-- **Prompt:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
-
-#### 28) Thực thi mã Python cắt phóng to mã vạch siêu nhỏ `[Verified]`
-- **Prompt:** `Use code execution to crop barcode region and verify serial number.`
-
-#### 29) Mặt nạ phân đoạn chi tiết đầu ngón kẹp và vật thể `[Verified]`
-- **Prompt:** `Output base64 PNG instance segmentation masks for left/right gripper fingers and payload.`
-
----
-
-### 8. Sử dụng công cụ & Phối hợp hạm đội robot
-
-#### 30) Sử dụng Google Search tra cứu quy định phân loại rác địa phương `[Verified]`
+#### 26) Sử dụng Google Search tra cứu quy định phân loại rác địa phương `[Verified]`
 - **Prompt:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Thực thi mã Python chuyển đổi tọa độ quang học sang gốc robot `[Verified]`
+#### 27) Thực thi mã Python chuyển đổi tọa độ quang học sang gốc robot `[Verified]`
 - **Prompt:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
-#### 32) Điều phối hạm đội robot không đồng nhất (Hình người + AMR + 4 chân) `[Verified]`
+#### 28) Điều phối hạm đội robot không đồng nhất (Hình người + AMR + 4 chân) `[Verified]`
 - **Prompt:** `Assign roles across Spot quadruped, Apollo 2 humanoid, and AMR rover with sync barriers.`
 
-#### 33) Nâng khay hai tay đồng bộ giữ cân bằng chất lỏng `[Verified]`
+#### 29) Nâng khay hai tay đồng bộ giữ cân bằng chất lỏng `[Verified]`
 - **Prompt:** `Coordinate dual Franka arms to lift liquid tray keeping tilt < 2.0 degrees.`
 
 ---
 
-### 9. Điều khiển động cơ Vision-Language-Action (VLA)
+### 8. Điều khiển động cơ Vision-Language-Action (VLA)
 
-#### 34) Xuất trực tiếp token hành động khớp 20Hz `[Verified]`
+#### 30) Xuất trực tiếp token hành động khớp 20Hz `[Verified]`
 - **Prompt:** `Instruction: 'Grasp handle and pull outward.' Output: 20Hz 7DoF continuous delta actions.`
 
-#### 35) Hiệu chỉnh thích ứng siêu tốc trên thiết bị biên (~2.5 giờ) `[Verified]`
+#### 31) Hiệu chỉnh thích ứng siêu tốc trên thiết bị biên (~2.5 giờ) `[Verified]`
 - **Quy trình:** `adapt_edge_policy(base_model='gemini-robotics-2-ondevice', target_hardware='enpire_gripper')`
 
 ---
