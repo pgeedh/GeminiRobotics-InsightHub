@@ -1,12 +1,12 @@
 # Awesome Gemini Robotics 2.0 (日本語版)
 
 [![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
-[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
-[![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202.0%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](../ros2_gemini_bridge)
+[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](../BENCHMARKS.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](../LICENSE)
 
-**言語選択:** [English](./README.md) | **日本語 (Japanese)** | [中文 (Chinese)](./README_zh.md) | [한국어 (Korean)](./README_kr.md) | [Tiếng Việt (Vietnamese)](./README_vn.md)
+**言語選択:** [English](../README.md) | **日本語 (Japanese)** | [中文 (Chinese)](./README_zh.md) | [한국어 (Korean)](./README_kr.md) | [Tiếng Việt (Vietnamese)](./README_vn.md)
 
 ---
 
@@ -54,13 +54,13 @@ Gemini Robotics 2.0 は**階層的デュアルモデル・アーキテクチャ*
 
 | トラック / レシピ | レシピファイル | 説明 | 実行コマンド |
 | :--- | :--- | :--- | :--- |
-| **1. 空間認識＆6DoF把持** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2Dポインティング、3Dメトリック体積、進入法線ベクトル。 | `python cookbook/01_spatial_perception_recipe.py` |
-| **2. 運動学的タスク計画** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic構造化全身姿勢選択および衝突回避順序。 | `python cookbook/02_kinematic_planning_recipe.py` |
-| **3. 動画滑り＆異常追跡** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 連続フレーム接触力学、滑り検知、閉ループ補正。 | `python cookbook/03_continuous_video_slip_recipe.py` |
-| **4. ASIMOV安全ガバナー** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066安全基準遵守と自律拒否。 | `python cookbook/04_asimov_safety_guard_recipe.py` |
-| **5. 複数ロボット協調** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 明示的待機バリアによる異種ロボット協調。 | `python cookbook/05_multi_agent_fleet_recipe.py` |
-| **6. 20Hz VLA動作チャンキング** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz連続7DoFモータ動作チャンク生成。 | `python cookbook/06_vla_action_chunking_recipe.py` |
-| **対話型サンドボックス** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 任意画像・カスタムプロンプト評価ハーネス。 | `python cookbook/interactive_sandbox.py` |
+| **1. 空間認識＆6DoF把持** | [`cookbook/01_spatial_perception_recipe.py`](../cookbook/01_spatial_perception_recipe.py) | 2Dポインティング、3Dメトリック体積、進入法線ベクトル。 | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. 運動学的タスク計画** | [`cookbook/02_kinematic_planning_recipe.py`](../cookbook/02_kinematic_planning_recipe.py) | Pydantic構造化全身姿勢選択および衝突回避順序。 | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. 動画滑り＆異常追跡** | [`cookbook/03_continuous_video_slip_recipe.py`](../cookbook/03_continuous_video_slip_recipe.py) | 連続フレーム接触力学、滑り検知、閉ループ補正。 | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV安全ガバナー** | [`cookbook/04_asimov_safety_guard_recipe.py`](../cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066安全基準遵守と自律拒否。 | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. 複数ロボット協調** | [`cookbook/05_multi_agent_fleet_recipe.py`](../cookbook/05_multi_agent_fleet_recipe.py) | 明示的待機バリアによる異種ロボット協調。 | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA動作チャンキング** | [`cookbook/06_vla_action_chunking_recipe.py`](../cookbook/06_vla_action_chunking_recipe.py) | 20Hz連続7DoFモータ動作チャンク生成。 | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **対話型サンドボックス** | [`cookbook/interactive_sandbox.py`](../cookbook/interactive_sandbox.py) | 任意画像・カスタムプロンプト評価ハーネス。 | `python cookbook/interactive_sandbox.py` |
 
 ---
 
@@ -227,11 +227,11 @@ print(response.text)
 
 | **ER Metrics Comparison** | **Progress Classification** |
 | :---: | :---: |
-| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_er_metrics.svg" alt="ER Metrics" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_progress_classification.svg" alt="Progress Classification" width="460"/></a> |
+| <a href="../BENCHMARKS.md"><img src="../assets/benchmark_er_metrics.svg" alt="ER Metrics" width="460"/></a> | <a href="../BENCHMARKS.md"><img src="../assets/benchmark_progress_classification.svg" alt="Progress Classification" width="460"/></a> |
 
 | **Physical Agent Performance** | **Safety and Proximity Governance** |
 | :---: | :---: |
-| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_physical_agent.svg" alt="Physical Agent" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_safety_performance.svg" alt="Safety Performance" width="460"/></a> |
+| <a href="../BENCHMARKS.md"><img src="../assets/benchmark_physical_agent.svg" alt="Physical Agent" width="460"/></a> | <a href="../BENCHMARKS.md"><img src="../assets/benchmark_safety_performance.svg" alt="Safety Performance" width="460"/></a> |
 
 </div>
 
@@ -276,13 +276,13 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 
 ## コントリビューション
 
-コミュニティからの貢献を歓迎します。プロンプトカード、ベンチマーク評価、ハードウェアブリッジの提案については [`CONTRIBUTING.md`](./CONTRIBUTING.md) をご覧ください。
+コミュニティからの貢献を歓迎します。プロンプトカード、ベンチマーク評価、ハードウェアブリッジの提案については [`CONTRIBUTING.md`](../CONTRIBUTING.md) をご覧ください。
 
 ---
 
 ## ライセンスおよび画像帰属
 
-- **テキスト＆コード**: [MITライセンス](./LICENSE) に基づき公開されています。
+- **テキスト＆コード**: [MITライセンス](../LICENSE) に基づき公開されています。
 - **画像・視覚デモ**: `[Verified]` の表示があるデモ画像は Google DeepMind の公開ドキュメントおよびブログを参照しています（教育・デモ目的のみ）。再配布前に元のライセンス条件をご確認ください。
 
 ---

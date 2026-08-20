@@ -6,7 +6,7 @@
 [![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
-**Languages:** **English** | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | [한국어 (Korean)](./README_kr.md) | [Tiếng Việt (Vietnamese)](./README_vn.md)
+**Languages:** **English** | [日本語 (Japanese)](./i18n/README_ja.md) | [中文 (Chinese)](./i18n/README_zh.md) | [한국어 (Korean)](./i18n/README_kr.md) | [Tiếng Việt (Vietnamese)](./i18n/README_vn.md)
 
 ---
 

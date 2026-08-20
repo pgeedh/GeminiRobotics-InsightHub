@@ -1,12 +1,12 @@
 # Awesome Gemini Robotics 2.0 (한국어판)
 
 [![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
-[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
-[![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202.0%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](../ros2_gemini_bridge)
+[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](../BENCHMARKS.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](../LICENSE)
 
-**언어 선택:** [English](./README.md) | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | **한국어 (Korean)** | [Tiếng Việt (Vietnamese)](./README_vn.md)
+**언어 선택:** [English](../README.md) | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | **한국어 (Korean)** | [Tiếng Việt (Vietnamese)](./README_vn.md)
 
 ---
 
@@ -54,13 +54,13 @@ Gemini Robotics 2.0 은 **계층적 이중 모델 아키텍처**로 동작합니
 
 | 테스트 트랙 / 레시피 | 레시피 파일 | 상세 설명 | 빠른 실행 명령어 |
 | :--- | :--- | :--- | :--- |
-| **1. 공간 인식 & 6DoF 파지** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2D 포인팅, 3D 미터 바운딩 박스 및 접근 벡터 산출. | `python cookbook/01_spatial_perception_recipe.py` |
-| **2. 전신 기구학 모션 계획** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic 스키마 기반 웅크림/기구학 충돌 회피 시퀀스. | `python cookbook/02_kinematic_planning_recipe.py` |
-| **3. 비디오 슬립 & 이상 추적** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 연속 비디오 스트림 내 미끄러짐 감지 및 폐루프 보정. | `python cookbook/03_continuous_video_slip_recipe.py` |
-| **4. ASIMOV 안전 거버넌스** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066 안전 정책 강제 및 위험 명령 거부. | `python cookbook/04_asimov_safety_guard_recipe.py` |
-| **5. 이종 다중 로봇 협업** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 명시적 동기화 배리어를 활용한 휴머노이드+AMR 협동. | `python cookbook/05_multi_agent_fleet_recipe.py` |
-| **6. 20Hz VLA 모터 액션 청킹** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz 7DoF 관절 델타 액션 생성 및 지연시간 벤치마크. | `python cookbook/06_vla_action_chunking_recipe.py` |
-| **대화형 샌드박스** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 사용자 지정 이미지와 프롬프트 대화형 실시간 테스트. | `python cookbook/interactive_sandbox.py` |
+| **1. 공간 인식 & 6DoF 파지** | [`cookbook/01_spatial_perception_recipe.py`](../cookbook/01_spatial_perception_recipe.py) | 2D 포인팅, 3D 미터 바운딩 박스 및 접근 벡터 산출. | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. 전신 기구학 모션 계획** | [`cookbook/02_kinematic_planning_recipe.py`](../cookbook/02_kinematic_planning_recipe.py) | Pydantic 스키마 기반 웅크림/기구학 충돌 회피 시퀀스. | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. 비디오 슬립 & 이상 추적** | [`cookbook/03_continuous_video_slip_recipe.py`](../cookbook/03_continuous_video_slip_recipe.py) | 연속 비디오 스트림 내 미끄러짐 감지 및 폐루프 보정. | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV 안전 거버넌스** | [`cookbook/04_asimov_safety_guard_recipe.py`](../cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066 안전 정책 강제 및 위험 명령 거부. | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. 이종 다중 로봇 협업** | [`cookbook/05_multi_agent_fleet_recipe.py`](../cookbook/05_multi_agent_fleet_recipe.py) | 명시적 동기화 배리어를 활용한 휴머노이드+AMR 협동. | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA 모터 액션 청킹** | [`cookbook/06_vla_action_chunking_recipe.py`](../cookbook/06_vla_action_chunking_recipe.py) | 20Hz 7DoF 관절 델타 액션 생성 및 지연시간 벤치마크. | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **대화형 샌드박스** | [`cookbook/interactive_sandbox.py`](../cookbook/interactive_sandbox.py) | 사용자 지정 이미지와 프롬프트 대화형 실시간 테스트. | `python cookbook/interactive_sandbox.py` |
 
 ---
 
@@ -226,11 +226,11 @@ print(response.text)
 
 | **ER Metrics Comparison** | **Progress Classification** |
 | :---: | :---: |
-| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_er_metrics.svg" alt="ER Metrics" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_progress_classification.svg" alt="Progress Classification" width="460"/></a> |
+| <a href="../BENCHMARKS.md"><img src="../assets/benchmark_er_metrics.svg" alt="ER Metrics" width="460"/></a> | <a href="../BENCHMARKS.md"><img src="../assets/benchmark_progress_classification.svg" alt="Progress Classification" width="460"/></a> |
 
 | **Physical Agent Performance** | **Safety and Proximity Governance** |
 | :---: | :---: |
-| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_physical_agent.svg" alt="Physical Agent" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_safety_performance.svg" alt="Safety Performance" width="460"/></a> |
+| <a href="../BENCHMARKS.md"><img src="../assets/benchmark_physical_agent.svg" alt="Physical Agent" width="460"/></a> | <a href="../BENCHMARKS.md"><img src="../assets/benchmark_safety_performance.svg" alt="Safety Performance" width="460"/></a> |
 
 </div>
 
@@ -275,13 +275,13 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 
 ## 기여 안내
 
-커뮤니티 기여를 적극 환영합니다. 새로운 프롬프트 카드, 벤치마크 평가, 하드웨어 어댑터 제안은 [`CONTRIBUTING.md`](./CONTRIBUTING.md)를 참고해 주세요.
+커뮤니티 기여를 적극 환영합니다. 새로운 프롬프트 카드, 벤치마크 평가, 하드웨어 어댑터 제안은 [`CONTRIBUTING.md`](../CONTRIBUTING.md)를 참고해 주세요.
 
 ---
 
 ## 라이선스 및 이미지 출처
 
-- **텍스트 및 코드**: [MIT 라이선스](./LICENSE) 하에 배포됩니다.
+- **텍스트 및 코드**: [MIT 라이선스](../LICENSE) 하에 배포됩니다.
 - **이미지 및 시각 데모**: `[Verified]`로 표시된 데모 이미지는 Google DeepMind의 공식 기술 보고서 및 블로그에서 인용되었으며, 교육 및 연구 목적으로만 사용됩니다. 재배포 시 원본 라이선스를 확인하십시오.
 
 ---

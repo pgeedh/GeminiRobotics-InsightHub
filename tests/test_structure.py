@@ -46,10 +46,10 @@ class TestGeminiRoboticsPlaybook(unittest.TestCase):
             'cli.py',
             'requirements.txt',
             'README.md',
-            'README_ja.md',
-            'README_zh.md',
-            'README_kr.md',
-            'README_vn.md',
+            'i18n/README_ja.md',
+            'i18n/README_zh.md',
+            'i18n/README_kr.md',
+            'i18n/README_vn.md',
             'INTERESTING_PROMPTS.md',
             'RESOURCES.md'
         ]
@@ -108,8 +108,8 @@ class TestGeminiRoboticsPlaybook(unittest.TestCase):
         languages = ['ja', 'zh', 'kr', 'vn']
         for lang in languages:
             filename = f"README_{lang}.md"
-            path = os.path.join(ROOT_DIR, filename)
-            self.assertTrue(os.path.exists(path), f"Missing {filename}")
+            path = os.path.join(ROOT_DIR, "i18n", filename)
+            self.assertTrue(os.path.exists(path), f"Missing {filename} in i18n/")
             with open(path, 'r', encoding='utf-8') as f:
                 content = f.read()
             self.assertTrue(len(content) > 2000, f"{filename} is too short ({len(content)} chars)")
