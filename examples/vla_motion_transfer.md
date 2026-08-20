@@ -1,4 +1,4 @@
-# Motion Transfer & Whole-Body VLA Models (Gemini Robotics 2 & 1.5)
+# Motion Transfer & Whole-Body VLA Models (Gemini Robotics 2.0)
 
 Google DeepMind's **Gemini Robotics 2 (VLA)** and **Gemini Robotics On-Device 2** introduce state-of-the-art capabilities for **Whole-Body Motion Transfer**, solving the fundamental bottleneck of physical data scarcity and cross-embodiment generalization.
 
@@ -40,11 +40,6 @@ Gemini Robotics 2 introduces a hierarchical **Whole-Body Intelligence** pipeline
                        │  Robot Actuators & Motor Controllers         │
                        └──────────────────────────────────────────────┘
 ```
-
-### Core Mechanisms
-1. **Whole-Body Coordination**: Unlike 1.5 which focused on upper-body tabletop manipulation, Gemini Robotics 2 coordinates locomotion (walking, crouching, stretching) simultaneously with arm and hand manipulation.
-2. **Fast On-Device Adaptation**: **Gemini Robotics On-Device 2** can adapt to new physical kinematics and sensor configurations locally on edge hardware with only a few hours of demonstration data.
-3. **Dexterous End-Effector Control**: Direct continuous mapping for multi-axis finger joints, compliance control, and slip-aware grasp stabilization.
 
 ---
 

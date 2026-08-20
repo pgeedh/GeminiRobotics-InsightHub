@@ -140,8 +140,7 @@ def select_model():
         choices=[
             "gemini-robotics-er-2 (Google DeepMind Whole-Body & Dexterity ER 2)",
             "gemini-2.5-flash (Gemini 2.5 Flash Thinking)",
-            "gemini-2.0-flash (Gemini 2.0 Flash Multimodal)",
-            "gemini-1.5-pro (Gemini 1.5 Pro Long-Context)"
+            "gemini-2.0-flash (Gemini 2.0 Flash Multimodal)"
         ]
     ).ask()
     if choice:
