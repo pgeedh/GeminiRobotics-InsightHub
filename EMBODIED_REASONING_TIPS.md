@@ -1,17 +1,17 @@
-# 🧠 The Physical AI Practitioner's Handbook: Mastering Embodied Reasoning with Gemini Robotics ER 2
+# The Physical AI Practitioner's Handbook: Embodied Reasoning with Gemini Robotics ER 2
 
-Welcome to the definitive engineering guide for **Embodied Reasoning (ER)** with Google DeepMind's Gemini Robotics models. This guide provides battle-tested prompting patterns, coordinate frame conversions, safety constraints, and latency optimizations derived from the Early Trusted Tester program.
+Engineering reference and prompt design guidelines for **Embodied Reasoning (ER)** with Google DeepMind's Gemini Robotics models. This guide covers spatial coordinate conventions, kinematic planning patterns, safety constraints, and latency optimization.
 
 ---
 
-## 📐 1. Coordinate Framing & Spatial Grounding
+## 1. Coordinate Framing and Spatial Grounding
 
-Gemini Robotics ER models output spatial tokens in a normalized **`[0, 1000]` coordinate system** for 2D bounding boxes/points and metric meters `[x, y, z]` for 3D bounding boxes.
+Gemini Robotics ER models output spatial tokens in a normalized **`[0, 1000]` coordinate system** for 2D bounding boxes and points, and metric meters `[x, y, z]` for 3D bounding volumes.
 
-### Golden Rule of 2D Coordinates
+### 2D Coordinates Convention
 - Top-Left Origin: `(ymin=0, xmin=0)` is the top-left pixel.
 - Bottom-Right: `(ymax=1000, xmax=1000)` is the bottom-right pixel.
-- To convert normalized coordinates `[ymin, xmin, ymax, xmax]` to pixel values:
+- Python pixel conversion formula:
   ```python
   pixel_xmin = int((xmin / 1000.0) * image_width)
   pixel_xmax = int((xmax / 1000.0) * image_width)
@@ -20,7 +20,7 @@ Gemini Robotics ER models output spatial tokens in a normalized **`[0, 1000]` co
   ```
 
 ### 3D Metric Coordinate Prompt Template
-When prompting for 3D boxes, always provide camera intrinsics hints or ask for metric meters relative to camera optical center:
+When prompting for 3D boxes, specify camera optical center conventions:
 ```text
 Conditioning: Camera optical center is (0,0,0). Forward is +Z, Right is +X, Down is +Y.
 Prompt: Detect all manipulable tools on the workbench.
@@ -30,10 +30,10 @@ Return 3D oriented bounding boxes in meters:
 
 ---
 
-## ⚡ 2. 10 Essential Embodied Reasoning Prompt Patterns
+## 2. Embodied Reasoning Prompt Patterns
 
 ### Pattern 1: Chain-of-Kinematics (Whole-Body Stance Selection)
-*Prevents joint limit singularities by forcing the model to select whole-body posture before arm movement.*
+*Prevents joint limit singularities by prompting the model to resolve whole-body posture before arm movement.*
 ```text
 Task: Pick up the dropped bolt beneath the assembly jig (clearance height: 35cm).
 Reasoning Steps:
@@ -44,7 +44,7 @@ Reasoning Steps:
 ```
 
 ### Pattern 2: 6DoF Grasp Affordance Grounding
-*Specifies the exact approach normal vector and finger opening width rather than just a center point.*
+*Specifies approach normal vectors and finger opening widths alongside contact coordinates.*
 ```text
 Identify the screwdriver on the table.
 Return the 6DoF grasp affordance for a tendon-driven gripper:
@@ -54,16 +54,16 @@ Return the 6DoF grasp affordance for a tendon-driven gripper:
 - target_grip_aperture_mm: 35
 ```
 
-### Pattern 3: ASIMOV-Agentic Safety Invariant
-*Embeds hard safety guarantees directly into the model's high-priority system instructions.*
+### Pattern 3: ASIMOV Safety Invariant
+*Embeds hard safety guarantees directly into high-priority system instructions.*
 ```text
-System Invariant:
+System Invariants:
 - If a human operator is visible within a 1.2m radius of the manipulator, cap all joint speeds to 0.2 rad/s.
 - If a human hand enters the active grasp corridor, immediately output an ASIMOV_SAFETY_PAUSE state.
-- Never swing heavy payloads (>5kg) with angular acceleration > 0.5 rad/s^2.
+- Never swing payloads (>5kg) with angular acceleration > 0.5 rad/s^2.
 ```
 
-### Pattern 4: Multimodal Video State Verification (Before/After)
+### Pattern 4: Multimodal Video State Verification
 *Audits execution success across temporal video frames.*
 ```text
 Watch the start state frame (Frame 0) and final state frame (Frame 60).
@@ -74,8 +74,8 @@ Checklist:
 3. Output state: 'SUCCESS' or 'FAILURE_RETRY' with spatial coordinate of defect.
 ```
 
-### Pattern 5: Multi-Robot Fleet Task Allocation
-*Coordinates dual agents with synchronization barriers to avoid deadlock.*
+### Pattern 5: Multi-Robot Task Allocation and Synchronization
+*Coordinates multi-agent fleets with synchronization barriers to prevent deadlock.*
 ```text
 Available Fleet:
 - Robot A (Humanoid Manipulator, 20kg payload)
@@ -86,23 +86,26 @@ Requirement: Output synchronized schedule with explicit wait_for_agent barriers 
 
 ---
 
-## 🛠️ 3. Temperature & Thinking Budget Guidelines
+## 3. Temperature and Thinking Budget Guidelines
 
 | Task Type | Recommended Temperature | Thinking Budget | Notes |
 | :--- | :--- | :--- | :--- |
 | **3D Spatial Bounding Boxes** | `0.1 - 0.2` | `1024 - 2048` | Low temperature ensures tight bounding box coordinates. |
 | **Whole-Body Mission Planning** | `0.1` | `2048` | Structured JSON outputs require deterministic logic. |
-| **Creative / Open-Ended Handoffs** | `0.4` | `1024` | Allows exploring alternative collaborative pathways. |
+| **Collaborative Handoffs** | `0.3` | `1024` | Allows exploring alternative collaborative pathways. |
 | **ASIMOV Safety Auditing** | `0.0` | `2048` | Zero temperature for strict rule-based violation detection. |
 
 ---
 
-## 🚨 4. Handling Occlusion and Ambiguity
+## 4. Handling Occlusion and Ambiguity
 
-When parts are partially occluded or reflective:
-1. **Request Multi-View Confirmation**: Prompt Gemini ER 2 to combine wrist camera and head camera views.
-2. **Confidence Bounds**: Instruct the model to return an `occlusion_ratio` (0.0 to 1.0) and specify a secondary exploratory viewpoint if confidence is below 0.85.
+When targets are partially occluded or reflective:
+- Query multi-view inputs (wrist camera + overhead camera) simultaneously.
+- Request confidence bounds alongside coordinate outputs.
+- Trigger active perception maneuvers (e.g., tilt head camera +15 degrees) if confidence falls below 0.85.
 
 ---
 
-*Curated for Google DeepMind Gemini Robotics Early Access Program.*
+<p align="center">
+  <i>Maintained by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
+</p>

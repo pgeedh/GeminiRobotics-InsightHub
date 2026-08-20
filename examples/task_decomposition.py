@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 # -------------------------------------------------------------------------
 # GEMINI ROBOTICS 2.0: WHOLE-BODY TASK DECOMPOSITION & PLANNING (ER 2)
 # -------------------------------------------------------------------------
-# Shows how to use Gemini Robotics ER 2 as a high-level physical AI brain
-# decomposing complex tasks into whole-body action sequences.
+# Decomposes complex physical missions into structured whole-body action
+# sequences with explicit ASIMOV safety checks and parameters.
 # -------------------------------------------------------------------------
 
 load_dotenv()
@@ -25,14 +25,14 @@ FALLBACK_MODELS = [
 ]
 
 if not api_key:
-    print("⚠️ Warning: GEMINI_API_KEY not found. Running with simulation fallback.")
+    print("[INFO] GEMINI_API_KEY not configured. Running with simulated planner.")
     client = None
 else:
-    print("✅ Gemini API Key loaded.")
+    print("[INFO] Gemini API Key loaded.")
     try:
         client = genai.Client(api_key=api_key)
     except Exception as e:
-        print(f"Error initializing client: {e}")
+        print(f"[ERROR] Error initializing client: {e}")
         client = None
 
 class PlanStep(BaseModel):
@@ -57,7 +57,7 @@ Always decompose missions into structured kinematic steps with ASIMOV safety che
 """
 
 def plan_mission(mission_goal: str, model_name: str = DEFAULT_MODEL) -> Optional[RobotTaskPlan]:
-    print(f"\n🧠 Planning robot mission: '{mission_goal}' (Model: {model_name})...")
+    print(f"\n[PLANNER] Planning robot mission: '{mission_goal}' (Model: {model_name})...")
     
     if client:
         try:
@@ -78,7 +78,7 @@ def plan_mission(mission_goal: str, model_name: str = DEFAULT_MODEL) -> Optional
             print_plan(plan_obj)
             return plan_obj
         except Exception as e:
-            print(f"⚠️ API call error: {e}. Running simulated planner...")
+            print(f"[WARN] API call error: {e}. Running simulated planner...")
 
     sim_plan = generate_simulated_plan(mission_goal)
     print_plan(sim_plan)
@@ -127,7 +127,7 @@ def generate_simulated_plan(mission_goal: str) -> RobotTaskPlan:
     )
 
 def print_plan(plan: RobotTaskPlan):
-    print("\n📋 Executable Whole-Body Plan:")
+    print("\nExecutable Whole-Body Plan:")
     print("==================================================")
     print(f"Goal: {plan.overall_goal}")
     print(f"Estimated Duration: {plan.estimated_duration_sec}s")

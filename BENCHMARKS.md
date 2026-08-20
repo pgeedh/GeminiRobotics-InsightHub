@@ -1,15 +1,15 @@
-# 📊 Official Benchmarks & Performance: Gemini Robotics ER 2
+# Benchmarks and Empirical Performance: Gemini Robotics ER 2
 
 Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 2** across standardized physical AI, embodied reasoning, VLA execution control, and safety governance benchmarks.
 
-> **Research & Technical Citations**:
+> **Research and Technical Citations:**
 > - *"Gemini Robotics: Bringing AI into the Physical World"* (Google DeepMind, arXiv:[2503.20020](https://arxiv.org/abs/2503.20020))
 > - Google DeepMind Gemini Robotics ER 2 Technical Benchmark Suite
 > - ASIMOV-Agentic Human Proximity & Physical Safety Evaluation Benchmark
 
 ---
 
-## 📈 1. Embodied Reasoning (ER) Metrics Comparison
+## 1. Embodied Reasoning (ER) Metrics Comparison
 
 <p align="center">
   <img src="./assets/benchmark_er_metrics.svg" alt="ER Metrics Comparison" width="100%" />
@@ -24,7 +24,7 @@ Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 
 
 ---
 
-## ⏱️ 2. Progress Classification Comparison
+## 2. Progress Classification Comparison
 
 <p align="center">
   <img src="./assets/benchmark_progress_classification.svg" alt="Progress Classification Comparison" width="100%" />
@@ -40,7 +40,7 @@ Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 
 
 ---
 
-## 🦾 3. Physical Agent Execution Performance
+## 3. Physical Agent Execution Performance
 
 <p align="center">
   <img src="./assets/benchmark_physical_agent.svg" alt="Physical Agent Performance" width="100%" />
@@ -54,7 +54,7 @@ Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 
 
 ---
 
-## 🛡️ 4. Safety & Human Proximity Governance
+## 4. Safety and Human Proximity Governance
 
 <p align="center">
   <img src="./assets/benchmark_safety_performance.svg" alt="Safety Performance" width="100%" />
@@ -67,13 +67,13 @@ Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 
 
 ---
 
-## 🔬 Benchmark Methodology & Evaluation Protocol
+## Benchmark Methodology and Protocol
 
 ### 1. ERQA (Embodied Reasoning Question Answering)
-- Evaluates multi-camera spatial reasoning across 400 questions.
+- Evaluates multi-camera spatial reasoning across 400 empirical questions.
 - Tests coordinate grounding, affordance mapping, multi-view consistency, and kinematic feasibility.
 
-### 2. Video-Based Success & Slip Detection
+### 2. Video-Based Success and Slip Detection
 - Evaluates mid-execution RGB video stream reasoning to detect object drops, grasp shifts, and container tipping in real time without static assumptions.
 
 ### 3. VLA Policy Control

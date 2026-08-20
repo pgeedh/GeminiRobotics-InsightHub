@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 # -------------------------------------------------------------------------
 # GEMINI ROBOTICS 2.0: MULTI-ROBOT COLLABORATION & FLEET ALLOCATION (ER 2)
 # -------------------------------------------------------------------------
-# Gemini Robotics ER 2 enables heterogeneous robot fleets (humanoids,
-# quadrupeds, AMR rovers) to coordinate synchronized operations.
+# Coordinates heterogeneous robot fleets (humanoids, quadrupeds, AMR rovers)
+# with explicit spatial synchronization barriers.
 # -------------------------------------------------------------------------
 
 load_dotenv()
@@ -25,10 +25,10 @@ FALLBACK_MODELS = [
 
 if api_key:
     client = genai.Client(api_key=api_key)
-    print("✅ Gemini API Key loaded.")
+    print("[INFO] Gemini API Key loaded.")
 else:
     client = None
-    print("⚠️ Warning: GEMINI_API_KEY not found. Running in simulation mode.")
+    print("[INFO] GEMINI_API_KEY not configured. Running in simulation mode.")
 
 class RobotAgentSpec(BaseModel):
     agent_id: str
@@ -55,7 +55,7 @@ class MultiRobotMissionPlan(BaseModel):
     inter_robot_safety_buffer_m: float
 
 def coordinate_robot_fleet(mission_goal: str, fleet_specs: List[RobotAgentSpec], model_name: str = DEFAULT_MODEL) -> MultiRobotMissionPlan:
-    print(f"\n🤝 Coordinating Multi-Robot Fleet for: '{mission_goal}'")
+    print(f"\n[FLEET] Coordinating Multi-Robot Fleet for: '{mission_goal}'")
     
     fleet_json = json.dumps([agent.model_dump() for agent in fleet_specs], indent=2)
     
@@ -86,7 +86,7 @@ def coordinate_robot_fleet(mission_goal: str, fleet_specs: List[RobotAgentSpec],
             print_fleet_plan(plan)
             return plan
         except Exception as e:
-            print(f"⚠️ Live API call failed: {e}. Executing simulated fleet plan...")
+            print(f"[WARN] Live API call failed: {e}. Executing simulated fleet plan...")
 
     plan = generate_simulated_fleet_plan(mission_goal, fleet_specs)
     print_fleet_plan(plan)
@@ -137,7 +137,7 @@ def generate_simulated_fleet_plan(mission_goal: str, fleet_specs: List[RobotAgen
     )
 
 def print_fleet_plan(plan: MultiRobotMissionPlan):
-    print("\n🤝 Multi-Robot Coordinated Execution Schedule:")
+    print("\nMulti-Robot Coordinated Execution Schedule:")
     print("==================================================")
     print(f"Mission: {plan.mission_title}")
     print(f"Objective: {plan.shared_objective}")
@@ -149,7 +149,7 @@ def print_fleet_plan(plan: MultiRobotMissionPlan):
         print(f"  Step {step.step_id}: {step.assigned_agent.upper()} -> {step.action}{sync}")
         print(f"    Target: {step.target} | Params: {step.parameters}")
         if step.handoff_payload:
-            print(f"    📦 Physical Handoff: {step.handoff_payload}")
+            print(f"    Physical Handoff: {step.handoff_payload}")
     print("==================================================")
 
 if __name__ == "__main__":

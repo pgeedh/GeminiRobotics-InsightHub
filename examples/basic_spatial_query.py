@@ -7,10 +7,10 @@ from PIL import Image, ImageDraw, ImageFont
 from dotenv import load_dotenv
 
 # -------------------------------------------------------------------------
-# GEMINI ROBOTICS 2.0: SPATIAL QUERY & 3D GROUNDING (ER 2)
+# GEMINI ROBOTICS 2.0: SPATIAL QUERY AND 3D GROUNDING (ER 2)
 # -------------------------------------------------------------------------
-# Demonstrates querying Google DeepMind's Gemini Robotics ER 2
-# for 2D bounding boxes, pixel points, 3D bounding boxes, and 6DoF grasp poses.
+# Queries Google DeepMind's Gemini Robotics ER 2 for 2D bounding boxes,
+# pixel points, 3D metric bounding boxes, and 6DoF grasp affordances.
 # -------------------------------------------------------------------------
 
 load_dotenv()
@@ -23,14 +23,14 @@ FALLBACK_MODELS = [
 ]
 
 if not api_key:
-    print("⚠️ Warning: GEMINI_API_KEY not found in .env or environment.")
+    print("[INFO] GEMINI_API_KEY not set. Offline demonstration mode active.")
 else:
-    print("✅ Gemini API Key loaded.")
+    print("[INFO] Gemini API Key loaded.")
 
 try:
     client = genai.Client(api_key=api_key) if api_key else None
 except Exception as e:
-    print(f"Error initializing client: {e}")
+    print(f"[ERROR] Error initializing client: {e}")
     client = None
 
 def get_mime_type(image_path: str) -> str:
@@ -46,10 +46,10 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
     Executes a visual spatial perception query using Gemini Robotics ER 2.
     Supports 2D bounding boxes, point coordinates, and 3D spatial bounding boxes.
     """
-    print(f"\n🤖 Robot: Analyzing {image_path} with model '{model_name}'...")
+    print(f"\n[QUERY] Analyzing {image_path} with model '{model_name}'...")
     
     if not os.path.exists(image_path):
-        print(f"❌ Error: Image file '{image_path}' not found.")
+        print(f"[ERROR] Image file '{image_path}' not found.")
         return None
 
     with open(image_path, 'rb') as f:
@@ -62,7 +62,7 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
         models_to_try = [model_name] + [m for m in FALLBACK_MODELS if m != model_name]
         for m in models_to_try:
             try:
-                print(f"📡 Sending request to {m}...")
+                print(f"[REQUEST] Sending request to {m}...")
                 response = client.models.generate_content(
                     model=m,
                     contents=[
@@ -75,17 +75,17 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
                     )
                 )
                 response_text = response.text
-                print(f"✅ Success with model: {m}")
+                print(f"[SUCCESS] Model response received from: {m}")
                 break
             except Exception as e:
-                print(f"⚠️ Failed with model '{m}': {e}")
+                print(f"[WARN] Failed with model '{m}': {e}")
                 continue
 
     if not response_text:
-        print("ℹ️ Running in simulated demo mode (offline / mock output)...")
+        print("[INFO] Running in simulated telemetry mode...")
         response_text = generate_simulated_spatial_output(prompt_text)
 
-    print("\n🔍 Gemini Robotics Spatial Output:")
+    print("\nSpatial Grounding Output:")
     print("--------------------------------------------------")
     print(response_text)
     print("--------------------------------------------------")
@@ -94,7 +94,7 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
     return response_text
 
 def generate_simulated_spatial_output(prompt_text: str) -> str:
-    """Generates high-fidelity simulated ER 2 output for offline or demonstration mode."""
+    """Generates high-fidelity simulated ER 2 output for offline demonstration mode."""
     prompt_lower = prompt_text.lower()
     if "3d" in prompt_lower or "metric" in prompt_lower or "grasp" in prompt_lower:
         mock_data = [
@@ -151,7 +151,7 @@ def parse_spatial_json(response_text: str):
         if match:
             return json.loads(match.group(1))
     except Exception as e:
-        print(f"Warning: could not parse spatial JSON: {e}")
+        print(f"[WARN] Could not parse spatial JSON: {e}")
     return None
 
 def visualize_results(image_path: str, response_text: str, output_path: str = "output_perception.jpg"):
@@ -206,10 +206,10 @@ def visualize_results(image_path: str, response_text: str, output_path: str = "o
                     draw.text((gpx + 10, gpy - 8), f"6DoF Grasp: {label}", fill="#FF0055")
 
         image.save(output_path)
-        print(f"🖼️ Perception visualization saved to: {output_path}")
+        print(f"[OUTPUT] Perception visualization saved to: {output_path}")
         return output_path
     except Exception as e:
-        print(f"Warning: visualization failed: {e}")
+        print(f"[WARN] Visualization failed: {e}")
         return None
 
 if __name__ == "__main__":

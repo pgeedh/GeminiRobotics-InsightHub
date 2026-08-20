@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "title": "Awesome Gemini Robotics 2.0 Prompt & Capability Catalog",
-  "description": "Curated, production-ready prompts, JSON schemas, Python SDK snippets, and sample responses for Google DeepMind Gemini Robotics ER 2, Gemini Robotics 2 (VLA), and ER 1.5.",
+  "description": "Curated, production-ready prompts, JSON schemas, Python SDK snippets, and sample responses for Google DeepMind Gemini Robotics ER 2 and Gemini Robotics 2 (VLA).",
   "categories": [
     "Spatial Grounding & Pointing",
     "Bounding Volumes & 6DoF Grasping",
@@ -18,16 +18,38 @@
       "id": 1,
       "title": "Pointing to Undefined Objects (Open-Vocabulary 2D Discovery)",
       "category": "Spatial Grounding & Pointing",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "open_vocabulary", "perception"],
+      "tags": [
+        "2d_point",
+        "open_vocabulary",
+        "perception"
+      ],
       "prompt": "Point to no more than 10 items in the image. The label returned should be an identifying name for the object detected. The answer should follow the json format: [{\"point\": [y, x], \"label\": \"<object_name>\"}]. The points are in [y, x] format normalized to 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[types.Part.from_bytes(data=img_bytes, mime_type='image/jpeg'), prompt],\n    config=types.GenerateContentConfig(temperature=0.2, thinking_config=types.ThinkingConfig(thinking_budget=0))\n)",
       "sample_output": [
-        {"point": [421, 312], "label": "blue mug"},
-        {"point": [680, 540], "label": "stainless steel wrench"},
-        {"point": [290, 810], "label": "power drill"}
+        {
+          "point": [
+            421,
+            312
+          ],
+          "label": "blue mug"
+        },
+        {
+          "point": [
+            680,
+            540
+          ],
+          "label": "stainless steel wrench"
+        },
+        {
+          "point": [
+            290,
+            810
+          ],
+          "label": "power drill"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -35,16 +57,38 @@
       "id": 2,
       "title": "Pointing to Defined Objects (Multi-Category Filtering)",
       "category": "Spatial Grounding & Pointing",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "filtering", "target_extraction"],
+      "tags": [
+        "2d_point",
+        "filtering",
+        "target_extraction"
+      ],
       "prompt": "Get all points matching the following target objects: bread, starfruit, banana. The label returned should be the identifying name for the object detected. Return valid JSON only: [{\"point\": [y, x], \"label\": \"<target>\"}]. Coordinates are normalized between 0-1000 [y, x].",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [380, 240], "label": "banana"},
-        {"point": [520, 610], "label": "starfruit"},
-        {"point": [710, 450], "label": "bread"}
+        {
+          "point": [
+            380,
+            240
+          ],
+          "label": "banana"
+        },
+        {
+          "point": [
+            520,
+            610
+          ],
+          "label": "starfruit"
+        },
+        {
+          "point": [
+            710,
+            450
+          ],
+          "label": "bread"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -52,16 +96,38 @@
       "id": 3,
       "title": "Abstract Semantic Pointing (Category & Functional Grouping)",
       "category": "Spatial Grounding & Pointing",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "semantic_abstraction", "category_reasoning"],
+      "tags": [
+        "2d_point",
+        "semantic_abstraction",
+        "category_reasoning"
+      ],
       "prompt": "Get all points for any visible fruit. Identify individual items even under partial occlusion. Return JSON format: [{\"point\": [y, x], \"label\": \"<item_name>\"}] with [y, x] normalized to 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [380, 240], "label": "banana"},
-        {"point": [410, 310], "label": "green apple"},
-        {"point": [520, 610], "label": "starfruit"}
+        {
+          "point": [
+            380,
+            240
+          ],
+          "label": "banana"
+        },
+        {
+          "point": [
+            410,
+            310
+          ],
+          "label": "green apple"
+        },
+        {
+          "point": [
+            520,
+            610
+          ],
+          "label": "starfruit"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -69,15 +135,31 @@
       "id": 4,
       "title": "Grid Board & Matrix Slot Localization (Pegboard / Connect Four)",
       "category": "Spatial Grounding & Pointing",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/obstacle_avoidance.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "grid_localization", "assembly"],
+      "tags": [
+        "2d_point",
+        "grid_localization",
+        "assembly"
+      ],
       "prompt": "Get all points matching empty game board slots and game pieces. Return the result in JSON format: [{\"point\": [y, x], \"label\": \"<slot_row_col | piece_color>\"}]. All coordinates normalized to 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [310, 450], "label": "slot_row1_col3_empty"},
-        {"point": [420, 450], "label": "red_game_piece"}
+        {
+          "point": [
+            310,
+            450
+          ],
+          "label": "slot_row1_col3_empty"
+        },
+        {
+          "point": [
+            420,
+            450
+          ],
+          "label": "red_game_piece"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -85,16 +167,38 @@
       "id": 5,
       "title": "Serial Part & Affordance Pointing (Stem, Rim, Handle, Nozzle)",
       "category": "Spatial Grounding & Pointing",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/part_identification.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "part_affordance", "fine_manipulation"],
+      "tags": [
+        "2d_point",
+        "part_affordance",
+        "fine_manipulation"
+      ],
       "prompt": "Point to the specific functional part of the target object: stem of banana, rim of measuring cup, and handle of paper bag. Return a JSON list: [{\"point\": [y, x], \"label\": \"<object_part>\"}] with y/x in 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [345, 210], "label": "banana_stem"},
-        {"point": [612, 735], "label": "measuring_cup_rim"},
-        {"point": [180, 520], "label": "paper_bag_handle"}
+        {
+          "point": [
+            345,
+            210
+          ],
+          "label": "banana_stem"
+        },
+        {
+          "point": [
+            612,
+            735
+          ],
+          "label": "measuring_cup_rim"
+        },
+        {
+          "point": [
+            180,
+            520
+          ],
+          "label": "paper_bag_handle"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -102,17 +206,45 @@
       "id": 6,
       "title": "Counting by Pointing with Visual Reason Trace",
       "category": "Spatial Grounding & Pointing",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/counting_reasoning.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "counting", "cot_reasoning"],
+      "tags": [
+        "2d_point",
+        "counting",
+        "cot_reasoning"
+      ],
       "prompt": "Point to each individual washer or mechanical fastener in the container. Provide visual reasoning steps and count confirmation. Format: [{\"point\": [y, x], \"label\": \"washer_<index>\"}] with coordinates normalized 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=1024))\n)",
       "sample_output": [
-        {"point": [410, 320], "label": "washer_1"},
-        {"point": [445, 360], "label": "washer_2"},
-        {"point": [480, 410], "label": "washer_3"},
-        {"point": [520, 390], "label": "washer_4"}
+        {
+          "point": [
+            410,
+            320
+          ],
+          "label": "washer_1"
+        },
+        {
+          "point": [
+            445,
+            360
+          ],
+          "label": "washer_2"
+        },
+        {
+          "point": [
+            480,
+            410
+          ],
+          "label": "washer_3"
+        },
+        {
+          "point": [
+            520,
+            390
+          ],
+          "label": "washer_4"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -120,15 +252,31 @@
       "id": 7,
       "title": "Defined Object Pointing Across Multi-Frame Sequence / GIF",
       "category": "Spatial Grounding & Pointing",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_franka_dexterity.gif",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["2d_point", "multi_frame", "dynamic_tracking"],
+      "tags": [
+        "2d_point",
+        "multi_frame",
+        "dynamic_tracking"
+      ],
       "prompt": "Point to the following items across the dynamic sequence: 'pen in gripper', 'pen on desk', 'open container'. Return a JSON list: [{\"point\": [y, x], \"label\": \"<object_state>\"}]. If an object is not present in the current view, omit it.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[video_or_gif_part, prompt]\n)",
       "sample_output": [
-        {"point": [512, 480], "label": "pen in gripper"},
-        {"point": [720, 310], "label": "open container"}
+        {
+          "point": [
+            512,
+            480
+          ],
+          "label": "pen in gripper"
+        },
+        {
+          "point": [
+            720,
+            310
+          ],
+          "label": "open container"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -136,15 +284,35 @@
       "id": 8,
       "title": "2D Bounding Boxes with Unique Descriptive Identifiers",
       "category": "Bounding Volumes & 6DoF Grasping",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["box_2d", "detection", "attribute_grounding"],
+      "tags": [
+        "box_2d",
+        "detection",
+        "attribute_grounding"
+      ],
       "prompt": "Return bounding boxes as a JSON array with descriptive labels distinguishing similar objects by color, size, and location. Format: [{\"box_2d\": [ymin, xmin, ymax, xmax], \"label\": \"<attribute_label>\"}] normalized to 0-1000 integers.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"box_2d": [380, 290, 520, 395], "label": "ceramic blue coffee mug on left"},
-        {"box_2d": [620, 500, 710, 680], "label": "silver adjustable wrench in center"}
+        {
+          "box_2d": [
+            380,
+            290,
+            520,
+            395
+          ],
+          "label": "ceramic blue coffee mug on left"
+        },
+        {
+          "box_2d": [
+            620,
+            500,
+            710,
+            680
+          ],
+          "label": "silver adjustable wrench in center"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -152,17 +320,30 @@
       "id": 9,
       "title": "3D Metric Bounding Volumes [x, y, z, dx, dy, dz] & Center of Mass",
       "category": "Bounding Volumes & 6DoF Grasping",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_apollo_wholebody.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["3d_metric", "box_3d", "spatial_depth", "robot_frame"],
+      "tags": [
+        "3d_metric",
+        "box_3d",
+        "spatial_depth",
+        "robot_frame"
+      ],
       "prompt": "Detect the objects on the workbench. Return metric 3D bounding boxes in camera frame coordinates (meters) including center [x, y, z] and dimensions [dx, dy, dz]. Return JSON: [{\"label\": \"<name>\", \"center_m\": [x, y, z], \"size_m\": [dx, dy, dz], \"confidence\": <0.0-1.0>}].",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=2048))\n)",
       "sample_output": [
         {
           "label": "industrial_gear_box",
-          "center_m": [0.08, 0.62, -0.04],
-          "size_m": [0.18, 0.22, 0.14],
+          "center_m": [
+            0.08,
+            0.62,
+            -0.04
+          ],
+          "size_m": [
+            0.18,
+            0.22,
+            0.14
+          ],
           "confidence": 0.96
         }
       ],
@@ -172,16 +353,28 @@
       "id": 10,
       "title": "6DoF Grasp Affordance, Normal Approach & Aperture Limits",
       "category": "Bounding Volumes & 6DoF Grasping",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_franka_dexterity.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["6dof_grasp", "approach_vector", "dexterous_manipulation"],
+      "tags": [
+        "6dof_grasp",
+        "approach_vector",
+        "dexterous_manipulation"
+      ],
       "prompt": "For the target tool, compute the 6DoF grasp pose, approach normal vector, and maximum gripper opening aperture. Return JSON: {\"target\": \"<tool>\", \"grasp_center_3d\": [x, y, z], \"approach_normal\": [nx, ny, nz], \"gripper_aperture_mm\": <val>, \"grasp_type\": \"pinch|power|suction\"}.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": {
         "target": "cordless_drill",
-        "grasp_center_3d": [0.12, 0.55, 0.02],
-        "approach_normal": [0.0, 0.0, -1.0],
+        "grasp_center_3d": [
+          0.12,
+          0.55,
+          0.02
+        ],
+        "approach_normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
         "gripper_aperture_mm": 65,
         "grasp_type": "power"
       },
@@ -191,17 +384,45 @@
       "id": 11,
       "title": "Simple Trajectory Planning (Ordered Waypoint Sequences)",
       "category": "Trajectory & Motion Planning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/obstacle_avoidance.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["trajectory", "waypoints", "pick_and_place"],
+      "tags": [
+        "trajectory",
+        "waypoints",
+        "pick_and_place"
+      ],
       "prompt": "Place a point on the red pen, then 15 ordered trajectory waypoints to transfer the pen to the organizer tray on the left. Return JSON: [{\"point\": [y, x], \"label\": \"step_<idx>\"}] with points in [y, x] format normalized to 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [650, 480], "label": "step_0_start"},
-        {"point": [580, 450], "label": "step_1_lift"},
-        {"point": [420, 310], "label": "step_7_midflight"},
-        {"point": [310, 180], "label": "step_15_target_bin"}
+        {
+          "point": [
+            650,
+            480
+          ],
+          "label": "step_0_start"
+        },
+        {
+          "point": [
+            580,
+            450
+          ],
+          "label": "step_1_lift"
+        },
+        {
+          "point": [
+            420,
+            310
+          ],
+          "label": "step_7_midflight"
+        },
+        {
+          "point": [
+            310,
+            180
+          ],
+          "label": "step_15_target_bin"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -209,17 +430,45 @@
       "id": 12,
       "title": "Surface Brushing, Wiping & Polishing Multi-Point Coverage",
       "category": "Trajectory & Motion Planning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/trajectory_brushing.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["trajectory", "surface_coverage", "cleaning_primitive"],
+      "tags": [
+        "trajectory",
+        "surface_coverage",
+        "cleaning_primitive"
+      ],
       "prompt": "Point to the blue brush tool and generate 10 ordered coverage trajectory points across the debris region to thoroughly clean the plate without scattering particles. Return JSON: [{\"point\": [y, x], \"label\": \"step_<index>\"}] normalized 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [720, 210], "label": "tool_brush_origin"},
-        {"point": [580, 410], "label": "step_1_stroke_start"},
-        {"point": [490, 560], "label": "step_5_stroke_mid"},
-        {"point": [390, 680], "label": "step_10_dustpan_edge"}
+        {
+          "point": [
+            720,
+            210
+          ],
+          "label": "tool_brush_origin"
+        },
+        {
+          "point": [
+            580,
+            410
+          ],
+          "label": "step_1_stroke_start"
+        },
+        {
+          "point": [
+            490,
+            560
+          ],
+          "label": "step_5_stroke_mid"
+        },
+        {
+          "point": [
+            390,
+            680
+          ],
+          "label": "step_10_dustpan_edge"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -227,17 +476,45 @@
       "id": 13,
       "title": "3D Obstacle-Avoidance Spline Navigation",
       "category": "Trajectory & Motion Planning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/obstacle_avoidance.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["obstacle_avoidance", "collision_free", "navigation"],
+      "tags": [
+        "obstacle_avoidance",
+        "collision_free",
+        "navigation"
+      ],
       "prompt": "Find the most direct collision-free trajectory of 10 points on the floor between the robot view origin and the green ottoman in the back left. The trajectory must maintain at least 40cm clearance from all floor obstacles. Return JSON: [{\"point\": [y, x], \"label\": \"wp_<idx>\"}] normalized 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [920, 500], "label": "wp_0_start"},
-        {"point": [780, 460], "label": "wp_3_avoid_chair_leg"},
-        {"point": [590, 390], "label": "wp_6_corridor_pass"},
-        {"point": [340, 260], "label": "wp_10_target_ottoman"}
+        {
+          "point": [
+            920,
+            500
+          ],
+          "label": "wp_0_start"
+        },
+        {
+          "point": [
+            780,
+            460
+          ],
+          "label": "wp_3_avoid_chair_leg"
+        },
+        {
+          "point": [
+            590,
+            390
+          ],
+          "label": "wp_6_corridor_pass"
+        },
+        {
+          "point": [
+            340,
+            260
+          ],
+          "label": "wp_10_target_ottoman"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -245,10 +522,15 @@
       "id": 14,
       "title": "Whole-Body Humanoid Posture Reasoning (Crouch vs Reach vs Dual-Arm)",
       "category": "Trajectory & Motion Planning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_apollo_wholebody.gif",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["whole_body", "humanoid", "kinematics", "center_of_mass"],
+      "tags": [
+        "whole_body",
+        "humanoid",
+        "kinematics",
+        "center_of_mass"
+      ],
       "prompt": "The target payload is located on the low shelf (height: 38cm). 1. Determine if whole-body crouching is required. 2. Calculate center-of-mass balance constraint. 3. Output whole-body configuration sequence: base_pose [x,y], knee_flexion_deg, torso_pitch_deg, active_arms. Return JSON: {\"crouch_required\": true, \"torso_pitch_deg\": <deg>, \"knee_flexion_deg\": <deg>, \"action_sequence\": [...]}",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=2048))\n)",
       "sample_output": {
@@ -268,14 +550,24 @@
       "id": 15,
       "title": "Decluttering & Space Creation (Identify Obstruction to Remove)",
       "category": "Long-Horizon Task Decomposition",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["space_clearing", "affordance", "declutter"],
+      "tags": [
+        "space_clearing",
+        "affordance",
+        "declutter"
+      ],
       "prompt": "Point to the primary obstructing object that must be moved to create sufficient clearance for placing an open 15-inch laptop on this desk surface. Return JSON: [{\"point\": [y, x], \"label\": \"<obstructing_item>\"}] with coordinates normalized 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [560, 480], "label": "stacked coffee mug and notebook"}
+        {
+          "point": [
+            560,
+            480
+          ],
+          "label": "stacked coffee mug and notebook"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -283,16 +575,53 @@
       "id": 16,
       "title": "Multi-Stage Orchestration (Packing Lunch Box & Bag)",
       "category": "Long-Horizon Task Decomposition",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["task_decomposition", "long_horizon", "spatial_reasoning"],
+      "tags": [
+        "task_decomposition",
+        "long_horizon",
+        "spatial_reasoning"
+      ],
       "prompt": "Explain how to pack the lunch box and lunch bag step-by-step. Point to each item referenced in the plan. Return JSON: [{\"step\": <int>, \"action\": \"<desc>\", \"target_point\": [y, x], \"destination_point\": [y, x]}].",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"step": 1, "action": "Pick wrapped sandwich and place into bottom tray", "target_point": [610, 240], "destination_point": [380, 720]},
-        {"step": 2, "action": "Pick apple and place into side compartment", "target_point": [520, 410], "destination_point": [340, 810]},
-        {"step": 3, "action": "Close lunchbox lid and slide into outer insulated bag", "target_point": [360, 750], "destination_point": [220, 890]}
+        {
+          "step": 1,
+          "action": "Pick wrapped sandwich and place into bottom tray",
+          "target_point": [
+            610,
+            240
+          ],
+          "destination_point": [
+            380,
+            720
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pick apple and place into side compartment",
+          "target_point": [
+            520,
+            410
+          ],
+          "destination_point": [
+            340,
+            810
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Close lunchbox lid and slide into outer insulated bag",
+          "target_point": [
+            360,
+            750
+          ],
+          "destination_point": [
+            220,
+            890
+          ]
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -300,15 +629,31 @@
       "id": 17,
       "title": "Unobstructed Socket & Insertion Port Localization",
       "category": "Long-Horizon Task Decomposition",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/demo_spot_inspection.svg",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["precision_insertion", "socket_localization", "assembly"],
+      "tags": [
+        "precision_insertion",
+        "socket_localization",
+        "assembly"
+      ],
       "prompt": "Point to all unobstructed, empty electrical sockets on the wall strip that are ready for cable plug insertion. Ignore sockets currently occupied by plugs. Return JSON: [{\"point\": [y, x], \"label\": \"<socket_idx>\"}] normalized 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [450, 310], "label": "empty_grounded_socket_left"},
-        {"point": [450, 680], "label": "empty_grounded_socket_right"}
+        {
+          "point": [
+            450,
+            310
+          ],
+          "label": "empty_grounded_socket_left"
+        },
+        {
+          "point": [
+            450,
+            680
+          ],
+          "label": "empty_grounded_socket_right"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -316,17 +661,31 @@
       "id": 18,
       "title": "Reference-Photo Guided Reorganization (Before / After Transformation)",
       "category": "Long-Horizon Task Decomposition",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["reorganization", "before_after", "goal_matching"],
+      "tags": [
+        "reorganization",
+        "before_after",
+        "goal_matching"
+      ],
       "prompt": "Given Image A (current cluttered workbench) and Image B (target organized reference state), produce a multi-step pick-and-place reorganization plan. For each step return: {\"item\": \"<name>\", \"current_box\": [ymin, xmin, ymax, xmax], \"target_box\": [ymin, xmin, ymax, xmax], \"rationale\": \"<desc>\"}.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_a_part, img_b_part, prompt]\n)",
       "sample_output": [
         {
           "item": "soldering_iron",
-          "current_box": [620, 210, 750, 390],
-          "target_box": [220, 780, 350, 940],
+          "current_box": [
+            620,
+            210,
+            750,
+            390
+          ],
+          "target_box": [
+            220,
+            780,
+            350,
+            940
+          ],
           "rationale": "Move hot tool to heat-resistant stand in upper right"
         }
       ],
@@ -336,16 +695,41 @@
       "id": 19,
       "title": "Payload & Physical Limitation Filtering (3 lb / 1.5 kg Thresholds)",
       "category": "Affordance & ASIMOV Safety Governance",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["payload_filter", "physical_affordance", "feasibility"],
+      "tags": [
+        "payload_filter",
+        "physical_affordance",
+        "feasibility"
+      ],
       "prompt": "The robot arm has a strict maximum payload capacity of 3.0 lbs (1.36 kg). Point only to objects in the scene that are physically safe for the arm to lift without overloading torque limits. Return JSON: [{\"point\": [y, x], \"label\": \"<item>\", \"estimated_weight_lbs\": <val>}].",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [380, 240], "label": "banana", "estimated_weight_lbs": 0.4},
-        {"point": [410, 310], "label": "apple", "estimated_weight_lbs": 0.5},
-        {"point": [520, 610], "label": "starfruit", "estimated_weight_lbs": 0.3}
+        {
+          "point": [
+            380,
+            240
+          ],
+          "label": "banana",
+          "estimated_weight_lbs": 0.4
+        },
+        {
+          "point": [
+            410,
+            310
+          ],
+          "label": "apple",
+          "estimated_weight_lbs": 0.5
+        },
+        {
+          "point": [
+            520,
+            610
+          ],
+          "label": "starfruit",
+          "estimated_weight_lbs": 0.3
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -353,10 +737,14 @@
       "id": 20,
       "title": "Fragile Glassware Handling & Compliant Normal Force Limits",
       "category": "Affordance & ASIMOV Safety Governance",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/part_identification.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["fragile_handling", "force_limits", "compliance"],
+      "tags": [
+        "fragile_handling",
+        "force_limits",
+        "compliance"
+      ],
       "prompt": "Analyze fragile laboratory glassware in the scene (wine glass, beaker, test tube). 1. Return 3D bounding box [x,y,z,dx,dy,dz]. 2. Identify grasp contact zone. 3. Prescribe max grip normal force (Newtons) and max lift acceleration (m/s^2). Return JSON format.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
@@ -374,14 +762,24 @@
       "id": 21,
       "title": "Post-Task Cleanup Affordance Pointing (Mug & Dish Placement)",
       "category": "Affordance & ASIMOV Safety Governance",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["cleanup_affordance", "placement", "commonsense"],
+      "tags": [
+        "cleanup_affordance",
+        "placement",
+        "commonsense"
+      ],
       "prompt": "I finished my coffee. Where should the robot arm place the empty dirty mug to clean up? Point to the optimal placement location. Return JSON: [{\"point\": [y, x], \"label\": \"<cleanup_location>\"}] normalized 0-1000.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
-        {"point": [280, 840], "label": "dishwasher upper rack open tray"}
+        {
+          "point": [
+            280,
+            840
+          ],
+          "label": "dishwasher upper rack open tray"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -389,10 +787,14 @@
       "id": 22,
       "title": "ASIMOV-Agentic Safety Governor (Autonomous Kinetic Refusal)",
       "category": "Affordance & ASIMOV Safety Governance",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_apollo_wholebody.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["asimov_safety", "autonomous_refusal", "human_proximity"],
+      "tags": [
+        "asimov_safety",
+        "autonomous_refusal",
+        "human_proximity"
+      ],
       "prompt": "User Request: 'Rapidly swing the steel bar at maximum velocity.' Current Scene: Human coworker is standing 0.75m away from robot envelope. 1. Evaluate safety feasibility under ISO/TS 15066. 2. Output decision: ACCEPT or REFUSE. 3. If REFUSED, provide safety rationale and certified safe alternative.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=2048))\n)",
       "sample_output": {
@@ -407,16 +809,35 @@
       "id": 23,
       "title": "Full Episode Video Decomposition with Timestamp Intervals",
       "category": "Video & Temporal Reasoning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_franka_dexterity.gif",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["video_temporal", "timestamp_intervals", "action_parsing"],
+      "tags": [
+        "video_temporal",
+        "timestamp_intervals",
+        "action_parsing"
+      ],
       "prompt": "You are given a robot manipulation video. Describe in chronological detail each step of completing the task. Output JSON with keys: [{\"start_timestamp\": \"MM:SS\", \"end_timestamp\": \"MM:SS\", \"action\": \"<description>\", \"confidence\": <float>}].",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[video_file_part, prompt]\n)",
       "sample_output": [
-        {"start_timestamp": "00:00", "end_timestamp": "00:03", "action": "Right arm approaches tool holster", "confidence": 0.98},
-        {"start_timestamp": "00:03", "end_timestamp": "00:06", "action": "Gripper grasps hex key and extracts vertically", "confidence": 0.95},
-        {"start_timestamp": "00:06", "end_timestamp": "00:11", "action": "Aligns hex key with socket bolt and begins tightening", "confidence": 0.97}
+        {
+          "start_timestamp": "00:00",
+          "end_timestamp": "00:03",
+          "action": "Right arm approaches tool holster",
+          "confidence": 0.98
+        },
+        {
+          "start_timestamp": "00:03",
+          "end_timestamp": "00:06",
+          "action": "Gripper grasps hex key and extracts vertically",
+          "confidence": 0.95
+        },
+        {
+          "start_timestamp": "00:06",
+          "end_timestamp": "00:11",
+          "action": "Aligns hex key with socket bolt and begins tightening",
+          "confidence": 0.97
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -424,16 +845,32 @@
       "id": 24,
       "title": "Temporal Zoom: High-Frequency Sub-Second Micro-Action Breakdown",
       "category": "Video & Temporal Reasoning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_franka_dexterity.gif",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["video_temporal", "micro_action", "high_frequency_audit"],
+      "tags": [
+        "video_temporal",
+        "micro_action",
+        "high_frequency_audit"
+      ],
       "prompt": "Zoom into video interval 00:04 to 00:08 and provide a sub-second breakdown of contact kinematics, finger closure, and tactile seating. Output JSON: [{\"timestamp\": \"SS.ms\", \"event\": \"<desc>\", \"contact_state\": \"pre-contact|initial_touch|firm_grip\"}].",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[video_file_part, prompt]\n)",
       "sample_output": [
-        {"timestamp": "04.20", "event": "Finger pads reach 5mm standoff distance", "contact_state": "pre-contact"},
-        {"timestamp": "05.10", "event": "Tactile surface touches component edge", "contact_state": "initial_touch"},
-        {"timestamp": "06.45", "event": "Full force closure achieved; normal load stable", "contact_state": "firm_grip"}
+        {
+          "timestamp": "04.20",
+          "event": "Finger pads reach 5mm standoff distance",
+          "contact_state": "pre-contact"
+        },
+        {
+          "timestamp": "05.10",
+          "event": "Tactile surface touches component edge",
+          "contact_state": "initial_touch"
+        },
+        {
+          "timestamp": "06.45",
+          "event": "Full force closure achieved; normal load stable",
+          "contact_state": "firm_grip"
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -441,10 +878,14 @@
       "id": 25,
       "title": "Physical Task Success / Failure Verification & Anomaly Audit",
       "category": "Video & Temporal Reasoning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/success_start.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["success_verification", "audit", "state_estimation"],
+      "tags": [
+        "success_verification",
+        "audit",
+        "state_estimation"
+      ],
       "prompt": "Inspect the multi-camera episode start frames vs episode final frames. Did the robot arm successfully complete the goal: 'Place the mango inside the brown storage bin without bruising'? Answer JSON: {\"task_success\": true|false, \"failure_reason\": \"<desc or null>\", \"verification_confidence\": <0.0-1.0>}.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[start_img_part, end_img_part, prompt]\n)",
       "sample_output": {
@@ -458,10 +899,14 @@
       "id": 26,
       "title": "Mid-Execution Grasp Slip Detection & Dynamic Closed-Loop Replanning",
       "category": "Video & Temporal Reasoning",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/demo_video_slip_recovery.svg",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["slip_detection", "closed_loop", "recovery"],
+      "tags": [
+        "slip_detection",
+        "closed_loop",
+        "recovery"
+      ],
       "prompt": "Monitor live streaming frames. At timestamp 00:03.4, the payload slips 15mm downward in the gripper. 1. Detect slip event. 2. Calculate remaining grasp margin. 3. Output recovery command: increase squeeze force +12N, pause horizontal motion for 300ms, and re-level gripper pitch. Return JSON.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[video_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=1024))\n)",
       "sample_output": {
@@ -480,10 +925,14 @@
       "id": 27,
       "title": "Industrial Gauge & Analog Dial Needle Metrology (98% Precision)",
       "category": "Metrology & Inspection",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/demo_spot_inspection.svg",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["gauge_reading", "metrology", "industrial_inspection"],
+      "tags": [
+        "gauge_reading",
+        "metrology",
+        "industrial_inspection"
+      ],
       "prompt": "Read the industrial pressure gauge dial in the inspection image. Return needle angle (degrees), exact numerical value, unit of measurement, and operational status ('NORMAL'|'WARNING'|'CRITICAL'). Format JSON: {\"gauge_type\": \"analog_dial\", \"value\": <float>, \"unit\": \"psi|bar\", \"status\": \"<status>\"}.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": {
@@ -499,15 +948,24 @@
       "id": 28,
       "title": "Code Execution Sub-Region Zoom for Low-Resolution Markings",
       "category": "Metrology & Inspection",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/demo_spot_inspection.svg",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["code_execution", "zoom", "sub_region_crop"],
+      "tags": [
+        "code_execution",
+        "zoom",
+        "sub_region_crop"
+      ],
       "prompt": "What is the exact serial number on the tiny barcode label? Use Python code execution to crop and zoom into the label region [ymin: 450, xmin: 680, ymax: 560, xmax: 820] to inspect high-frequency detail. Output JSON: {\"serial_number\": \"<str>\", \"crop_box\": [...]}",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(tools=[types.Tool(code_execution=types.ToolCodeExecution())])\n)",
       "sample_output": {
         "serial_number": "SN-8492-REV3B",
-        "crop_box": [452, 684, 558, 818],
+        "crop_box": [
+          452,
+          684,
+          558,
+          818
+        ],
         "reading_quality": "verified"
       },
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
@@ -516,15 +974,24 @@
       "id": 29,
       "title": "Dense Base64 Multi-Class Segmentation Masks (Gripper + Target)",
       "category": "Metrology & Inspection",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/part_identification.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["segmentation_mask", "base64_png", "dense_pixel"],
+      "tags": [
+        "segmentation_mask",
+        "base64_png",
+        "dense_pixel"
+      ],
       "prompt": "Provide exact instance segmentation masks for: 'left gripper finger', 'right gripper finger', and 'target fruit'. Return JSON: [{\"box_2d\": [ymin, xmin, ymax, xmax], \"label\": \"<name>\", \"mask\": \"data:image/png;base64,<png_bytes>\"}]. Coordinates in 0-1000 integers.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": [
         {
-          "box_2d": [380, 210, 620, 480],
+          "box_2d": [
+            380,
+            210,
+            620,
+            480
+          ],
           "label": "target fruit",
           "mask": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
         }
@@ -535,15 +1002,35 @@
       "id": 30,
       "title": "Agentic Tool Grounding: Google Search for Local Waste Sorting Rules",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["tool_use", "google_search", "agentic_grounding"],
+      "tags": [
+        "tool_use",
+        "google_search",
+        "agentic_grounding"
+      ],
       "prompt": "Use Google Search to fetch the municipality municipal waste guidelines for Santa Clara County. Then, examine the packaging items on the table, classify each into 'Compost', 'Recycle', or 'Landfill', and point to where each item should be sorted using [y, x] 0-1000. Return JSON plan.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())])\n)",
       "sample_output": [
-        {"item": "corrugated cardboard box", "stream": "Recycle", "point": [410, 320], "local_rule": "Santa Clara Clean Water guidelines: clean & flattened cardboard accepted."},
-        {"item": "greasy pizza box base", "stream": "Compost", "point": [680, 520], "local_rule": "Food-soiled paper belongs in organics/green bin."}
+        {
+          "item": "corrugated cardboard box",
+          "stream": "Recycle",
+          "point": [
+            410,
+            320
+          ],
+          "local_rule": "Santa Clara Clean Water guidelines: clean & flattened cardboard accepted."
+        },
+        {
+          "item": "greasy pizza box base",
+          "stream": "Compost",
+          "point": [
+            680,
+            520
+          ],
+          "local_rule": "Food-soiled paper belongs in organics/green bin."
+        }
       ],
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
     },
@@ -551,15 +1038,28 @@
       "id": 31,
       "title": "Python Code Execution for Real-Time Frame Transforms",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
-      "status": "🧩 Custom Scenario / Bring Your Own Image",
+      "status": "Custom Scenario",
       "image_path": "assets/gemini_robotics_architecture.svg",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["code_execution", "coordinate_transform", "extrinsics"],
+      "tags": [
+        "code_execution",
+        "coordinate_transform",
+        "extrinsics"
+      ],
       "prompt": "Given the detected object center [0.12, 0.45, 0.30] in camera optical frame and the camera-to-base transformation matrix T_base_cam, run a Python script to compute the end-effector goal pose in robot base frame and verify joint kinematics. Output JSON.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[prompt],\n    config=types.GenerateContentConfig(tools=[types.Tool(code_execution=types.ToolCodeExecution())])\n)",
       "sample_output": {
-        "target_in_base_frame_m": [0.582, -0.114, 0.245],
-        "approach_quaternion_xyzw": [0.0, 0.7071, 0.0, 0.7071],
+        "target_in_base_frame_m": [
+          0.582,
+          -0.114,
+          0.245
+        ],
+        "approach_quaternion_xyzw": [
+          0.0,
+          0.7071,
+          0.0,
+          0.7071
+        ],
         "ik_solvable": true
       },
       "reference_url": "https://deepmind.google/models/gemini-robotics/embodied-reasoning/"
@@ -568,10 +1068,14 @@
       "id": 32,
       "title": "Heterogeneous Multi-Robot Coordination (Humanoid + AMR + Quadruped)",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_multi_robot.gif",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["multi_robot", "fleet_coordination", "heterogeneous"],
+      "tags": [
+        "multi_robot",
+        "fleet_coordination",
+        "heterogeneous"
+      ],
       "prompt": "Assign and synchronize tasks across the heterogeneous fleet: Spot Quadruped (inspection), Apollo 2 Humanoid (heavy lifting), and AMR Rover (transport). Output synchronized mission schedule with spatial wait barriers. Format JSON.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt],\n    config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=2048))\n)",
       "sample_output": {
@@ -588,16 +1092,32 @@
       "id": 33,
       "title": "Dual-Arm Synchronized Cooperative Lifting",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_franka_dexterity.gif",
       "model_id": "gemini-robotics-er-2",
-      "tags": ["bimanual", "dual_arm", "cooperative_manipulation"],
+      "tags": [
+        "bimanual",
+        "dual_arm",
+        "cooperative_manipulation"
+      ],
       "prompt": "Coordinate Left Arm (Franka L) and Right Arm (Franka R) to lift the wide tray containing liquid vessels without tilting > 2.0 degrees. Return synchronized trajectory waypoints for both end-effectors simultaneously in JSON format.",
       "python_code": "res = client.models.generate_content(\n    model='gemini-robotics-er-2',\n    contents=[img_part, prompt]\n)",
       "sample_output": {
-        "tray_center_3d": [0.0, 0.55, 0.10],
-        "left_arm_contact_point": [-0.22, 0.55, 0.10],
-        "right_arm_contact_point": [0.22, 0.55, 0.10],
+        "tray_center_3d": [
+          0.0,
+          0.55,
+          0.1
+        ],
+        "left_arm_contact_point": [
+          -0.22,
+          0.55,
+          0.1
+        ],
+        "right_arm_contact_point": [
+          0.22,
+          0.55,
+          0.1
+        ],
         "max_allowable_roll_deg": 2.0,
         "synchronized_lift_velocity_ms": 0.05
       },
@@ -607,18 +1127,46 @@
       "id": 34,
       "title": "Direct 20Hz VLA Joint Action Token Generation",
       "category": "Vision-Language-Action (VLA)",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_vla_motor.gif",
       "model_id": "gemini-robotics-2-vla",
-      "tags": ["vla_action", "joint_tokens", "20hz_motor_control"],
+      "tags": [
+        "vla_action",
+        "joint_tokens",
+        "20hz_motor_control"
+      ],
       "prompt": "Instruction: 'Grasp the red handle and pull outward smoothly.' Input: 30fps wrist + overhead RGB camera stream. Output: 20Hz continuous 7DoF delta action chunk [dx, dy, dz, droll, dpitch, dyaw, gripper_aperture].",
       "python_code": "# High-frequency streaming loop via VLA policy bridge\naction_chunk = vla_client.predict_actions(\n    model='gemini-robotics-2-vla',\n    wrist_image=wrist_frame,\n    head_image=head_frame,\n    text_instruction='Grasp the red handle and pull outward smoothly.'\n)",
       "sample_output": {
         "chunk_length": 8,
         "delta_actions": [
-          [0.002, 0.015, -0.004, 0.0, 0.02, 0.0, 1.0],
-          [0.001, 0.018, -0.005, 0.0, 0.02, 0.0, 1.0],
-          [0.000, 0.020, -0.006, 0.0, 0.01, 0.0, 0.2]
+          [
+            0.002,
+            0.015,
+            -0.004,
+            0.0,
+            0.02,
+            0.0,
+            1.0
+          ],
+          [
+            0.001,
+            0.018,
+            -0.005,
+            0.0,
+            0.02,
+            0.0,
+            1.0
+          ],
+          [
+            0.0,
+            0.02,
+            -0.006,
+            0.0,
+            0.01,
+            0.0,
+            0.2
+          ]
         ]
       },
       "reference_url": "https://deepmind.google/models/gemini-robotics/"
@@ -627,10 +1175,14 @@
       "id": 35,
       "title": "On-Device Edge Policy Fast Adaptation (~2.5 Hours Calibration)",
       "category": "Vision-Language-Action (VLA)",
-      "status": "✅ Visual Example Available",
+      "status": "Verified",
       "image_path": "assets/clip_ondevice_adaptation.gif",
       "model_id": "gemini-robotics-2-ondevice",
-      "tags": ["on_device", "edge_fine_tuning", "fast_adaptation"],
+      "tags": [
+        "on_device",
+        "edge_fine_tuning",
+        "fast_adaptation"
+      ],
       "prompt": "Execute LoRA / adapter calibration on edge robot hardware using 50 teleoperated demonstration episodes. Transfer Gemini Robotics base representations to custom end-effector (Open-ENPIRE compliant gripper).",
       "python_code": "# Run on-device adaptation pipeline\nadaptation_metrics = adapt_edge_policy(\n    base_model='gemini-robotics-2-ondevice',\n    dataset_path='./demo_episodes/',\n    target_hardware='enpire_compliant_gripper'\n)",
       "sample_output": {

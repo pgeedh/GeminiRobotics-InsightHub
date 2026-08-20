@@ -1,29 +1,34 @@
 # Contributing to Awesome Gemini Robotics 2.0
 
-Thank you for your interest in contributing to the **Awesome Gemini Robotics 2.0 Developer Gallery**! 🚀
-
-As a **Google DeepMind Physical AI Early Trusted Tester**, this collection is open to the robotics community to build, experiment, and deploy faster. We welcome contributions from researchers, roboticists, and engineers.
-
-## 🤝 How to Contribute
-
-### 1. Adding a Use Case or Prompt Card
-Have you developed a new embodied reasoning pattern or robotic control prompt with Gemini Robotics 2.0 / ER 2 / VLA?
-1. Add your prompt card to [`prompts/gemini_robotics_2_catalog.json`](./prompts/gemini_robotics_2_catalog.json).
-2. Document the card in [`README.md`](./README.md) with a clear schema and sample output.
-3. If applicable, add a demonstration script in `examples/` and visual demonstration to `assets/`.
-4. Submit a PR with the title `feat(prompt): add <use_case_name> card`.
-
-### 2. Improving Multilingual Documentation & Benchmarks
-- PRs for `README.md`, `README_ja.md`, `README_zh.md`, `README_kr.md`, `README_vn.md`, and `BENCHMARKS.md` are highly encouraged.
-- Keep translations accurate, elegant, and synchronized with the primary catalog.
-
-### 3. Reporting Issues & Hardware Adapters
-- If a prompt or ROS 2 node requires adjustment for a specific robot embodiment (Franka, Universal Robots, Boston Dynamics, Unitree, Apollo), submit an issue or PR with the tag `[HARDWARE]`.
-
-## ⚖️ Code of Conduct
-
-- **Safety First**: Adhere to ASIMOV safety invariants and ISO/TS 15066 guidelines. Never submit prompts intended to bypass robot physical safety limits.
-- **Reproducibility**: Ensure all sample outputs and schemas are valid and reproducible.
+Contributions from researchers, roboticists, and engineers are welcome to expand this collection of prompts, schemas, and robotic workflows for Google DeepMind's **Gemini Robotics 2.0** suite.
 
 ---
-*By contributing, you agree that your code can be distributed under the MIT License of this repository.*
+
+## Contribution Guidelines
+
+### 1. Adding a Use Case or Prompt Card
+To contribute a new embodied reasoning pattern or physical AI prompt:
+1. Add the prompt card schema to [`prompts/gemini_robotics_2_catalog.json`](./prompts/gemini_robotics_2_catalog.json).
+2. Document the card in [`README.md`](./README.md) with an input prompt, Python execution snippet, and sample JSON output.
+3. If applicable, add a demonstration script to `examples/` and test asset to `assets/`.
+4. Open a Pull Request titled `feat(prompt): add <use_case_name> card`.
+
+### 2. Documentation and Localizations
+- Pull Requests improving accuracy or adding translations for `README.md`, `README_ja.md`, `README_zh.md`, `README_kr.md`, `README_vn.md`, and `BENCHMARKS.md` are encouraged.
+- Ensure all translations maintain consistency with the primary schema IDs and technical terminology.
+
+### 3. Reporting Issues and Hardware Adapters
+- If a prompt or ROS 2 node requires modification for a specific robotic hardware embodiment (e.g. Franka Emika, Universal Robots, Boston Dynamics, Unitree, Apollo), open an Issue or Pull Request labeled `[HARDWARE]`.
+
+---
+
+## Code of Conduct
+
+- **Safety Compliance**: All submissions must respect ASIMOV safety guidelines and ISO/TS 15066 collaborative robot safety standards. Prompts intended to bypass velocity limits, proximity barriers, or safety invariants will not be accepted.
+- **Reproducibility**: All sample JSON outputs, schemas, and code snippets must be syntactically valid and reproducible against official Gemini Robotics models.
+
+---
+
+<p align="center">
+  <i>Distributed under the MIT License</i>
+</p>

@@ -1,50 +1,50 @@
-# Awesome Gemini Robotics 2.0 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png" align="right" width="100">
+# Awesome Gemini Robotics 2.0
 
-[![DeepMind](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
-[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=for-the-badge)](https://aistudio.google.com/)
-[![ROS 2](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=for-the-badge&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=for-the-badge)](./BENCHMARKS.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
+[![Maintained By: Google DeepMind Trusted Tester](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=flat-square&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
+[![Model: Gemini Robotics ER 2 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
+[![Benchmarks: Official DeepMind ER 2](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=flat-square)](./BENCHMARKS.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
-🌐 **Languages:** **English** • [日本語 (Japanese)](./README_ja.md) • [中文 (Chinese)](./README_zh.md) • [한국어 (Korean)](./README_kr.md) • [Tiếng Việt (Vietnamese)](./README_vn.md)
-
----
-
-> **🚀 THE DEFINITIVE COMMUNITY & DEVELOPER GALLERY FOR GEMINI ROBOTICS 2.0**
-> 
-> A curated, community-maintained gallery of **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning)**, and **Gemini Robotics 2 (VLA)** prompts, schemas, recipes, and production code snippets ready to copy-paste into your own robotics and physical AI pipelines.
-> 
-> **What is Gemini Robotics 2.0?** Google DeepMind's flagship physical AI suite operating on a **Hierarchical Dual-Model Paradigm**:
-> 1. **The Planner / Upper Brain (Gemini Robotics ER 2):** High-level embodied spatial reasoning, 3D metric bounding, long-horizon task planning, continuous video slip/anomaly tracking, and agentic tool use.
-> 2. **The Motor Cortex / Doer (Gemini Robotics 2 VLA & On-Device 2):** High-frequency (20Hz+) motor policies generating direct joint and Cartesian trajectories for humanoids, cobots, and mobile rovers without "stop-and-think" latency.
+**Languages:** **English** | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | [한국어 (Korean)](./README_kr.md) | [Tiếng Việt (Vietnamese)](./README_vn.md)
 
 ---
 
-## 📑 Contents
+### Overview
 
-- [⚡ Quick Start (`google-genai` SDK v1.x)](#-quick-start)
-- [🗂️ Complete Use Cases & Prompt Gallery (35 Cards)](#-complete-use-cases--prompt-gallery-35-cards)
-  - [1. Spatial Grounding & 2D/3D Pointing (Cards 1–7)](#1-spatial-grounding--2d3d-pointing)
-  - [2. Bounding Volumes & 6DoF Grasping (Cards 8–10)](#2-bounding-volumes--6dof-grasping)
-  - [3. Trajectory & Whole-Body Motion Planning (Cards 11–14)](#3-trajectory--whole-body-motion-planning)
+A curated, community-maintained developer gallery of **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning)**, and **Gemini Robotics 2 (Vision-Language-Action / VLA)** prompt patterns, structured JSON schemas, Python SDK snippets, and ROS 2 execution nodes for physical AI and embodied robotics pipelines.
+
+Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
+1. **Planner / Embodied Reasoning (Gemini Robotics ER 2):** High-level spatial perception, metric 3D bounding, long-horizon task planning, continuous video slip/anomaly tracking, and agentic tool use.
+2. **Motor Control / Execution Policy (Gemini Robotics 2 VLA & On-Device 2):** High-frequency (20Hz+) direct joint and Cartesian action generation for humanoids, manipulators, and mobile platforms without stop-and-think latency.
+
+---
+
+## Contents
+
+- [Quick Start (`google-genai` SDK v1.x)](#quick-start)
+- [Use Cases and Prompt Gallery (35 Cards)](#use-cases-and-prompt-gallery-35-cards)
+  - [1. Spatial Grounding and 2D/3D Pointing (Cards 1–7)](#1-spatial-grounding-and-2d3d-pointing)
+  - [2. Bounding Volumes and 6DoF Grasping (Cards 8–10)](#2-bounding-volumes-and-6dof-grasping)
+  - [3. Trajectory and Whole-Body Motion Planning (Cards 11–14)](#3-trajectory-and-whole-body-motion-planning)
   - [4. Long-Horizon Task Decomposition (Cards 15–18)](#4-long-horizon-task-decomposition)
-  - [5. Affordance & ASIMOV Safety Governance (Cards 19–22)](#5-affordance--asimov-safety-governance)
-  - [6. Continuous Video & Temporal Reasoning (Cards 23–26)](#6-continuous-video--temporal-reasoning)
-  - [7. Metrology, Gauges & Dense Segmentation (Cards 27–29)](#7-metrology-gauges--dense-segmentation)
-  - [8. Agentic Tool Use & Multi-Robot Fleet (Cards 30–33)](#8-agentic-tool-use--multi-robot-fleet)
+  - [5. Physical Affordance and ASIMOV Safety Governance (Cards 19–22)](#5-physical-affordance-and-asimov-safety-governance)
+  - [6. Continuous Video and Temporal Reasoning (Cards 23–26)](#6-continuous-video-and-temporal-reasoning)
+  - [7. Industrial Metrology, Gauges, and Dense Segmentation (Cards 27–29)](#7-industrial-metrology-gauges-and-dense-segmentation)
+  - [8. Agentic Tool Use and Multi-Robot Fleet Coordination (Cards 30–33)](#8-agentic-tool-use-and-multi-robot-fleet-coordination)
   - [9. Vision-Language-Action (VLA) Motor Control (Cards 34–35)](#9-vision-language-action-vla-motor-control)
-- [🎥 Official DeepMind Robotics Video Showcase](#-official-deepmind-robotics-video-showcase)
-- [📊 Official DeepMind Benchmarks (Gemini Robotics ER 2)](#-official-deepmind-benchmarks)
-- [🤖 ROS 2 Bridge Integration](#-ros-2-bridge-integration-ros2_gemini_bridge)
-- [💡 5 Golden Rules for Embodied Reasoning](#-5-golden-rules-for-embodied-reasoning)
-- [🧪 Interactive Suite CLI & Testing](#-interactive-suite-cli--testing)
-- [🤝 Contributing & PR Guide](#-contributing)
+- [Official DeepMind Robotics Demonstrations](#official-deepmind-robotics-demonstrations)
+- [Official DeepMind Benchmarks (Gemini Robotics ER 2)](#official-deepmind-benchmarks)
+- [ROS 2 Bridge Integration](#ros-2-bridge-integration-ros2_gemini_bridge)
+- [Embodied Reasoning Principles](#embodied-reasoning-principles)
+- [Interactive Suite CLI and Testing](#interactive-suite-cli-and-testing)
+- [Contributing](#contributing)
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
-Minimal Python snippet using Google's official [`google-genai`](https://pypi.org/project/google-genai/) SDK (v1.x):
+Minimal Python implementation using Google's official [`google-genai`](https://pypi.org/project/google-genai/) SDK (v1.x):
 
 ```python
 from google import genai
@@ -81,17 +81,17 @@ print(response.text)
 
 ---
 
-## 🗂️ Complete Use Cases & Prompt Gallery (35 Cards)
+## Use Cases and Prompt Gallery (35 Cards)
 
-> **Legend:**
-> - `✅` = Visual demonstration included from official DeepMind research / dataset
-> - `🧩` = Bring-your-own image or custom robot scenario
+> **Status Legend:**
+> - `[Verified]` = Visual demonstration verified from official DeepMind research / dataset
+> - `[Custom Scenario]` = Bring-your-own image or hardware test scenario
 
 ---
 
-### 1. Spatial Grounding & 2D/3D Pointing
+### 1. Spatial Grounding and 2D/3D Pointing
 
-#### 1) Pointing to Undefined Objects (Open-Vocabulary 2D Discovery) ✅
+#### 1) Pointing to Undefined Objects (Open-Vocabulary 2D Discovery) `[Verified]`
 <p align="center"><img src="./assets/pointing_undefined.png" alt="Pointing to Undefined Objects" width="500px"/></p>
 
 **Prompt:**
@@ -99,7 +99,7 @@ print(response.text)
 Point to no more than 10 items in the image. The label returned should be an identifying name for the object detected. The answer should follow the json format: [{"point": [y, x], "label": "<object_name>"}]. The points are in [y, x] format normalized to 0-1000.
 ```
 
-**Python Snippet:**
+**Python Implementation:**
 ```python
 response = client.models.generate_content(
     model="gemini-robotics-er-2",
@@ -115,11 +115,11 @@ response = client.models.generate_content(
   {"point": [290, 810], "label": "cordless power drill"}
 ]
 ```
-🔗 *Reference:* [DeepMind Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
+*Reference:* [DeepMind Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
 
 ---
 
-#### 2) Pointing to Defined Objects (Multi-Category Filtering) ✅
+#### 2) Pointing to Defined Objects (Multi-Category Filtering) `[Verified]`
 <p align="center"><img src="./assets/find_fruit.png" alt="Find Target Objects" width="500px"/></p>
 
 **Prompt:**
@@ -138,7 +138,7 @@ Get all points matching the following target objects: bread, starfruit, banana. 
 
 ---
 
-#### 3) Abstract Semantic Pointing (Category & Functional Grouping) ✅
+#### 3) Abstract Semantic Pointing (Category and Functional Grouping) `[Verified]`
 <p align="center"><img src="./assets/find_fruit.png" alt="Abstract Category Pointing" width="500px"/></p>
 
 **Prompt:**
@@ -157,7 +157,7 @@ Get all points for any visible fruit. Identify individual items even under parti
 
 ---
 
-#### 4) Grid Board & Matrix Slot Localization (Pegboard / Connect Four) 🧩
+#### 4) Grid Board and Matrix Slot Localization (Pegboard / Matrix) `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -174,7 +174,7 @@ Get all points matching empty game board slots and game pieces. Return the resul
 
 ---
 
-#### 5) Serial Part & Affordance Pointing (Stem, Rim, Handle, Nozzle) ✅
+#### 5) Serial Part and Affordance Pointing (Stem, Rim, Handle, Nozzle) `[Verified]`
 <p align="center"><img src="./assets/part_identification.png" alt="Part Identification" width="500px"/></p>
 
 **Prompt:**
@@ -193,7 +193,7 @@ Point to the specific functional part of the target object: stem of banana, rim 
 
 ---
 
-#### 6) Counting by Pointing with Visual Reason Trace ✅
+#### 6) Counting by Pointing with Visual Reasoning Trace `[Verified]`
 <p align="center"><img src="./assets/counting_reasoning.png" alt="Counting with Reason" width="500px"/></p>
 
 **Prompt:**
@@ -213,7 +213,7 @@ Point to each individual washer or mechanical fastener in the container. Provide
 
 ---
 
-#### 7) Defined Object Pointing Across Multi-Frame Sequence / GIF ✅
+#### 7) Defined Object Pointing Across Multi-Frame Sequence / GIF `[Verified]`
 <p align="center"><img src="./assets/clip_franka_dexterity.gif" alt="Dynamic Video Tracking" width="500px"/></p>
 
 **Prompt:**
@@ -231,9 +231,9 @@ Point to the following items across the dynamic sequence: 'pen in gripper', 'pen
 
 ---
 
-### 2. Bounding Volumes & 6DoF Grasping
+### 2. Bounding Volumes and 6DoF Grasping
 
-#### 8) 2D Bounding Boxes with Unique Descriptive Identifiers ✅
+#### 8) 2D Bounding Boxes with Unique Descriptive Identifiers `[Verified]`
 <p align="center"><img src="./assets/pointing_undefined.png" alt="2D Bounding Boxes" width="500px"/></p>
 
 **Prompt:**
@@ -251,7 +251,7 @@ Return bounding boxes as a JSON array with descriptive labels distinguishing sim
 
 ---
 
-#### 9) 3D Metric Bounding Volumes [x, y, z, dx, dy, dz] & Center of Mass ✅
+#### 9) 3D Metric Bounding Volumes [x, y, z, dx, dy, dz] and Center of Mass `[Verified]`
 <p align="center"><img src="./assets/clip_apollo_wholebody.png" alt="3D Metric Bounding" width="500px"/></p>
 
 **Prompt:**
@@ -273,7 +273,7 @@ Detect the objects on the workbench. Return metric 3D bounding boxes in camera f
 
 ---
 
-#### 10) 6DoF Grasp Affordance, Normal Approach & Aperture Limits ✅
+#### 10) 6DoF Grasp Affordance, Normal Approach, and Aperture Limits `[Verified]`
 <p align="center"><img src="./assets/clip_franka_dexterity.png" alt="6DoF Grasp Pose" width="500px"/></p>
 
 **Prompt:**
@@ -294,9 +294,9 @@ For the target tool, compute the 6DoF grasp pose, approach normal vector, and ma
 
 ---
 
-### 3. Trajectory & Whole-Body Motion Planning
+### 3. Trajectory and Whole-Body Motion Planning
 
-#### 11) Simple Trajectory Planning (Ordered Waypoint Sequences) ✅
+#### 11) Simple Trajectory Planning (Ordered Waypoint Sequences) `[Verified]`
 <p align="center"><img src="./assets/obstacle_avoidance.png" alt="Trajectory Waypoints" width="500px"/></p>
 
 **Prompt:**
@@ -316,7 +316,7 @@ Place a point on the red pen, then 15 ordered trajectory waypoints to transfer t
 
 ---
 
-#### 12) Surface Brushing, Wiping & Polishing Multi-Point Coverage ✅
+#### 12) Surface Brushing, Wiping, and Polishing Coverage `[Verified]`
 <p align="center"><img src="./assets/trajectory_brushing.png" alt="Surface Brushing" width="500px"/></p>
 
 **Prompt:**
@@ -336,7 +336,7 @@ Point to the blue brush tool and generate 10 ordered coverage trajectory points 
 
 ---
 
-#### 13) 3D Obstacle-Avoidance Spline Navigation ✅
+#### 13) 3D Obstacle-Avoidance Spline Navigation `[Verified]`
 <p align="center"><img src="./assets/obstacle_avoidance.png" alt="Obstacle Avoidance Path" width="500px"/></p>
 
 **Prompt:**
@@ -356,7 +356,7 @@ Find the most direct collision-free trajectory of 10 points on the floor between
 
 ---
 
-#### 14) Whole-Body Humanoid Posture Reasoning (Crouch vs Reach vs Dual-Arm) ✅
+#### 14) Whole-Body Humanoid Posture Reasoning (Crouch vs Reach vs Dual-Arm) `[Verified]`
 <p align="center"><img src="./assets/clip_apollo_wholebody.gif" alt="Apollo Whole Body" width="500px"/></p>
 
 **Prompt:**
@@ -383,7 +383,7 @@ The target payload is located on the low shelf (height: 38cm). 1. Determine if w
 
 ### 4. Long-Horizon Task Decomposition
 
-#### 15) Decluttering & Space Creation (Identify Obstruction to Remove) 🧩
+#### 15) Decluttering and Space Creation (Obstruction Identification) `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -399,7 +399,7 @@ Point to the primary obstructing object that must be moved to create sufficient 
 
 ---
 
-#### 16) Multi-Stage Orchestration (Packing Lunch Box & Bag) 🧩
+#### 16) Multi-Stage Orchestration (Packing Container and Carrier Bag) `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -417,7 +417,7 @@ Explain how to pack the lunch box and lunch bag step-by-step. Point to each item
 
 ---
 
-#### 17) Unobstructed Socket & Insertion Port Localization 🧩
+#### 17) Unobstructed Socket and Port Insertion Localization `[Custom Scenario]`
 <p align="center"><img src="./assets/demo_spot_inspection.svg" alt="Socket Localization" width="500px"/></p>
 
 **Prompt:**
@@ -435,7 +435,7 @@ Point to all unobstructed, empty electrical sockets on the wall strip that are r
 
 ---
 
-#### 18) Reference-Photo Guided Reorganization (Before / After Transformation) 🧩
+#### 18) Reference-Photo Guided Reorganization (Before / After Matching) `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -456,9 +456,9 @@ Given Image A (current cluttered workbench) and Image B (target organized refere
 
 ---
 
-### 5. Affordance & ASIMOV Safety Governance
+### 5. Physical Affordance and ASIMOV Safety Governance
 
-#### 19) Payload & Physical Limitation Filtering (3 lb / 1.5 kg Thresholds) 🧩
+#### 19) Payload and Physical Limitation Filtering (3 lb Threshold) `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -476,7 +476,7 @@ The robot arm has a strict maximum payload capacity of 3.0 lbs (1.36 kg). Point 
 
 ---
 
-#### 20) Fragile Glassware Handling & Compliant Normal Force Limits 🧩
+#### 20) Fragile Glassware Handling and Compliant Force Limits `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -498,7 +498,7 @@ Analyze fragile laboratory glassware in the scene (wine glass, beaker, test tube
 
 ---
 
-#### 21) Post-Task Cleanup Affordance Pointing (Mug & Dish Placement) ✅
+#### 21) Post-Task Cleanup Affordance Pointing `[Verified]`
 <p align="center"><img src="./assets/pointing_undefined.png" alt="Cleanup Affordance" width="500px"/></p>
 
 **Prompt:**
@@ -515,7 +515,7 @@ I finished my coffee. Where should the robot arm place the empty dirty mug to cl
 
 ---
 
-#### 22) ASIMOV-Agentic Safety Governor (Autonomous Kinetic Refusal) ✅
+#### 22) ASIMOV Safety Governor (Autonomous Kinetic Refusal) `[Verified]`
 <p align="center"><img src="./assets/clip_apollo_wholebody.png" alt="Safety Envelope" width="500px"/></p>
 
 **Prompt:**
@@ -535,9 +535,9 @@ User Request: 'Rapidly swing the steel bar at maximum velocity.' Current Scene: 
 
 ---
 
-### 6. Continuous Video & Temporal Reasoning
+### 6. Continuous Video and Temporal Reasoning
 
-#### 23) Full Episode Video Decomposition with Timestamp Intervals ✅
+#### 23) Full Episode Video Decomposition with Timestamp Intervals `[Verified]`
 <p align="center"><img src="./assets/clip_franka_dexterity.gif" alt="Video Timestamp Parsing" width="500px"/></p>
 
 **Prompt:**
@@ -556,7 +556,7 @@ You are given a robot manipulation video. Describe in chronological detail each 
 
 ---
 
-#### 24) Temporal Zoom: High-Frequency Sub-Second Micro-Action Breakdown ✅
+#### 24) Temporal Zoom: Sub-Second Micro-Action Breakdown `[Verified]`
 <p align="center"><img src="./assets/clip_franka_dexterity.gif" alt="Micro-Action Breakdown" width="500px"/></p>
 
 **Prompt:**
@@ -575,7 +575,7 @@ Zoom into video interval 00:04 to 00:08 and provide a sub-second breakdown of co
 
 ---
 
-#### 25) Physical Task Success / Failure Verification & Anomaly Audit ✅
+#### 25) Physical Task Success / Failure Verification and Anomaly Audit `[Verified]`
 <p align="center"><img src="./assets/success_start.png" alt="Success Verification" width="500px"/></p>
 
 **Prompt:**
@@ -594,7 +594,7 @@ Inspect the multi-camera episode start frames vs episode final frames. Did the r
 
 ---
 
-#### 26) Mid-Execution Grasp Slip Detection & Dynamic Closed-Loop Replanning ✅
+#### 26) Mid-Execution Grasp Slip Detection and Dynamic Replanning `[Verified]`
 <p align="center"><img src="./assets/demo_video_slip_recovery.svg" alt="Slip Detection" width="500px"/></p>
 
 **Prompt:**
@@ -618,9 +618,9 @@ Monitor live streaming frames. At timestamp 00:03.4, the payload slips 15mm down
 
 ---
 
-### 7. Metrology, Gauges & Dense Segmentation
+### 7. Industrial Metrology, Gauges, and Dense Segmentation
 
-#### 27) Industrial Gauge & Analog Dial Needle Metrology (98% Precision) ✅
+#### 27) Industrial Gauge and Analog Dial Needle Metrology `[Verified]`
 <p align="center"><img src="./assets/demo_spot_inspection.svg" alt="Gauge Inspection" width="500px"/></p>
 
 **Prompt:**
@@ -641,7 +641,7 @@ Read the industrial pressure gauge dial in the inspection image. Return needle a
 
 ---
 
-#### 28) Code Execution Sub-Region Zoom for Low-Resolution Markings 🧩
+#### 28) Code Execution Sub-Region Zoom for High-Resolution Inspection `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -659,7 +659,7 @@ What is the exact serial number on the tiny barcode label? Use Python code execu
 
 ---
 
-#### 29) Dense Base64 Multi-Class Segmentation Masks (Gripper + Target) ✅
+#### 29) Dense Base64 Multi-Class Segmentation Masks (Gripper and Target) `[Verified]`
 <p align="center"><img src="./assets/part_identification.png" alt="Dense Segmentation" width="500px"/></p>
 
 **Prompt:**
@@ -680,9 +680,9 @@ Provide exact instance segmentation masks for: 'left gripper finger', 'right gri
 
 ---
 
-### 8. Agentic Tool Use & Multi-Robot Fleet
+### 8. Agentic Tool Use and Multi-Robot Fleet Coordination
 
-#### 30) Agentic Tool Grounding: Google Search for Local Waste Sorting Rules ✅
+#### 30) Agentic Tool Grounding: Google Search for Facility Rules `[Verified]`
 <p align="center"><img src="./assets/find_fruit.png" alt="Tool Grounding" width="500px"/></p>
 
 **Prompt:**
@@ -700,7 +700,7 @@ Use Google Search to fetch the municipality municipal waste guidelines for Santa
 
 ---
 
-#### 31) Python Code Execution for Real-Time Frame Transforms 🧩
+#### 31) Python Code Execution for Real-Time Frame Transforms `[Custom Scenario]`
 
 **Prompt:**
 ```json
@@ -718,7 +718,7 @@ Given the detected object center [0.12, 0.45, 0.30] in camera optical frame and 
 
 ---
 
-#### 32) Heterogeneous Multi-Robot Coordination (Humanoid + AMR + Quadruped) ✅
+#### 32) Heterogeneous Multi-Robot Coordination (Humanoid + AMR + Quadruped) `[Verified]`
 <p align="center"><img src="./assets/clip_multi_robot.gif" alt="Multi-Robot Fleet" width="500px"/></p>
 
 **Prompt:**
@@ -740,7 +740,7 @@ Assign and synchronize tasks across the heterogeneous fleet: Spot Quadruped (ins
 
 ---
 
-#### 33) Dual-Arm Synchronized Cooperative Lifting ✅
+#### 33) Dual-Arm Synchronized Cooperative Lifting `[Verified]`
 <p align="center"><img src="./assets/clip_franka_dexterity.gif" alt="Dual-Arm Coordination" width="500px"/></p>
 
 **Prompt:**
@@ -763,7 +763,7 @@ Coordinate Left Arm (Franka L) and Right Arm (Franka R) to lift the wide tray co
 
 ### 9. Vision-Language-Action (VLA) Motor Control
 
-#### 34) Direct 20Hz VLA Joint Action Token Generation ✅
+#### 34) Direct 20Hz VLA Joint Action Token Generation `[Verified]`
 <p align="center"><img src="./assets/clip_vla_motor.gif" alt="VLA Motor Action" width="500px"/></p>
 
 **Prompt:**
@@ -773,7 +773,7 @@ Input: 30fps wrist + overhead RGB camera stream.
 Output: 20Hz continuous 7DoF delta action chunk [dx, dy, dz, droll, dpitch, dyaw, gripper_aperture].
 ```
 
-**Python High-Frequency Loop:**
+**Python Implementation:**
 ```python
 action_chunk = vla_client.predict_actions(
     model="gemini-robotics-2-vla",
@@ -797,7 +797,7 @@ action_chunk = vla_client.predict_actions(
 
 ---
 
-#### 35) On-Device Edge Policy Fast Adaptation (~2.5 Hours Calibration) ✅
+#### 35) On-Device Edge Policy Fast Adaptation (~2.5 Hours Calibration) `[Verified]`
 <p align="center"><img src="./assets/clip_ondevice_adaptation.gif" alt="On-Device Adaptation" width="500px"/></p>
 
 **Pipeline Call:**
@@ -821,32 +821,32 @@ adaptation_metrics = adapt_edge_policy(
 
 ---
 
-## 🎥 Official DeepMind Robotics Video Showcase
+## Official DeepMind Robotics Demonstrations
 
-Direct captures and demonstrations from Google DeepMind's official [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) research release:
+Direct demonstrations from Google DeepMind's official [Gemini Robotics 2 and Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) research release:
 
 <div align="center">
 
-| 🦾 **1. Whole-Body Humanoid Manipulation (Apollo 2)** | 🤝 **2. High-Precision Bi-Arm Dexterity (Franka F3)** |
+| **1. Whole-Body Humanoid Manipulation (Apollo 2)** | **2. High-Precision Bi-Arm Dexterity (Franka F3)** |
 | :---: | :---: |
 | [![Apollo 2 Whole Body](./assets/clip_apollo_wholebody.gif)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | [![Franka Dexterity](./assets/clip_franka_dexterity.gif)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Apollo 2 whole-body humanoid control: crouching, carrying totes, and CoG balance.* <br> [▶ Watch DeepMind Humanoid Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Two Franka arms synchronize fine manipulation: screwing light bulbs and folding.* <br> [▶ Watch Franka Bimanual Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| *Apollo 2 whole-body humanoid control: crouching, carrying totes, and CoG balance.* <br> [Watch DeepMind Humanoid Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) | *Two Franka arms synchronize fine manipulation: screwing light bulbs and folding.* <br> [Watch Franka Bimanual Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
 
-| 🤝 **3. Multi-Robot Heterogeneous Fleet Teamwork** | 🧠 **4. Embodied Reasoning (ER 2) Spatial Grounding** |
+| **3. Multi-Robot Heterogeneous Fleet Teamwork** | **4. Embodied Reasoning (ER 2) Spatial Grounding** |
 | :---: | :---: |
 | [![Multi-Robot Teamwork](./assets/clip_multi_robot.gif)](https://deepmind.google/models/gemini-robotics/) | [![Embodied Reasoning](./assets/clip_er_embodied_reasoning.gif)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
-| *Synchronized collaborative workflows between Humanoids, AMR mobile rovers, and quadrupeds.* <br> [▶ Watch Multi-Robot Fleet Video](https://deepmind.google/models/gemini-robotics/) | *3D metric bounding boxes, continuous video slip detection, and long-horizon goal planning.* <br> [▶ Watch Embodied Reasoning Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
+| *Synchronized collaborative workflows between Humanoids, AMR mobile rovers, and quadrupeds.* <br> [Watch Multi-Robot Fleet Video](https://deepmind.google/models/gemini-robotics/) | *3D metric bounding boxes, continuous video slip detection, and long-horizon goal planning.* <br> [Watch Embodied Reasoning Video](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) |
 
-| ⚡ **5. Vision-Language-Action (VLA) Motor Control** | 🚀 **6. On-Device Edge Policy Adaptation (~2.5h)** |
+| **5. Vision-Language-Action (VLA) Motor Control** | **6. On-Device Edge Policy Adaptation (~2.5h)** |
 | :---: | :---: |
 | [![VLA Motor Control](./assets/clip_vla_motor.gif)](https://deepmind.google/models/gemini-robotics/) | [![On-Device Adaptation](./assets/clip_ondevice_adaptation.gif)](https://deepmind.google/models/gemini-robotics/) |
-| *High-frequency motor actions for full humanoid bodies and arms.* <br> [▶ Watch VLA Policy Video](https://deepmind.google/models/gemini-robotics/) | *Rapid adaptation of Gemini Robotics edge policies for custom hardware in ~2.5 hours.* <br> [▶ Watch On-Device Video](https://deepmind.google/models/gemini-robotics/) |
+| *High-frequency motor actions for full humanoid bodies and arms.* <br> [Watch VLA Policy Video](https://deepmind.google/models/gemini-robotics/) | *Rapid adaptation of Gemini Robotics edge policies for custom hardware in ~2.5 hours.* <br> [Watch On-Device Video](https://deepmind.google/models/gemini-robotics/) |
 
 </div>
 
 ---
 
-## 📊 Official DeepMind Benchmarks
+## Official DeepMind Benchmarks
 
 <div align="center">
 
@@ -854,7 +854,7 @@ Direct captures and demonstrations from Google DeepMind's official [Gemini Robot
 | :---: | :---: |
 | [![ER Metrics](./assets/benchmark_er_metrics.svg)](./BENCHMARKS.md) | [![Progress Classification](./assets/benchmark_progress_classification.svg)](./BENCHMARKS.md) |
 
-| **Physical Agent Performance** | **Safety & Proximity Governance** |
+| **Physical Agent Performance** | **Safety and Proximity Governance** |
 | :---: | :---: |
 | [![Physical Agent](./assets/benchmark_physical_agent.svg)](./BENCHMARKS.md) | [![Safety Performance](./assets/benchmark_safety_performance.svg)](./BENCHMARKS.md) |
 
@@ -877,7 +877,7 @@ Direct captures and demonstrations from Google DeepMind's official [Gemini Robot
 
 ---
 
-## 🤖 ROS 2 Bridge Integration (`ros2_gemini_bridge`)
+## ROS 2 Bridge Integration (`ros2_gemini_bridge`)
 
 A production-ready ROS 2 package is provided under [`ros2_gemini_bridge`](./ros2_gemini_bridge):
 
@@ -895,11 +895,11 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 
 ---
 
-## 💡 5 Golden Rules for Embodied Reasoning
+## Embodied Reasoning Principles
 
-> 📖 *Read the full practitioner guide: [`EMBODIED_REASONING_TIPS.md`](./EMBODIED_REASONING_TIPS.md)*
+> *Read the full engineering guide: [`EMBODIED_REASONING_TIPS.md`](./EMBODIED_REASONING_TIPS.md)*
 
-1. **Normalized vs. Metric Coordinates**: Use `[0, 1000]` for 2D pixel coordinates and metric meters `[x, y, z]` for 3D bounding boxes.
+1. **Normalized vs Metric Coordinates**: Use `[0, 1000]` for 2D pixel coordinates and metric meters `[x, y, z]` for 3D bounding boxes.
 2. **Chain-of-Kinematics**: When prompting humanoids or mobile manipulators, prompt for whole-body stance selection (`crouch`, `torso_pitch`) before end-effector reaching to avoid singularities.
 3. **6DoF Approach Vectors**: Always request approach normal vectors `[vx, vy, vz]` and aperture opening limits alongside grasp points.
 4. **ASIMOV Safety Invariants**: Enforce negative safety constraints (e.g., dynamic safety bubbles, collaborative speed limits < 0.5m/s) in system instructions.
@@ -907,19 +907,19 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 
 ---
 
-## 🧪 Interactive Suite CLI & Testing
+## Interactive Suite CLI and Testing
 
 ### Interactive Terminal Dashboard
 ```bash
 python cli.py
 ```
 
-*CLI Features:*
-- 🗂️ **Prompt Gallery Explorer**: Browse, inspect, and run all 35 prompt cards with sample or custom images
-- 👁️ **Perception & 3D Spatial Query**: Real-time visual overlay generation
-- 🧠 **Whole-Body Task Planner**: Autonomous Pydantic decomposition
-- 🛡️ **ASIMOV Safety Auditor**: Live human proximity safety verification
-- 🤖 **ROS 2 Status Monitor**: Bridge sanity test
+*CLI Modules:*
+- **Prompt Gallery Explorer**: Browse, inspect, and run all 35 prompt cards with sample or custom images
+- **Perception and 3D Spatial Query**: Real-time visual overlay generation
+- **Whole-Body Task Planner**: Autonomous Pydantic decomposition
+- **ASIMOV Safety Auditor**: Live human proximity safety verification
+- **ROS 2 Status Monitor**: Bridge sanity verification
 
 ### Run Automated Tests
 ```bash
@@ -928,12 +928,12 @@ python3 -m unittest tests/test_structure.py
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-We welcome community contributions! Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) to add new prompt cards, benchmark results, or robot bridge adapters.
+Community contributions are welcome. Please refer to [`CONTRIBUTING.md`](./CONTRIBUTING.md) to propose new prompt cards, benchmark evaluations, or hardware bridge adapters.
 
 ---
 
 <p align="center">
-  <i>Curated with ❤️ by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
+  <i>Curated by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
 </p>

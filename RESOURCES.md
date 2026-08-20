@@ -1,14 +1,14 @@
-# 📚 Awesome Gemini Robotics 2.0 Resource Hub
+# Resource Hub: Gemini Robotics 2.0 and Physical AI
 
-Welcome to the **Resource Hub**. This is a living collection of research papers, benchmarks, datasets, simulators, and developer SDKs for Google DeepMind's **Gemini Robotics 2.0**, **Gemini Robotics ER 2**, and **VLA 2.0** Physical AI suite.
+A curated reference collection of technical papers, benchmarks, datasets, physics simulators, and developer SDKs for Google DeepMind's **Gemini Robotics 2.0**, **Gemini Robotics ER 2**, and **VLA 2.0** physical AI ecosystem.
 
 ---
 
-## 📄 Core Research Papers & Benchmarks
+## 1. Core Research Papers and Benchmarks
 
-| Milestone / Paper | Summary & Impact | Resource Link |
-|-------------------|------------------|---------------|
-| **Gemini Robotics 2** (July 2026) | Introduces whole-body intelligence (feet to fingertips), dexterous manipulation, and multi-robot collaboration. | [DeepMind Announcement](https://deepmind.google/discover/blog/gemini-robotics-2-physical-ai/) |
+| Milestone / Publication | Technical Summary | Link |
+|-------------------------|-------------------|------|
+| **Gemini Robotics 2** (July 2026) | Whole-body intelligence (feet to fingertips), dexterous manipulation, and multi-robot collaboration. | [DeepMind Announcement](https://deepmind.google/discover/blog/gemini-robotics-2-physical-ai/) |
 | **Gemini Robotics ER 2** | Embodied Reasoning (ER) models specialized in 3D metric spatial grounding, dynamic task planning, and continuous multimodal video reasoning. | [Google AI Studio ER Hub](https://aistudio.google.com/) |
 | **ASIMOV-Agentic Benchmark** | Safety evaluation benchmark measuring agentic physical AI safety refusal, velocity compliance, and human proximity handling. | [Safety Benchmark Paper](https://deepmind.google/technologies/gemini/robotics/) |
 | **Open X-Embodiment 2** | The expanded cross-embodiment multi-robot dataset powering generalist robot policies across humanoids, quadrupeds, and manipulators. | [Project Page](https://robotics-transformer-x.github.io/) |
@@ -17,7 +17,7 @@ Welcome to the **Resource Hub**. This is a living collection of research papers,
 
 ---
 
-## 🛠️ Developer Tools & SDKs
+## 2. Developer Tools and SDKs
 
 - **[Google GenAI SDK (`google-genai`)](https://github.com/googleapis/python-genai)**: Official modern Python SDK with native typing, Structured Outputs, and Files API.
 - **[Google AI Studio](https://aistudio.google.com/)**: Fast interactive web environment for prototyping Gemini Robotics ER prompts and spatial grounding.
@@ -26,14 +26,14 @@ Welcome to the **Resource Hub**. This is a living collection of research papers,
 
 ---
 
-## 🤖 Simulators & Hardware Platforms
+## 3. Simulators and Hardware Platforms
 
-### Physics Simulators & Digital Twins
+### Physics Engines and Digital Twins
 - **[NVIDIA Isaac Sim / Isaac Lab](https://developer.nvidia.com/isaac-sim)**: GPU-accelerated photorealistic simulation standard for Sim-to-Real transfer.
 - **[MuJoCo](https://mujoco.org/)**: Open-source physics engine maintained by Google DeepMind for contact-rich multi-finger manipulation.
 - **[Gazebo Harmonic / Ionic](https://gazebosim.org/)**: Standard robotics simulator tightly integrated with ROS 2.
 
-### Hardware Embodiments & Hands
+### Hardware Embodiments and End-Effectors
 - **[Open-ENPIRE Hand](https://github.com/pgeedh/Open-ENPIRE-Gripper-nvidia)**: Open-source compliant anthropomorphic gripper with tendon actuation.
 - **Universal Robots (UR5e / UR10e)**: Industry cobot arms.
 - **Franka Emika Panda / FR3**: Research standard torque-controlled manipulator.
@@ -41,13 +41,13 @@ Welcome to the **Resource Hub**. This is a living collection of research papers,
 
 ---
 
-## 🎥 Video Tutorials & Technical Talks
+## 4. Technical Presentations and Tutorials
 
-- **[Google DeepMind: Physical AI & The Future of Robotics](https://deepmind.google/discover/blog/shaping-the-future-of-robots-with-gemini/)**: Deep dive into whole-body intelligence and cross-embodiment transfer.
+- **[Google DeepMind: Physical AI & The Future of Robotics](https://deepmind.google/discover/blog/shaping-the-future-of-robots-with-gemini/)**: Technical overview of whole-body intelligence and cross-embodiment transfer.
 - **[Google I/O: Multimodal Reasoning with Gemini](https://deepmind.google/technologies/gemini/)**: Understanding long-context video comprehension and spatial tokens.
 
 ---
 
 <p align="center">
-  <i>Maintained by the Gemini Robotics 2.0 Early Access & Physical AI Developer Community</i>
+  <i>Maintained by the Gemini Robotics 2.0 Early Access Community • Google DeepMind Early Trusted Tester Program</i>
 </p>

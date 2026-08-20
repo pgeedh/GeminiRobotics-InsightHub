@@ -10,9 +10,8 @@ from dotenv import load_dotenv
 # -------------------------------------------------------------------------
 # GEMINI ROBOTICS 2.0: VIDEO SAFETY AUDITING & ANOMALY DETECTION (ER 2)
 # -------------------------------------------------------------------------
-# Gemini Robotics ER 2 can reason across continuous robotic video logs
-# detecting physical anomalies, near-miss collisions, grip slip, and
-# safety violations against ASIMOV-Agentic standards.
+# Analyzes continuous robotic video logs to detect physical anomalies,
+# near-miss collisions, grip slip, and safety protocol violations.
 # -------------------------------------------------------------------------
 
 load_dotenv()
@@ -27,10 +26,10 @@ FALLBACK_MODELS = [
 
 if api_key:
     client = genai.Client(api_key=api_key)
-    print("✅ Gemini API Key loaded.")
+    print("[INFO] Gemini API Key loaded.")
 else:
     client = None
-    print("⚠️ Warning: GEMINI_API_KEY not found. Running in simulation mode.")
+    print("[INFO] GEMINI_API_KEY not found. Running in simulation mode.")
 
 class SafetyViolation(BaseModel):
     timestamp_range: str = Field(description="e.g. '00:14 - 00:19'")
@@ -46,18 +45,18 @@ class VideoSafetyAuditReport(BaseModel):
     human_in_loop_interventions_needed: bool
 
 def analyze_video_safety(video_path: str, safety_guidelines: str, model_name: str = DEFAULT_MODEL) -> VideoSafetyAuditReport:
-    print(f"\n🎬 Auditing Robot Video Log: '{video_path}'")
-    print(f"📋 Safety Guidelines / Protocols:\n   {safety_guidelines}")
+    print(f"\n[AUDIT] Auditing Robot Video Log: '{video_path}'")
+    print(f"Safety Guidelines / Protocols:\n   {safety_guidelines}")
 
     audit_result = None
 
     if client and os.path.exists(video_path):
         try:
-            print(f"Uploading video file to Gemini Files API...")
+            print(f"[UPLOAD] Uploading video file to Gemini Files API...")
             video_file = client.files.upload(file=video_path)
             
             while video_file.state.name == "PROCESSING":
-                print("⏳ Processing video frames in cloud...")
+                print("[PROCESSING] Processing video frames in cloud...")
                 time.sleep(2)
                 video_file = client.files.get(name=video_file.name)
 
@@ -83,7 +82,7 @@ def analyze_video_safety(video_path: str, safety_guidelines: str, model_name: st
             print_audit(audit_result)
             return audit_result
         except Exception as e:
-            print(f"⚠️ Video API processing error: {e}. Executing offline simulated audit...")
+            print(f"[WARN] Video API processing error: {e}. Executing offline simulated audit...")
 
     audit_result = generate_simulated_audit(video_path)
     print_audit(audit_result)
@@ -92,7 +91,7 @@ def analyze_video_safety(video_path: str, safety_guidelines: str, model_name: st
 def generate_simulated_audit(video_path: str) -> VideoSafetyAuditReport:
     return VideoSafetyAuditReport(
         status="UNSAFE",
-        audit_summary="Detected two critical safety violations during episode: human proximity bubble breach at 00:03 and payload slippage during high-acceleration swing at 00:07.",
+        audit_summary="Detected two safety violations during episode: human proximity bubble breach at 00:03 and payload slippage during high-acceleration swing at 00:07.",
         violations=[
             SafetyViolation(
                 timestamp_range="00:03 - 00:05",
@@ -113,7 +112,7 @@ def generate_simulated_audit(video_path: str) -> VideoSafetyAuditReport:
     )
 
 def print_audit(report: VideoSafetyAuditReport):
-    print("\n🛡️ ASIMOV Video Safety Audit Report:")
+    print("\nASIMOV Video Safety Audit Report:")
     print("==================================================")
     print(f"Overall Status: {report.status}")
     print(f"Summary: {report.audit_summary}")

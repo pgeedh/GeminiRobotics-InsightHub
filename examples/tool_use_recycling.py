@@ -24,10 +24,10 @@ FALLBACK_MODELS = [
 
 if api_key:
     client = genai.Client(api_key=api_key)
-    print("✅ Gemini API Key loaded.")
+    print("[INFO] Gemini API Key loaded.")
 else:
     client = None
-    print("⚠️ Warning: GEMINI_API_KEY not set. Running in simulation mode.")
+    print("[INFO] GEMINI_API_KEY not configured. Running in simulation mode.")
 
 def query_local_facility_rules(material: str, location: str = "San Francisco") -> str:
     """Queries local municipality recycling facility capabilities."""
@@ -44,7 +44,7 @@ def query_local_facility_rules(material: str, location: str = "San Francisco") -
     return "Recyclable if clean rigid plastic/metal; otherwise general landfill."
 
 def run_agentic_robot(item_description: str, location: str = "San Jose, CA"):
-    print(f"\n🛠️ Robot observing item: '{item_description}' in '{location}'...")
+    print(f"\n[AGENT] Robot observing item: '{item_description}' in '{location}'...")
     
     if client:
         try:
@@ -64,14 +64,14 @@ def run_agentic_robot(item_description: str, location: str = "San Jose, CA"):
                     temperature=0.2
                 )
             )
-            print("\n📡 Live Agentic Reasoning Result:")
+            print("\nLive Agentic Reasoning Result:")
             print(response.text)
             return response.text
         except Exception as e:
-            print(f"⚠️ Live API call failed: {e}. Falling back to simulation...")
+            print(f"[WARN] Live API call failed: {e}. Falling back to simulation...")
 
     sim_res = simulate_agentic_decision(item_description, location)
-    print("\n📡 Simulated Agentic Decision:")
+    print("\nSimulated Agentic Decision:")
     print(sim_res)
     return sim_res
 
