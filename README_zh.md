@@ -1,10 +1,9 @@
 # Awesome Gemini Robotics 2.0 (中文版) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png" align="right" width="100">
 
 [![DeepMind](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
-[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%201.5-blue?style=for-the-badge)](https://aistudio.google.com/)
+[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=for-the-badge)](https://aistudio.google.com/)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=for-the-badge&logo=ros)](./ros2_gemini_bridge)
-[![Interactive 3D Demo](https://img.shields.io/badge/Interactive%203D-Architecture%20Explainer-purple?style=for-the-badge&logo=three.js)](./docs/architecture_3d_explainer.html)
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-ERQA%20%7C%20ASIMOV-green?style=for-the-badge)](./BENCHMARKS.md)
+[![Benchmarks](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=for-the-badge)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 🌐 **语言导航:** [English](./README.md) • [日本語 (Japanese)](./README_ja.md) • **中文 (Chinese)** • [한국어 (Korean)](./README_kr.md) • [Tiếng Việt (Vietnamese)](./README_vn.md)
@@ -34,7 +33,7 @@
   - [7. 工业计量、表盘识别与精细分割 (卡片 27–29)](#7-工业计量表盘识别与精细分割)
   - [8. 工具调用与多机器人协同 (卡片 30–33)](#8-工具调用与多机器人协同)
   - [9. Vision-Language-Action (VLA) 控制 (卡片 34–35)](#9-vision-language-action-vla-控制)
-- [📊 官方基准评测：ER 1.5 vs. ER 2](#-官方基准评测)
+- [📊 官方DeepMind基准评测（ER 2 对比 SOTA）](#-官方deepmind基准评测)
 - [🤖 ROS 2 桥接节点集成](#-ros-2-桥接节点集成)
 - [💡 具身推理五大黄金法则](#-具身推理五大黄金法则)
 
@@ -213,16 +212,18 @@ print(response.text)
 
 ---
 
-## 📊 官方基准评测
+## 📊 官方DeepMind基准评测
 
-| 评测维度 | 数据集 / 评测目标 | ER 1.5 | Gemini Robotics ER 2 | 提升幅度 |
-| :--- | :--- | :---: | :---: | :---: |
-| **ERQA 具身多视角推理** | ERQA Benchmark (400题) | 58.4% | **91.2%** | **+32.8%** |
-| **原始视频滑移/失败检测** | 连续RGB视频流 | 52.1% | **94.6%** | **+81.5%** |
-| **ASIMOV 危险指令拒绝** | ASIMOV 安全测试集 | 61.2% | **98.4%** | **+60.7%** |
-| **工业表盘与仪器计量** | 10种工业仪表数据集 | 64.0% | **96.5%** | **+50.7%** |
-| **3D 空间定位 (3D mAP)** | Open X-Embodiment | 55.2% | **93.1%** | **+68.6%** |
-| **首动作输出延迟 (Latency)** | 云端流式接口 | 850 ms | **210 ms** | **4倍加速** |
+| 评测维度 | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **图像成功判定** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
+| **视频成功判定** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |
+| **ERQA 具身多视角推理** | 67.2% | 43.2% | 72.5% | 73.0% | **78.5%** |
+| **工业表盘与仪器计量** | 53.0% | 61.5% | 52.8% | 52.0% | **65.7%** |
+| **任务阶段进展分类** | 37.1% | 46.2% | 42.7% | 43.9% | **57.4%** |
+| **实机 VLA 硬件控制** | — | — | 48.6% | — | **60.0%** |
+| **安全指令遵循精度** | 95.9% | 91.4% | 47.2% | — | **97.9%** |
+| **人机距离安全合规 (1m)** | 77.1% | 83.4% | 51.1% | — | **93.0%** |
 
 ---
 

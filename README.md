@@ -1,10 +1,9 @@
 # Awesome Gemini Robotics 2.0 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png" align="right" width="100">
 
 [![DeepMind](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
-[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%201.5-blue?style=for-the-badge)](https://aistudio.google.com/)
+[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=for-the-badge)](https://aistudio.google.com/)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=for-the-badge&logo=ros)](./ros2_gemini_bridge)
-[![Interactive 3D Demo](https://img.shields.io/badge/Interactive%203D-Architecture%20Explainer-purple?style=for-the-badge&logo=three.js)](./docs/architecture_3d_explainer.html)
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-ERQA%20%7C%20ASIMOV-green?style=for-the-badge)](./BENCHMARKS.md)
+[![Benchmarks](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=for-the-badge)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 🌐 **Languages:** **English** • [日本語 (Japanese)](./README_ja.md) • [中文 (Chinese)](./README_zh.md) • [한국어 (Korean)](./README_kr.md) • [Tiếng Việt (Vietnamese)](./README_vn.md)
@@ -13,7 +12,7 @@
 
 > **🚀 THE DEFINITIVE COMMUNITY & DEVELOPER GALLERY FOR GEMINI ROBOTICS 2.0**
 > 
-> A curated, community-maintained gallery of **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning)**, and **Gemini Robotics 2 (VLA)** prompts, schemas, recipes, and production code snippets ready to copy-paste into your own robotics and embodied AI pipelines.
+> A curated, community-maintained gallery of **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning)**, and **Gemini Robotics 2 (VLA)** prompts, schemas, recipes, and production code snippets ready to copy-paste into your own robotics and physical AI pipelines.
 > 
 > **What is Gemini Robotics 2.0?** Google DeepMind's flagship physical AI suite operating on a **Hierarchical Dual-Model Paradigm**:
 > 1. **The Planner / Upper Brain (Gemini Robotics ER 2):** High-level embodied spatial reasoning, 3D metric bounding, long-horizon task planning, continuous video slip/anomaly tracking, and agentic tool use.
@@ -23,7 +22,6 @@
 
 ## 📑 Contents
 
-- [🎮 Interactive 3D Visual Architecture Explainer](#-interactive-3d-visual-architecture-explainer)
 - [⚡ Quick Start (`google-genai` SDK v1.x)](#-quick-start)
 - [🗂️ Complete Use Cases & Prompt Gallery (35 Cards)](#-complete-use-cases--prompt-gallery-35-cards)
   - [1. Spatial Grounding & 2D/3D Pointing (Cards 1–7)](#1-spatial-grounding--2d3d-pointing)
@@ -36,26 +34,11 @@
   - [8. Agentic Tool Use & Multi-Robot Fleet (Cards 30–33)](#8-agentic-tool-use--multi-robot-fleet)
   - [9. Vision-Language-Action (VLA) Motor Control (Cards 34–35)](#9-vision-language-action-vla-motor-control)
 - [🎥 Official DeepMind Robotics Video Showcase](#-official-deepmind-robotics-video-showcase)
-- [📊 Official Benchmarks: ER 1.5 vs. Gemini Robotics ER 2](#-official-benchmarks-er-15-vs-gemini-robotics-er-2)
+- [📊 Official DeepMind Benchmarks (Gemini Robotics ER 2)](#-official-deepmind-benchmarks)
 - [🤖 ROS 2 Bridge Integration](#-ros-2-bridge-integration-ros2_gemini_bridge)
 - [💡 5 Golden Rules for Embodied Reasoning](#-5-golden-rules-for-embodied-reasoning)
 - [🧪 Interactive Suite CLI & Testing](#-interactive-suite-cli--testing)
 - [🤝 Contributing & PR Guide](#-contributing)
-
----
-
-## 🎮 Interactive 3D Visual Architecture Explainer
-
-Explore the internal mechanisms of Gemini Robotics 2 in real-time 3D WebGL. Inspect how RGB-D camera streams map to spatial attention tokens, 3D metric bounding boxes, whole-body kinematic plans, and 20Hz VLA joint trajectories:
-
-<p align="center">
-  <a href="./docs/architecture_3d_explainer.html">
-    <img src="./assets/gemini_robotics_architecture.svg" alt="Gemini Robotics 2 Interactive 3D Architecture" width="100%" />
-  </a>
-</p>
-<p align="center">
-  👉 <b><a href="./docs/architecture_3d_explainer.html">Launch Full Interactive 3D Architecture & Spatial Explainer in Browser</a></b>
-</p>
 
 ---
 
@@ -69,7 +52,7 @@ from google.genai import types
 
 # Initialize official Gemini API Client
 client = genai.Client()
-MODEL_ID = "gemini-robotics-er-2"  # or "gemini-robotics-er-1.5-preview"
+MODEL_ID = "gemini-robotics-er-2"
 
 # Spatial Pointing Query
 prompt = """
@@ -718,7 +701,6 @@ Use Google Search to fetch the municipality municipal waste guidelines for Santa
 ---
 
 #### 31) Python Code Execution for Real-Time Frame Transforms 🧩
-<p align="center"><img src="./assets/gemini_robotics_architecture.svg" alt="Coordinate Transform" width="500px"/></p>
 
 **Prompt:**
 ```json
@@ -864,28 +846,34 @@ Direct captures and demonstrations from Google DeepMind's official [Gemini Robot
 
 ---
 
-## 📊 Official Benchmarks: ER 1.5 vs. Gemini Robotics ER 2
+## 📊 Official DeepMind Benchmarks
 
-<p align="center">
-  <a href="./BENCHMARKS.md">
-    <img src="./assets/benchmark_comparison.svg" alt="Gemini Robotics Benchmark Comparison" width="100%" />
-  </a>
-</p>
+<div align="center">
 
-| Benchmark Dimension | Dataset / Evaluation Target | Baseline / ER 1.5 | Gemini Robotics ER 2 | Relative Gain |
-| :--- | :--- | :---: | :---: | :---: |
-| **ERQA Multi-View Embodied Reasoning** | ERQA Benchmark (400 questions, arXiv:[2503.20020](https://arxiv.org/abs/2503.20020)) | 58.4% | **91.2%** | **+32.8%** |
-| **Raw Video Failure & Slip Detection** | Continuous RGB Video Streams (Mid-execution) | 52.1% | **94.6%** | **+81.5%** |
-| **ASIMOV-Agentic Safety Refusal** | ASIMOV Unsafe VLA Tool Call Refusal Suite | 61.2% | **98.4%** | **+60.7%** |
-| **General Instrument & Gauge Reading** | 10 Instrument Types (Scales, dials, thermometers) | 64.0% | **96.5%** | **+50.7%** |
-| **3D Spatial Grounding (3D mAP@0.75)** | Open X-Embodiment 3D Metric Evaluation | 55.2% | **93.1%** | **+68.6%** |
-| **Long-Horizon Plan Success (50+ Steps)** | Multi-Stage Kitchen & Assembly Benches | 47.0% | **89.0%** | **+89.3%** |
-| **Multi-Robot Fleet Handoff Precision** | Dual-Agent Warehouse & Assembly Cell | 34.0% | **93.0%** | **+173.5%** |
-| **Diffusion Policy Manipulation Tasks** | 15 Benchmark Tasks across 4 Environments | 53.1% | **88.2%** | **+46.9%** |
-| **Time-to-First-Action-Token (Latency)** | Cloud Streaming API (Average ms) | 850 ms | **210 ms** | **4.0x Faster** |
-| **On-Device VLA Adaptation Time** | Custom Gripper Edge Adaptation | ~40.0 hrs | **2.5 hrs** | **16x Faster** |
+| **ER Metrics Comparison** | **Progress Classification** |
+| :---: | :---: |
+| [![ER Metrics](./assets/benchmark_er_metrics.svg)](./BENCHMARKS.md) | [![Progress Classification](./assets/benchmark_progress_classification.svg)](./BENCHMARKS.md) |
 
-*See [`BENCHMARKS.md`](./BENCHMARKS.md) for complete citations, datasets, and evaluation methodology.*
+| **Physical Agent Performance** | **Safety & Proximity Governance** |
+| :---: | :---: |
+| [![Physical Agent](./assets/benchmark_physical_agent.svg)](./BENCHMARKS.md) | [![Safety Performance](./assets/benchmark_safety_performance.svg)](./BENCHMARKS.md) |
+
+</div>
+
+### Summary Table: Gemini Robotics ER 2 vs SOTA
+
+| Benchmark Evaluation Metric | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Success Detection (Image-Based)** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
+| **Success Detection (Video-Based)** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |
+| **Question Answering (ERQA)** | 67.2% | 43.2% | 72.5% | 73.0% | **78.5%** |
+| **Generalized Instrument Reading** | 53.0% | 61.5% | 52.8% | 52.0% | **65.7%** |
+| **Progress Classification** | 37.1% | 46.2% | 42.7% | 43.9% | **57.4%** |
+| **Controlling Real VLA Hardware** | — | — | 48.6% | — | **60.0%** |
+| **Safety Instruction Following** | 95.9% | 91.4% | 47.2% | — | **97.9%** |
+| **Human Proximity Safety (1m)** | 77.1% | 83.4% | 51.1% | — | **93.0%** |
+
+*See [`BENCHMARKS.md`](./BENCHMARKS.md) for full citations, datasets, and methodology.*
 
 ---
 

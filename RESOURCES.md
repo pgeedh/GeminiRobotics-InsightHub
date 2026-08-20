@@ -1,8 +1,6 @@
-# 📚 Gemini Robotics 2 & ER 1.5 Resource Hub
+# 📚 Awesome Gemini Robotics 2.0 Resource Hub
 
-Welcome to the **Resource Hub**. This is a living collection of research papers, benchmarks, datasets, simulators, and developer SDKs for Google DeepMind's Gemini Robotics models, VLA architectures, and Physical AI.
-
-> *Tip: Star and watch this repository to receive updates as new Gemini Robotics models and SDK features are released.*
+Welcome to the **Resource Hub**. This is a living collection of research papers, benchmarks, datasets, simulators, and developer SDKs for Google DeepMind's **Gemini Robotics 2.0**, **Gemini Robotics ER 2**, and **VLA 2.0** Physical AI suite.
 
 ---
 
@@ -11,7 +9,7 @@ Welcome to the **Resource Hub**. This is a living collection of research papers,
 | Milestone / Paper | Summary & Impact | Resource Link |
 |-------------------|------------------|---------------|
 | **Gemini Robotics 2** (July 2026) | Introduces whole-body intelligence (feet to fingertips), dexterous manipulation, and multi-robot collaboration. | [DeepMind Announcement](https://deepmind.google/discover/blog/gemini-robotics-2-physical-ai/) |
-| **Gemini Robotics ER 2 & 1.5** | Embodied Reasoning (ER) models specialized in 3D spatial grounding, dynamic task planning, and multimodal video reasoning. | [Google AI Studio ER Hub](https://aistudio.google.com/) |
+| **Gemini Robotics ER 2** | Embodied Reasoning (ER) models specialized in 3D metric spatial grounding, dynamic task planning, and continuous multimodal video reasoning. | [Google AI Studio ER Hub](https://aistudio.google.com/) |
 | **ASIMOV-Agentic Benchmark** | Safety evaluation benchmark measuring agentic physical AI safety refusal, velocity compliance, and human proximity handling. | [Safety Benchmark Paper](https://deepmind.google/technologies/gemini/robotics/) |
 | **Open X-Embodiment 2** | The expanded cross-embodiment multi-robot dataset powering generalist robot policies across humanoids, quadrupeds, and manipulators. | [Project Page](https://robotics-transformer-x.github.io/) |
 | **RT-2: Vision-Language-Action** | Foundational VLA work translating internet-scale vision and language into physical control tokens. | [DeepMind RT-2 Blog](https://deepmind.google/discover/blog/rt-2-new-model-translates-vision-and-language-into-action/) |
@@ -51,6 +49,5 @@ Welcome to the **Resource Hub**. This is a living collection of research papers,
 ---
 
 <p align="center">
-  <i>Maintained by the Gemini Robotics Early Access & Physical AI Developer Community</i>
+  <i>Maintained by the Gemini Robotics 2.0 Early Access & Physical AI Developer Community</i>
 </p>
-

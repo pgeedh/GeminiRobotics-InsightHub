@@ -1,8 +1,8 @@
-# 🧠 Interesting & Experimental Prompts (Gemini Robotics 2 & ER 1.5)
+# 🧠 Advanced Physical AI Prompts (Gemini Robotics 2.0 & ER 2)
 
-This collection pushes the boundaries of what **Gemini Robotics ER 2** and **ER 1.5** can achieve. These prompts go far beyond simple "pick and place" and explore 3D physics reasoning, whole-body kinematics, multi-agent fleet collaboration, and ASIMOV-Agentic safety protocols.
+This collection pushes the boundaries of what **Gemini Robotics 2.0** and **Gemini Robotics ER 2** can achieve. These prompts explore 3D physics reasoning, whole-body kinematics, multi-agent fleet collaboration, and ASIMOV-Agentic safety protocols.
 
-> **🧪 Experimental**: These prompts leverage the model's world model, 3D spatial grounding, and embodied commonsense reasoning.
+> **🧪 Advanced Capabilities**: These prompts leverage the model's physical world model, 3D spatial grounding, and embodied commonsense reasoning.
 
 ---
 
@@ -110,5 +110,4 @@ Analyze the failure:
 
 ---
 
-*Curated for Gemini Robotics 2 & ER 1.5 Early Access Program.*
-
+*Curated for Gemini Robotics 2.0 & ER 2.*

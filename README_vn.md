@@ -1,10 +1,9 @@
 # Awesome Gemini Robotics 2.0 (Tiếng Việt) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png" align="right" width="100">
 
 [![DeepMind](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
-[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%201.5-blue?style=for-the-badge)](https://aistudio.google.com/)
+[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=for-the-badge)](https://aistudio.google.com/)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=for-the-badge&logo=ros)](./ros2_gemini_bridge)
-[![Interactive 3D Demo](https://img.shields.io/badge/Interactive%203D-Architecture%20Explainer-purple?style=for-the-badge&logo=three.js)](./docs/architecture_3d_explainer.html)
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-ERQA%20%7C%20ASIMOV-green?style=for-the-badge)](./BENCHMARKS.md)
+[![Benchmarks](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=for-the-badge)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 🌐 **Ngôn ngữ:** [English](./README.md) • [日本語 (Japanese)](./README_ja.md) • [中文 (Chinese)](./README_zh.md) • [한국어 (Korean)](./README_kr.md) • **Tiếng Việt (Vietnamese)**
@@ -34,7 +33,7 @@
   - [7. Đo lường công nghiệp, Đồng hồ đo & Phân đoạn chi tiết (Thẻ 27–29)](#7-đo-lường-công-nghiệp-đồng-hồ-đo--phân-đoạn-chi-tiết)
   - [8. Sử dụng công cụ & Phối hợp hạm đội robot (Thẻ 30–33)](#8-sử-dụng-công-cụ--phối-hợp-hạm-đội-robot)
   - [9. Điều khiển động cơ Vision-Language-Action (VLA) (Thẻ 34–35)](#9-điều-khiển-động-cơ-vision-language-action-vla)
-- [📊 Bảng so chuẩn chính thức: ER 1.5 vs. ER 2](#-bảng-so-chuẩn-chính-thức)
+- [📊 Bảng so chuẩn chính thức DeepMind (ER 2 vs SOTA)](#-bảng-so-chuẩn-chính-thức-deepmind)
 - [🤖 Tích hợp cầu nối ROS 2](#-tích-hợp-cầu-nối-ros-2)
 - [💡 5 Quy tắc vàng cho Suy luận thể nhập](#-5-quy-tắc-vàng-cho-suy-luận-thể-nhập)
 
@@ -212,16 +211,18 @@ print(response.text)
 
 ---
 
-## 📊 Bảng so chuẩn chính thức
+## 📊 Bảng so chuẩn chính thức DeepMind
 
-| Tiêu chí đánh giá | Bộ dữ liệu thử nghiệm | ER 1.5 | Gemini Robotics ER 2 | Mức tăng |
-| :--- | :--- | :---: | :---: | :---: |
-| **Suy luận thể nhập ERQA** | ERQA Benchmark (400 câu hỏi) | 58.4% | **91.2%** | **+32.8%** |
-| **Phát hiện trượt/lỗi qua video** | Luồng RGB liên tục | 52.1% | **94.6%** | **+81.5%** |
-| **Từ chối lệnh nguy hiểm ASIMOV**| Bộ kiểm thử an toàn ASIMOV | 61.2% | **98.4%** | **+60.7%** |
-| **Đọc đồng hồ & thiết bị đo** | 10 loại đồng hồ công nghiệp | 64.0% | **96.5%** | **+50.7%** |
-| **Định vị không gian 3D (3D mAP)**| Open X-Embodiment | 55.2% | **93.1%** | **+68.6%** |
-| **Độ trễ phản hồi hành động đầu**| API luồng đám mây | 850 ms | **210 ms** | **Nhanh hơn 4x** |
+| Tiêu chí đánh giá | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Xác thực hình ảnh** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
+| **Xác thực video** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |
+| **Suy luận thể nhập ERQA** | 67.2% | 43.2% | 72.5% | 73.0% | **78.5%** |
+| **Đọc đồng hồ & thiết bị** | 53.0% | 61.5% | 52.8% | 52.0% | **65.7%** |
+| **Phân loại tiến độ** | 37.1% | 46.2% | 42.7% | 43.9% | **57.4%** |
+| **Điều khiển VLA thực tế** | — | — | 48.6% | — | **60.0%** |
+| **Tuân thủ an toàn** | 95.9% | 91.4% | 47.2% | — | **97.9%** |
+| **Khoảng cách an toàn (1m)** | 77.1% | 83.4% | 51.1% | — | **93.0%** |
 
 ---
 

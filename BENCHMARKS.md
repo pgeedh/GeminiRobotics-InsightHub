@@ -1,63 +1,86 @@
-# 📊 Benchmarks & Empirical Performance: Gemini Robotics ER 1.5 vs. ER 2
+# 📊 Official Benchmarks & Performance: Gemini Robotics ER 2
 
-This document provides empirical benchmarking data comparing Google DeepMind's **Gemini Robotics ER 1.5** and **Gemini Robotics ER 2** across standardized physical AI, spatial grounding, long-horizon planning, and safety benchmarks.
+Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 2** across standardized physical AI, embodied reasoning, VLA execution control, and safety governance benchmarks.
 
-> **Research References**:
-> - *"Gemini Robotics: Bringing AI into the Physical World"* (arXiv:[2503.20020](https://arxiv.org/abs/2503.20020))
-> - Google DeepMind Gemini Robotics 2 Technical Report (July 2026)
-> - ASIMOV-Agentic Safety & Feasibility Evaluation Suite
+> **Research & Technical Citations**:
+> - *"Gemini Robotics: Bringing AI into the Physical World"* (Google DeepMind, arXiv:[2503.20020](https://arxiv.org/abs/2503.20020))
+> - Google DeepMind Gemini Robotics ER 2 Technical Benchmark Suite
+> - ASIMOV-Agentic Human Proximity & Physical Safety Evaluation Benchmark
 
 ---
 
-## 📈 Visual Benchmark Summary
+## 📈 1. Embodied Reasoning (ER) Metrics Comparison
 
 <p align="center">
-  <img src="./assets/benchmark_comparison.svg" alt="Gemini Robotics Benchmark Comparison" width="100%" />
+  <img src="./assets/benchmark_er_metrics.svg" alt="ER Metrics Comparison" width="100%" />
 </p>
 
----
-
-## 🔬 Core Evaluation Metrics
-
-| Benchmark Dimension | Dataset / Evaluation Target | Baseline / ER 1.5 | Gemini Robotics ER 2 | Relative Gain |
-| :--- | :--- | :---: | :---: | :---: |
-| **ERQA Multi-View Embodied Reasoning** | ERQA Benchmark (400 questions, arXiv:2503.20020) | 58.4% | **91.2%** | **+32.8%** |
-| **Raw Video Failure & Slip Detection** | Continuous RGB Video Streams (Mid-execution) | 52.1% | **94.6%** | **+81.5%** |
-| **ASIMOV-Agentic Safety Refusal** | ASIMOV Unsafe VLA Tool Call Refusal Suite | 61.2% | **98.4%** | **+60.7%** |
-| **General Instrument & Gauge Reading** | 10 Instrument Types (Scales, dials, thermometers) | 64.0% | **96.5%** | **+50.7%** |
-| **3D Spatial Grounding (3D mAP@0.75)** | Open X-Embodiment 3D Metric Evaluation | 55.2% | **93.1%** | **+68.6%** |
-| **Long-Horizon Plan Success (50+ Steps)** | Multi-Stage Kitchen & Assembly Benches | 47.0% | **89.0%** | **+89.3%** |
-| **Multi-Robot Fleet Handoff Precision** | Dual-Agent Warehouse & Assembly Cell | 34.0% | **93.0%** | **+173.5%** |
-| **Diffusion Policy Manipulation Tasks** | 15 Benchmark Tasks across 4 Environments | 53.1% | **88.2%** | **+46.9%** |
-| **Time-to-First-Action-Token (Latency)** | Cloud Streaming API (Average ms) | 850 ms | **210 ms** | **4.0x Faster** |
-| **On-Device VLA Adaptation Time** | Custom Gripper Edge Adaptation | ~40.0 hrs | **2.5 hrs** | **16x Faster** |
+| Benchmark Evaluation Metric | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 | SOTA Margin |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Success Detection (Image-Based)** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** | **+4.1%** |
+| **Success Detection (Video-Based)** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** | **+1.4%** |
+| **Question Answering (ERQA)** | 67.2% | 43.2% | 72.5% | 73.0% | **78.5%** | **+5.5%** |
+| **Generalized Instrument Reading** | 53.0% | 61.5% | 52.8% | 52.0% | **65.7%** | **+4.2%** |
 
 ---
 
-## 🧪 Benchmark Capabilities & Methodology
+## ⏱️ 2. Progress Classification Comparison
 
-### 1. ERQA (Embodied Reasoning Question Answering) Benchmark
-Introduced in the DeepMind physical AI research (arXiv:2503.20020), **ERQA** measures multi-modal embodied reasoning across 400 challenging physical scenarios:
-- **Spatial Reasoning**: 3D bounding geometry, clearance heights, reach envelopes.
-- **Trajectory Reasoning**: Spline interpolation avoiding semantic hazards.
-- **State Estimation**: Gauging liquid volume, screw engagement, and surface friction.
-- **Multi-View Coherence**: ~28% of questions require cross-referencing head and wrist cameras.
+<p align="center">
+  <img src="./assets/benchmark_progress_classification.svg" alt="Progress Classification Comparison" width="100%" />
+</p>
 
-### 2. Raw Video Mid-Execution Failure Detection
-Rather than relying on static images before and after an action, **Gemini Robotics ER 2** continuously ingests video feeds to detect failures *as they happen*:
-- Identifies grasp slippage at the exact video timestamp.
-- Detects tipping containers or liquid spillage before catastrophic drops.
-- Triggers dynamic replanning in under 250ms.
+| Model | Progress Classification Accuracy | Relative Gain vs Opus 5 | Relative Gain vs GPT 5.6 Sol |
+| :--- | :---: | :---: | :---: |
+| **Opus 5** | 37.1% | — | — |
+| **GPT 5.6 Sol** | 46.2% | +24.5% | — |
+| **Gemini Robotics ER 1.6** | 42.7% | +15.1% | -7.6% |
+| **Gemini 3.6 Flash** | 43.9% | +18.3% | -5.0% |
+| **Gemini Robotics ER 2** | **57.4%** | **+54.7%** | **+24.2%** |
 
-### 3. ASIMOV-Agentic Safety & Feasibility Refusal
-Evaluates the model's ability to act as a safety governor for low-level VLA policies:
-- Proactively refuses dangerous user prompts (e.g. swinging heavy metal rods near humans).
-- Enforces dynamic safety bubbles (1.2m human proximity limits).
-- Flags high task uncertainty and requests human-in-the-loop validation.
+---
+
+## 🦾 3. Physical Agent Execution Performance
+
+<p align="center">
+  <img src="./assets/benchmark_physical_agent.svg" alt="Physical Agent Performance" width="100%" />
+</p>
+
+| Control Modality | Gemini Robotics ER 1.6 | Gemini Robotics ER 2 | Net Improvement |
+| :--- | :---: | :---: | :---: |
+| **Controlling Real VLA Hardware** | 48.6% | **60.0%** | **+11.4% (Relative +23.5%)** |
+| **Controlling Simulation VLA** | 37.4% | **42.9%** | **+5.5% (Relative +14.7%)** |
+| **Controlling Human Tele-Op Assistance** | 63.6% | **74.0%** | **+10.4% (Relative +16.4%)** |
+
+---
+
+## 🛡️ 4. Safety & Human Proximity Governance
+
+<p align="center">
+  <img src="./assets/benchmark_safety_performance.svg" alt="Safety Performance" width="100%" />
+</p>
+
+| Safety Evaluation Dimension | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini Robotics ER 2 |
+| :--- | :---: | :---: | :---: | :---: |
+| **Safety Instruction Following Accuracy** | 95.9% | 91.4% | 47.2% | **97.9%** |
+| **Human Proximity Safety Violation Avoidance (1m)** | 77.1% | 83.4% | 51.1% | **93.0%** |
+
+---
+
+## 🔬 Benchmark Methodology & Evaluation Protocol
+
+### 1. ERQA (Embodied Reasoning Question Answering)
+- Evaluates multi-camera spatial reasoning across 400 questions.
+- Tests coordinate grounding, affordance mapping, multi-view consistency, and kinematic feasibility.
+
+### 2. Video-Based Success & Slip Detection
+- Evaluates mid-execution RGB video stream reasoning to detect object drops, grasp shifts, and container tipping in real time without static assumptions.
+
+### 3. VLA Policy Control
+- Evaluates closed-loop high-frequency motor trajectory generation transferring Gemini Robotics ER 2 high-level plans to physical 7DoF robot arms and humanoid end-effectors.
 
 ---
 
 <p align="center">
   <i>Curated by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
 </p>
-

@@ -1,10 +1,9 @@
 # Awesome Gemini Robotics 2.0 (한국어판) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png" align="right" width="100">
 
 [![DeepMind](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
-[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%201.5-blue?style=for-the-badge)](https://aistudio.google.com/)
+[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=for-the-badge)](https://aistudio.google.com/)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=for-the-badge&logo=ros)](./ros2_gemini_bridge)
-[![Interactive 3D Demo](https://img.shields.io/badge/Interactive%203D-Architecture%20Explainer-purple?style=for-the-badge&logo=three.js)](./docs/architecture_3d_explainer.html)
-[![Benchmarks](https://img.shields.io/badge/Benchmarks-ERQA%20%7C%20ASIMOV-green?style=for-the-badge)](./BENCHMARKS.md)
+[![Benchmarks](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=for-the-badge)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 🌐 **언어 선택:** [English](./README.md) • [日本語 (Japanese)](./README_ja.md) • [中文 (Chinese)](./README_zh.md) • **한국어 (Korean)** • [Tiếng Việt (Vietnamese)](./README_vn.md)
@@ -34,7 +33,7 @@
   - [7. 산업 계측, 게이지 인식 및 고밀도 세그멘테이션 (카드 27–29)](#7-산업-계측-게이지-인식-및-고밀도-세그멘테이션)
   - [8. 도구 활용 및 다중 로봇 협업 (카드 30–33)](#8-도구-활용-및-다중-로봇-협업)
   - [9. Vision-Language-Action (VLA) 모터 제어 (카드 34–35)](#9-vision-language-action-vla-모터-제어)
-- [📊 공식 벤치마크: ER 1.5 vs. ER 2](#-공식-벤치마크)
+- [📊 공식 DeepMind 벤치마크 (ER 2 vs SOTA)](#-공식-deepmind-벤치마크)
 - [🤖 ROS 2 브리지 연동](#-ros-2-브리지-연동)
 - [💡 체화된 추론을 위한 5대 황금 법칙](#-체화된-추론을-위한-5대-황금-법칙)
 
@@ -89,7 +88,7 @@ print(response.text)
 - **프롬프트:** `Point to stem of banana, rim of measuring cup, and handle of bag. Return JSON list.`
 
 #### 6) 시각적 연쇄 추론(CoT)을 통한 수량 계수 ✅
-- **프롬프트:** `Point to each individual washer in container with reasoning. Return JSON format.`
+- **프롬프트:** `Point to each washer in container with reasoning. Return JSON format.`
 
 #### 7) 연속 비디오/GIF 내 동적 객체 추적 ✅
 - **프롬프트:** `Point to target items across dynamic sequence: 'pen in gripper', 'pen on desk'. Return JSON.`
@@ -212,16 +211,18 @@ print(response.text)
 
 ---
 
-## 📊 공식 벤치마크
+## 📊 공식 DeepMind 벤치마크
 
-| 평가 항목 | 벤치마크 데이터셋 | ER 1.5 | Gemini Robotics ER 2 | 개선폭 |
-| :--- | :--- | :---: | :---: | :---: |
-| **ERQA 다중 시점 체화 추론** | ERQA Benchmark (400문항) | 58.4% | **91.2%** | **+32.8%** |
-| **비디오 미끄러짐/실패 감지** | 실시간 RGB 스트림 | 52.1% | **94.6%** | **+81.5%** |
-| **ASIMOV 위험 명령 자율 거부** | ASIMOV 안전 테스트 세트 | 61.2% | **98.4%** | **+60.7%** |
-| **산업 계측기 판독 정확도** | 10종 산업 게이지 데이터 | 64.0% | **96.5%** | **+50.7%** |
-| **3D 공간 위치 추정 (3D mAP)** | Open X-Embodiment | 55.2% | **93.1%** | **+68.6%** |
-| **첫 동작 토큰 지연 시간** | 클라우드 스트리밍 API | 850 ms | **210 ms** | **4배 향상** |
+| 평가 항목 | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **이미지 성공 판정** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
+| **비디오 성공 판정** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |
+| **ERQA 체화 추론** | 67.2% | 43.2% | 72.5% | 73.0% | **78.5%** |
+| **산업 계측기 판독** | 53.0% | 61.5% | 52.8% | 52.0% | **65.7%** |
+| **진행 단계 분류** | 37.1% | 46.2% | 42.7% | 43.9% | **57.4%** |
+| **실제 VLA 제어 성공률** | — | — | 48.6% | — | **60.0%** |
+| **안전 지시 준수율** | 95.9% | 91.4% | 47.2% | — | **97.9%** |
+| **인간 근접 안전 회피 (1m)** | 77.1% | 83.4% | 51.1% | — | **93.0%** |
 
 ---
 
