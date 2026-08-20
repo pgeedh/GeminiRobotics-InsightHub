@@ -109,5 +109,5 @@ Analyze the failure:
 ---
 
 <p align="center">
-  <i>Curated for Gemini Robotics 2.0 & ER 2 • Google DeepMind Early Trusted Tester Program</i>
+  <i>Curated for Gemini Robotics 2.0 & ER 2 by Pruthvi Geedh</i>
 </p>

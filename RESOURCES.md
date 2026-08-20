@@ -49,5 +49,5 @@ A curated reference collection of technical papers, benchmarks, datasets, physic
 ---
 
 <p align="center">
-  <i>Maintained by the Gemini Robotics 2.0 Early Access Community • Google DeepMind Early Trusted Tester Program</i>
+  <i>Maintained by Pruthvi Geedh • Gemini Robotics 2.0 Community</i>
 </p>

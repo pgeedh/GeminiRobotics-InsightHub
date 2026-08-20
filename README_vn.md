@@ -1,6 +1,6 @@
 # Awesome Gemini Robotics 2.0 (Tiếng Việt)
 
-[![Maintained By: Google DeepMind Trusted Tester](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=flat-square&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
+[![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
 [![Model: Gemini Robotics ER 2 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
 [![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
 [![Benchmarks: Official DeepMind ER 2](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=flat-square)](./BENCHMARKS.md)
@@ -254,5 +254,5 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 ---
 
 <p align="center">
-  <i>Curated by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
+  <i>Curated by Pruthvi Geedh</i>
 </p>

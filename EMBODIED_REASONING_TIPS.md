@@ -107,5 +107,5 @@ When targets are partially occluded or reflective:
 ---
 
 <p align="center">
-  <i>Maintained by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
+  <i>Maintained by Pruthvi Geedh</i>
 </p>

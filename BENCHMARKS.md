@@ -82,5 +82,5 @@ Official empirical benchmarking data for Google DeepMind's **Gemini Robotics ER 
 ---
 
 <p align="center">
-  <i>Curated by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
+  <i>Curated by Pruthvi Geedh</i>
 </p>
