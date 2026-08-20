@@ -43,9 +43,9 @@
     <text x="540" y="215" font-size="14" font-weight="600" fill="#1D4ED8" text-anchor="middle">43.9%</text>
     <text x="540" y="420" font-size="14" font-weight="600" fill="#111827" text-anchor="middle">Gemini 3.6 Flash</text>
     
-    <!-- Gemini Robotics ER 2: 57.4% -> h=215.2, y=174.8 -->
+    <!-- Gemini Robotics ER 2.0: 57.4% -> h=215.2, y=174.8 -->
     <rect x="620" y="174.8" width="150" height="215.2" rx="4" fill="#1D4ED8" />
     <text x="695" y="162" font-size="15" font-weight="700" fill="#1D4ED8" text-anchor="middle">57.4%</text>
-    <text x="695" y="420" font-size="14" font-weight="700" fill="#1D4ED8" text-anchor="middle">Gemini Robotics ER 2</text>
+    <text x="695" y="420" font-size="14" font-weight="700" fill="#1D4ED8" text-anchor="middle">Gemini Robotics ER 2.0</text>
   </g>
 </svg>

@@ -1,9 +1,9 @@
 # Awesome Gemini Robotics 2.0 (中文版)
 
 [![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
-[![Model: Gemini Robotics ER 2 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
 [![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks: Official DeepMind ER 2](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=flat-square)](./BENCHMARKS.md)
+[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 **语言导航:** [English](./README.md) | [日本語 (Japanese)](./README_ja.md) | **中文 (Chinese)** | [한국어 (Korean)](./README_kr.md) | [Tiếng Việt (Vietnamese)](./README_vn.md)
@@ -12,10 +12,10 @@
 
 ### 概述
 
-面向 **Google DeepMind Gemini Robotics 2.0**、**Gemini Robotics ER 2（具身推理·Embodied Reasoning）** 以及 **Gemini Robotics 2（Vision-Language-Action / VLA）** 的开发者参考库，涵盖生产级提示词模式、JSON模式、Python SDK代码及ROS 2执行节点。
+面向 **Google DeepMind Gemini Robotics 2.0**、**Gemini Robotics ER 2.0（具身推理·Embodied Reasoning）** 以及 **Gemini Robotics 2.0（Vision-Language-Action / VLA）** 的开发者参考库，涵盖生产级提示词模式、JSON模式、Python SDK代码及ROS 2执行节点。
 
 Gemini Robotics 2.0 采用**分层双模型架构**：
-1. **规划层 / 具身推理 (Gemini Robotics ER 2):** 负责多模态空间感知、三维米级度量包围框预测、长程任务分解、实时视频流滑移检测与工具调用。
+1. **规划层 / 具身推理 (Gemini Robotics ER 2.0):** 负责多模态空间感知、三维米级度量包围框预测、长程任务分解、实时视频流滑移检测与工具调用。
 2. **控制层 / 执行策略 (Gemini Robotics 2 VLA & On-Device 2):** 以高频（20Hz以上）直接输出人形机器人、协作机械臂与移动底盘的关节角度轨迹，消除停顿延迟。
 
 ---
@@ -34,7 +34,7 @@ Gemini Robotics 2.0 采用**分层双模型架构**：
   - [6. 连续视频理解与时序推理](#6-连续视频理解与时序推理)
   - [7. 工具调用与多机器人协同](#7-工具调用与多机器人协同)
   - [8. Vision-Language-Action (VLA) 控制](#8-vision-language-action-vla-控制)
-- [官方DeepMind基准评测（ER 2 对比 SOTA）](#官方deepmind基准评测)
+- [官方DeepMind基准评测（ER 2.0 对比 SOTA）](#官方deepmind基准评测)
 - [ROS 2 桥接节点集成](#ros-2-桥接节点集成)
 - [具身推理五大黄金法则](#具身推理五大黄金法则)
 - [贡献指南](#贡献指南)
@@ -235,9 +235,9 @@ print(response.text)
 
 </div>
 
-### 综合评测对比表: Gemini Robotics ER 2 对比 SOTA
+### 综合评测对比表: Gemini Robotics ER 2.0 对比 SOTA
 
-| 评测维度 | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| 评测维度 | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **图像成功判定** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
 | **视频成功判定** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |

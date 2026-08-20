@@ -1,9 +1,9 @@
 # Awesome Gemini Robotics 2.0 (한국어판)
 
 [![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
-[![Model: Gemini Robotics ER 2 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
 [![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks: Official DeepMind ER 2](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=flat-square)](./BENCHMARKS.md)
+[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 **언어 선택:** [English](./README.md) | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | **한국어 (Korean)** | [Tiếng Việt (Vietnamese)](./README_vn.md)
@@ -12,10 +12,10 @@
 
 ### 개요
 
-**Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2(체화된 추론·Embodied Reasoning)**, 및 **Gemini Robotics 2(Vision-Language-Action / VLA)** 모델을 위한 프롬프트 패턴, JSON 스키마, Python SDK 스니펫, ROS 2 실행 노드 레퍼런스입니다.
+**Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2.0(체화된 추론·Embodied Reasoning)**, 및 **Gemini Robotics 2.0(Vision-Language-Action / VLA)** 모델을 위한 프롬프트 패턴, JSON 스키마, Python SDK 스니펫, ROS 2 실행 노드 레퍼런스입니다.
 
 Gemini Robotics 2.0 은 **계층적 이중 모델 아키텍처**로 동작합니다:
-1. **플래너 / 체화된 추론 (Gemini Robotics ER 2):** 공간 인식, 3D 미터법 바운딩 박스, 장기 과업 계획, 실시간 비디오 슬립 감지 및 도구 호출.
+1. **플래너 / 체화된 추론 (Gemini Robotics ER 2.0):** 공간 인식, 3D 미터법 바운딩 박스, 장기 과업 계획, 실시간 비디오 슬립 감지 및 도구 호출.
 2. **모터 제어 / 실행 정책 (Gemini Robotics 2 VLA & On-Device 2):** 휴머노이드, 협동 로봇, 모바일 플랫폼을 위해 20Hz 이상 고주파로 관절 궤적을 직접 생성하여 딜레이 없는 제어를 수행.
 
 ---
@@ -34,7 +34,7 @@ Gemini Robotics 2.0 은 **계층적 이중 모델 아키텍처**로 동작합니
   - [6. 연속 비디오 이해 및 시계열 추론](#6-연속-비디오-이해-및-시계열-추론)
   - [7. 도구 활용 및 다중 로봇 협업](#7-도구-활용-및-다중-로봇-협업)
   - [8. Vision-Language-Action (VLA) 모터 제어](#8-vision-language-action-vla-모터-제어)
-- [공식 DeepMind 벤치마크 (ER 2 vs SOTA)](#공식-deepmind-벤치마크)
+- [공식 DeepMind 벤치마크 (ER 2.0 vs SOTA)](#공식-deepmind-벤치마크)
 - [ROS 2 브리지 노드 연동](#ros-2-브리지-노드-연동)
 - [체화 추론 5대 황금 원칙](#체화-추론-5대-황금-원칙)
 - [기여 가이드](#기여-가이드)
@@ -234,9 +234,9 @@ print(response.text)
 
 </div>
 
-### 종합 성능 비교표: Gemini Robotics ER 2 vs SOTA
+### 종합 성능 비교표: Gemini Robotics ER 2.0 vs SOTA
 
-| 평가 항목 | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| 평가 항목 | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **이미지 성공 판정** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
 | **비디오 성공 판정** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |

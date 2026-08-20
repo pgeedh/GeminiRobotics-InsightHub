@@ -1,4 +1,4 @@
-# The Physical AI Practitioner's Handbook: Embodied Reasoning with Gemini Robotics ER 2
+# The Physical AI Practitioner's Handbook: Embodied Reasoning with Gemini Robotics ER 2.0
 
 Engineering reference and prompt design guidelines for **Embodied Reasoning (ER)** with Google DeepMind's Gemini Robotics models. This guide covers spatial coordinate conventions, kinematic planning patterns, safety constraints, and latency optimization.
 

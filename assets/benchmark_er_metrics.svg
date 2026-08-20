@@ -16,7 +16,7 @@
     <text x="465" y="4">Gemini 3.6 Flash</text>
     
     <circle cx="620" cy="0" r="7" fill="#1D4ED8" />
-    <text x="635" y="4" font-weight="700" fill="#1D4ED8">Gemini Robotics ER 2</text>
+    <text x="635" y="4" font-weight="700" fill="#1D4ED8">Gemini Robotics ER 2.0</text>
   </g>
   
   <!-- Grid lines -->

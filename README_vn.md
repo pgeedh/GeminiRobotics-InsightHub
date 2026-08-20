@@ -1,9 +1,9 @@
 # Awesome Gemini Robotics 2.0 (Tiếng Việt)
 
 [![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
-[![Model: Gemini Robotics ER 2 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
 [![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks: Official DeepMind ER 2](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=flat-square)](./BENCHMARKS.md)
+[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 **Ngôn ngữ:** [English](./README.md) | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | [한국어 (Korean)](./README_kr.md) | **Tiếng Việt (Vietnamese)**
@@ -12,10 +12,10 @@
 
 ### Tổng quan
 
-Thư viện tài liệu dành cho nhà phát triển tập hợp các mẫu câu lệnh (prompts), lược đồ JSON, mã nguồn Python và node thực thi ROS 2 dành cho **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning - Suy luận thể nhập)** và **Gemini Robotics 2 (Vision-Language-Action / VLA)**.
+Thư viện tài liệu dành cho nhà phát triển tập hợp các mẫu câu lệnh (prompts), lược đồ JSON, mã nguồn Python và node thực thi ROS 2 dành cho **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2.0 (Embodied Reasoning - Suy luận thể nhập)** và **Gemini Robotics 2.0 (Vision-Language-Action / VLA)**.
 
 Gemini Robotics 2.0 hoạt động theo **Kiến trúc Phân tầng Kép**:
-1. **Bộ lập kế hoạch / Suy luận thể nhập (Gemini Robotics ER 2):** Suy luận không gian 3D, hộp bao thể tích tính bằng mét, lập kế hoạch nhiệm vụ dài hạn, phát hiện trượt rơi qua video thời gian thực và điều phối công cụ.
+1. **Bộ lập kế hoạch / Suy luận thể nhập (Gemini Robotics ER 2.0):** Suy luận không gian 3D, hộp bao thể tích tính bằng mét, lập kế hoạch nhiệm vụ dài hạn, phát hiện trượt rơi qua video thời gian thực và điều phối công cụ.
 2. **Kiểm soát vận động / Chính sách thực thi (Gemini Robotics 2 VLA & On-Device 2):** Điều khiển động cơ tần số cao (20Hz+) tạo quỹ đạo khớp trực tiếp cho robot hình người, tay máy và xe tự hành không độ trễ ngắt quãng.
 
 ---
@@ -34,7 +34,7 @@ Gemini Robotics 2.0 hoạt động theo **Kiến trúc Phân tầng Kép**:
   - [6. Phân tích video liên tục & Suy luận thời gian](#6-phân-tích-video-liên-tục--suy-luận-thời-gian)
   - [7. Sử dụng công cụ & Phối hợp hạm đội robot](#7-sử-dụng-công-cụ--phối-hợp-hạm-đội-robot)
   - [8. Điều khiển động cơ Vision-Language-Action (VLA)](#8-điều-khiển-động-cơ-vision-language-action-vla)
-- [Bảng so chuẩn chính thức DeepMind (ER 2 vs SOTA)](#bảng-so-chuẩn-chính-thức-deepmind)
+- [Bảng so chuẩn chính thức DeepMind (ER 2.0 vs SOTA)](#bảng-so-chuẩn-chính-thức-deepmind)
 - [Tích hợp cầu nối ROS 2](#tích-hợp-cầu-nối-ros-2)
 - [5 Quy tắc vàng cho Suy luận thể nhập](#5-quy-tắc-vàng-cho-suy-luận-thể-nhập)
 - [Đóng góp](#đóng-góp)
@@ -234,9 +234,9 @@ print(response.text)
 
 </div>
 
-### Bảng tổng hợp so sánh: Gemini Robotics ER 2 vs SOTA
+### Bảng tổng hợp so sánh: Gemini Robotics ER 2.0 vs SOTA
 
-| Tiêu chí đánh giá | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| Tiêu chí đánh giá | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Xác thực hình ảnh** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
 | **Xác thực video** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |

@@ -1,9 +1,9 @@
 # Awesome Gemini Robotics 2.0
 
 [![Maintained By: Pruthvi Geedh](https://img.shields.io/badge/Maintained%20By-Pruthvi%20Geedh-4285F4?style=flat-square&logo=github)](https://github.com/pgeedh)
-[![Model: Gemini Robotics ER 2 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
+[![Model: Gemini Robotics ER 2.0 & VLA 2.0](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202.0%20%7C%20VLA%202.0-blue?style=flat-square)](https://aistudio.google.com/)
 [![ROS 2: Humble / Iron / Jazzy](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=flat-square&logo=ros)](./ros2_gemini_bridge)
-[![Benchmarks: Official DeepMind ER 2](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202-green?style=flat-square)](./BENCHMARKS.md)
+[![Benchmarks: Official DeepMind ER 2.0](https://img.shields.io/badge/Benchmarks-Official%20DeepMind%20ER%202.0-green?style=flat-square)](./BENCHMARKS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 **Languages:** **English** | [日本語 (Japanese)](./README_ja.md) | [中文 (Chinese)](./README_zh.md) | [한국어 (Korean)](./README_kr.md) | [Tiếng Việt (Vietnamese)](./README_vn.md)
@@ -12,10 +12,10 @@
 
 ### Overview
 
-A curated, community-maintained developer gallery of **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning)**, and **Gemini Robotics 2 (Vision-Language-Action / VLA)** prompt patterns, structured JSON schemas, Python SDK snippets, and ROS 2 execution nodes for physical AI and embodied robotics pipelines.
+A curated, community-maintained developer gallery of **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2.0 (Embodied Reasoning)**, and **Gemini Robotics 2.0 (Vision-Language-Action / VLA)** prompt patterns, structured JSON schemas, Python SDK snippets, and ROS 2 execution nodes for physical AI and embodied robotics pipelines.
 
 Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
-1. **Planner / Embodied Reasoning (Gemini Robotics ER 2):** High-level spatial perception, metric 3D bounding, long-horizon task planning, continuous video slip/anomaly tracking, and agentic tool use.
+1. **Planner / Embodied Reasoning (Gemini Robotics ER 2.0):** High-level spatial perception, metric 3D bounding, long-horizon task planning, continuous video slip/anomaly tracking, and agentic tool use.
 2. **Motor Control / Execution Policy (Gemini Robotics 2 VLA & On-Device 2):** High-frequency (20Hz+) direct joint and Cartesian action generation for humanoids, manipulators, and mobile platforms without stop-and-think latency.
 
 ---
@@ -35,7 +35,7 @@ Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
   - [7. Agentic Tool Use and Multi-Robot Fleet Coordination (Cards 26–29)](#7-agentic-tool-use-and-multi-robot-fleet-coordination)
   - [8. Vision-Language-Action (VLA) Motor Control (Cards 30–31)](#8-vision-language-action-vla-motor-control)
 - [Official DeepMind Robotics Demonstrations](#official-deepmind-robotics-demonstrations)
-- [Official DeepMind Benchmarks (Gemini Robotics ER 2)](#official-deepmind-benchmarks)
+- [Official DeepMind Benchmarks (Gemini Robotics ER 2.0)](#official-deepmind-benchmarks)
 - [ROS 2 Bridge Integration](#ros-2-bridge-integration-ros2_gemini_bridge)
 - [Embodied Reasoning Principles](#embodied-reasoning-principles)
 - [Interactive Suite CLI and Testing](#interactive-suite-cli-and-testing)
@@ -802,9 +802,9 @@ Direct demonstrations from Google DeepMind's official [Gemini Robotics 2 and Emb
 
 </div>
 
-### Summary Table: Gemini Robotics ER 2 vs SOTA
+### Summary Table: Gemini Robotics ER 2.0 vs SOTA
 
-| Benchmark Evaluation Metric | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
+| Benchmark Evaluation Metric | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Success Detection (Image-Based)** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |
 | **Success Detection (Video-Based)** | 81.0% | 74.7% | 76.0% | 75.4% | **82.4%** |

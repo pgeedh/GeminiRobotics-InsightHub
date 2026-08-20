@@ -13,7 +13,7 @@
     <text x="265" y="4">Gemini Robotics ER 1.6</text>
     
     <circle cx="450" cy="0" r="7" fill="#1D4ED8" />
-    <text x="465" y="4" font-weight="700" fill="#1D4ED8">Gemini Robotics ER 2</text>
+    <text x="465" y="4" font-weight="700" fill="#1D4ED8">Gemini Robotics ER 2.0</text>
   </g>
   
   <!-- Grid lines -->
