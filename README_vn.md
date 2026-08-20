@@ -22,6 +22,8 @@ Gemini Robotics 2.0 hoạt động theo **Kiến trúc Phân tầng Kép**:
 
 ## Mục lục
 
+- [Hướng dẫn sử dụng Playbook](#hướng-dẫn-sử-dụng-playbook)
+- [Các bài kiểm tra thực hành Cookbook (`cookbook/`)](#các-bài-kiểm-tra-thực-hành-cookbook-cookbook)
 - [Bắt đầu nhanh (`google-genai` SDK v1.x)](#bắt-đầu-nhanh)
 - [Thư viện 35 Thẻ Prompt Ứng Dụng](#thư-viện-35-thẻ-prompt-ứng-dụng)
   - [1. Định vị không gian & Điểm trỏ 2D/3D](#1-định-vị-không-gian--điểm-trỏ-2d3d)
@@ -37,6 +39,29 @@ Gemini Robotics 2.0 hoạt động theo **Kiến trúc Phân tầng Kép**:
 - [Tích hợp cầu nối ROS 2](#tích-hợp-cầu-nối-ros-2)
 - [5 Quy tắc vàng cho Suy luận thể nhập](#5-quy-tắc-vàng-cho-suy-luận-thể-nhập)
 - [Đóng góp](#đóng-góp)
+
+---
+
+## Hướng dẫn sử dụng Playbook
+
+1. **Giao diện dòng lệnh tương tác (`python cli.py`):** Khởi chạy bộ CLI để kiểm tra 35 thẻ prompt và 6 công thức thực hành theo thời gian thực.
+2. **Các công thức Cookbook dạng module (`cookbook/`):** Chạy các tệp script Python độc lập để thử nghiệm nhận thức 3D, lập kế hoạch tư thế, theo dõi trượt qua video và quản trị an toàn.
+3. **Sandbox thử nghiệm tùy chỉnh (`python cookbook/interactive_sandbox.py`):** Nhập ảnh bất kỳ từ camera hoặc câu lệnh tùy chỉnh để đánh giá kết quả mô hình.
+4. **Tích hợp ROS 2 (`ros2_gemini_bridge`):** Kết nối trực tiếp các topic camera robot với các node nhận thức và lập kế hoạch.
+
+---
+
+## Các bài kiểm tra thực hành Cookbook (`cookbook/`)
+
+| Bài thực hành / Recipe | Tệp mã nguồn | Mô tả | Lệnh chạy nhanh |
+| :--- | :--- | :--- | :--- |
+| **1. Nhận thức không gian & Gắp 6DoF** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | Điểm trỏ 2D, hộp bao 3D theo mét và vector pháp tuyến. | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. Kế hoạch động học toàn thân** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Chọn tư thế ngồi xổm Pydantic và chuỗi tránh va chạm. | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. Theo dõi trượt & Bất thường video** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | Suy luận tiếp xúc chuỗi video và điều chỉnh vòng kín. | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. Quản trị an toàn ASIMOV** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | Thực thi tiêu chuẩn ISO/TS 15066 và tự động từ chối lệnh. | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. Phối hợp hạm đội robot** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | Đồng bộ hạm đội không đồng nhất với rào chắn chờ. | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. Khối hành động VLA 20Hz** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | Tạo khối hành động điều khiển 7DoF tần số 20Hz. | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **Sandbox tương tác** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | Bộ khung kiểm thử tương tác với ảnh và prompt tùy chọn. | `python cookbook/interactive_sandbox.py` |
 
 ---
 

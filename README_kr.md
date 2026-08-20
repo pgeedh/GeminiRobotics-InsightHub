@@ -22,6 +22,8 @@ Gemini Robotics 2.0 은 **계층적 이중 모델 아키텍처**로 동작합니
 
 ## 목차
 
+- [플레이북 활용 가이드](#플레이북-활용-가이드)
+- [쿡북 실전 테스트 트랙 (`cookbook/`)](#쿡북-실전-테스트-트랙-cookbook)
 - [빠른 시작 (`google-genai` SDK v1.x)](#빠른-시작)
 - [핵심 활용 사례 및 프롬프트 갤러리 (35개 카드)](#핵심-활용-사례-및-프롬프트-갤러리-35개-카드)
   - [1. 공간 인식 및 2D/3D 포인팅](#1-공간-인식-및-2d3d-포인팅)
@@ -37,6 +39,29 @@ Gemini Robotics 2.0 은 **계층적 이중 모델 아키텍처**로 동작합니
 - [ROS 2 브리지 연동](#ros-2-브리지-연동)
 - [체화된 추론을 위한 5대 황금 법칙](#체화된-추론을-위한-5대-황금-법칙)
 - [기여 안내](#기여-안내)
+
+---
+
+## 플레이북 활용 가이드
+
+1. **대화형 터미널 대시보드 (`python cli.py`):** 35개 프롬프트 카드 및 6대 쿡북 레시피를 실시간으로 테스트.
+2. **모듈식 쿡북 레시피 (`cookbook/`):** 공간 인식, 전신 자세, 비디오 슬립 감지, 안전 정책, 다중 로봇 협업 독립 실행.
+3. **커스텀 테스트 샌드박스 (`python cookbook/interactive_sandbox.py`):** 임의의 이미지 및 커스텀 프롬프트를 즉시 평가.
+4. **ROS 2 브리지 연동 (`ros2_gemini_bridge`):** 로봇 카메라 토픽을 직접 Gemini 인식 및 계획 노드에 연결.
+
+---
+
+## 쿡북 실전 테스트 트랙 (`cookbook/`)
+
+| 트랙 / 레시피 | 레시피 파일 | 설명 | 빠른 실행 명령어 |
+| :--- | :--- | :--- | :--- |
+| **1. 공간 인식 & 6DoF 파지** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2D 포인팅, 3D 미터법 볼륨, 접근 법선 벡터. | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. 기구학적 과업 계획** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic 전신 자세 선택 및 무충돌 순서 생성. | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. 비디오 슬립 & 이상 감지** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 연속 프레임 접촉 분석 및 폐루프 보정. | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV 안전 거버넌스** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066 안전 기준 강제 및 자율 거부. | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. 다중 로봇 협업** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 명시적 대기 배리어를 통한 이종 로봇 스케줄링. | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA 동작 청킹** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz 연속 7DoF 모터 동작 청크 생성. | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **대화형 샌드박스** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 임의 이미지 및 프롬프트 테스트 하네스. | `python cookbook/interactive_sandbox.py` |
 
 ---
 

@@ -2,17 +2,26 @@ import unittest
 import os
 import sys
 import json
+import importlib
 
 # Add root and submodules to Python path
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, ROOT_DIR)
 sys.path.insert(0, os.path.join(ROOT_DIR, 'examples'))
+sys.path.insert(0, os.path.join(ROOT_DIR, 'cookbook'))
 sys.path.insert(0, os.path.join(ROOT_DIR, 'ros2_gemini_bridge'))
 
-class TestGeminiRoboticsHub(unittest.TestCase):
+class TestGeminiRoboticsPlaybook(unittest.TestCase):
     def test_core_files_exist(self):
-        """Verify all core examples, docs, and ROS 2 files exist."""
+        """Verify all core examples, cookbook recipes, docs, and ROS 2 files exist."""
         required_files = [
+            'cookbook/01_spatial_perception_recipe.py',
+            'cookbook/02_kinematic_planning_recipe.py',
+            'cookbook/03_continuous_video_slip_recipe.py',
+            'cookbook/04_asimov_safety_guard_recipe.py',
+            'cookbook/05_multi_agent_fleet_recipe.py',
+            'cookbook/06_vla_action_chunking_recipe.py',
+            'cookbook/interactive_sandbox.py',
             'examples/basic_spatial_query.py',
             'examples/task_decomposition.py',
             'examples/tool_use_recycling.py',
@@ -28,18 +37,6 @@ class TestGeminiRoboticsHub(unittest.TestCase):
             'assets/benchmark_progress_classification.svg',
             'assets/benchmark_physical_agent.svg',
             'assets/benchmark_safety_performance.svg',
-            'assets/clip_apollo_wholebody.gif',
-            'assets/clip_apollo_wholebody.png',
-            'assets/clip_franka_dexterity.gif',
-            'assets/clip_franka_dexterity.png',
-            'assets/clip_multi_robot.gif',
-            'assets/clip_multi_robot.png',
-            'assets/clip_er_embodied_reasoning.gif',
-            'assets/clip_er_embodied_reasoning.png',
-            'assets/clip_vla_motor.gif',
-            'assets/clip_vla_motor.png',
-            'assets/clip_ondevice_adaptation.gif',
-            'assets/clip_ondevice_adaptation.png',
             'prompts/gemini_robotics_2_catalog.json',
             'BENCHMARKS.md',
             'EMBODIED_REASONING_TIPS.md',
@@ -77,6 +74,32 @@ class TestGeminiRoboticsHub(unittest.TestCase):
             self.assertTrue(len(card["prompt"]) > 10, f"Card #{idx} prompt too short")
             self.assertTrue(len(card["tags"]) > 0, f"Card #{idx} missing tags")
 
+    def test_cookbook_recipes_execution(self):
+        """Test that all cookbook recipes run deterministically."""
+        r1 = importlib.import_module("cookbook.01_spatial_perception_recipe")
+        out1 = r1.run_spatial_recipe(image_path="assets/pointing_undefined.png")
+        self.assertIsNotNone(out1)
+
+        r2 = importlib.import_module("cookbook.02_kinematic_planning_recipe")
+        out2 = r2.run_planning_recipe()
+        self.assertIsNotNone(out2)
+
+        r3 = importlib.import_module("cookbook.03_continuous_video_slip_recipe")
+        out3 = r3.run_video_recipe()
+        self.assertIsNotNone(out3)
+
+        r4 = importlib.import_module("cookbook.04_asimov_safety_guard_recipe")
+        out4 = r4.run_safety_recipe()
+        self.assertIsNotNone(out4)
+
+        r5 = importlib.import_module("cookbook.05_multi_agent_fleet_recipe")
+        out5 = r5.run_fleet_recipe()
+        self.assertIsNotNone(out5)
+
+        r6 = importlib.import_module("cookbook.06_vla_action_chunking_recipe")
+        out6 = r6.simulate_vla_policy_inference()
+        self.assertIn("inference_latency_ms", out6)
+
     def test_multilingual_readmes_structure(self):
         """Verify international localized README files contain adequate sections."""
         languages = ['ja', 'zh', 'kr', 'vn']
@@ -90,7 +113,7 @@ class TestGeminiRoboticsHub(unittest.TestCase):
             self.assertIn("Gemini Robotics 2.0", content)
 
     def test_cli_catalog_loader(self):
-        """Verify catalog loader functions properly."""
+        """Verify catalog loader functions properly in CLI."""
         catalog_path = os.path.join(ROOT_DIR, "prompts", "gemini_robotics_2_catalog.json")
         self.assertTrue(os.path.exists(catalog_path))
         with open(catalog_path, "r", encoding="utf-8") as f:

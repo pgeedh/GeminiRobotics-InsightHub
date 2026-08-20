@@ -22,6 +22,8 @@ Gemini Robotics 2.0 は**階層的デュアルモデル・アーキテクチャ*
 
 ## 目次
 
+- [本プレイブックの使い方](#本プレイブックの使い方)
+- [クックブック・テストトラック (`cookbook/`)](#クックブックテストトラック-cookbook)
 - [クイックスタート (`google-genai` SDK v1.x)](#クイックスタート)
 - [ユースケース＆プロンプトギャラリー（35カード）](#ユースケースプロンプトギャラリー35カード)
   - [1. 空間認識・2D/3Dポインティング](#1-空間認識2d3dポインティング)
@@ -37,6 +39,29 @@ Gemini Robotics 2.0 は**階層的デュアルモデル・アーキテクチャ*
 - [ROS 2 ブリッジ統合](#ros-2-ブリッジ統合)
 - [身体化推論のための5大原則](#身体化推論のための5大原則)
 - [コントリビューション](#コントリビューション)
+
+---
+
+## 本プレイブックの使い方
+
+1. **対話型ターミナルダッシュボード (`python cli.py`):** 全35枚のプロンプトカードと6つのクックブックレシピをリアルタイムで対話テスト。
+2. **モジュール式クックブックレシピ (`cookbook/`):** 空間認識、全身姿勢、動画滑り検知、安全ガバナー、複数ロボット協調をスタンドアロンPythonスクリプトでテスト。
+3. **カスタムテストサンドボックス (`python cookbook/interactive_sandbox.py`):** 任意の画像やカスタムプロンプトを入力して即時評価。
+4. **ROS 2 統合 (`ros2_gemini_bridge`):** 実機・シミュレーションのカメラトピックを直接ノードに接続。
+
+---
+
+## クックブック・テストトラック (`cookbook/`)
+
+| トラック / レシピ | レシピファイル | 説明 | 実行コマンド |
+| :--- | :--- | :--- | :--- |
+| **1. 空間認識＆6DoF把持** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2Dポインティング、3Dメトリック体積、進入法線ベクトル。 | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. 運動学的タスク計画** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic構造化全身姿勢選択および衝突回避順序。 | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. 動画滑り＆異常追跡** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 連続フレーム接触力学、滑り検知、閉ループ補正。 | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV安全ガバナー** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066安全基準遵守と自律拒否。 | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. 複数ロボット協調** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 明示的待機バリアによる異種ロボット協調。 | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA動作チャンキング** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz連続7DoFモータ動作チャンク生成。 | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **対話型サンドボックス** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 任意画像・カスタムプロンプト評価ハーネス。 | `python cookbook/interactive_sandbox.py` |
 
 ---
 

@@ -22,6 +22,8 @@ Gemini Robotics 2.0 采用**分层双模型架构**：
 
 ## 目录
 
+- [如何使用本开发实战手册](#如何使用本开发实战手册)
+- [Cookbook 实战测试轨道 (`cookbook/`)](#cookbook-实战测试轨道-cookbook)
 - [快速上手 (`google-genai` SDK v1.x)](#快速上手)
 - [核心应用场景与提示词画廊（35个卡片）](#核心应用场景与提示词画廊35个卡片)
   - [1. 空间定位与 2D/3D 指向](#1-空间定位与-2d3d-指向)
@@ -37,6 +39,29 @@ Gemini Robotics 2.0 采用**分层双模型架构**：
 - [ROS 2 桥接节点集成](#ros-2-桥接节点集成)
 - [具身推理五大黄金法则](#具身推理五大黄金法则)
 - [贡献指南](#贡献指南)
+
+---
+
+## 如何使用本开发实战手册
+
+1. **交互式终端测试面板 (`python cli.py`):** 启动命令行交互套件，一键测试35个提示词卡片与6大实战配方。
+2. **模块化 Cookbook 配方 (`cookbook/`):** 包含空间感知、全身姿态、视频滑移检测、安全监管与多机器人协同独立脚本。
+3. **自定义测试沙盒 (`python cookbook/interactive_sandbox.py`):** 允许传入任意图像或自定义提示词进行快速测试。
+4. **ROS 2 桥接集成 (`ros2_gemini_bridge`):** 直接对接机器人相机话题与规划控制节点。
+
+---
+
+## Cookbook 实战测试轨道 (`cookbook/`)
+
+| 测试轨道 / 配方 | 配方文件 | 说明 | 快速执行命令 |
+| :--- | :--- | :--- | :--- |
+| **1. 空间感知与 6DoF 抓取** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2D指向、3D米级度量框与接近法向量。 | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. 运动学任务规划** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic全身姿态选择与无碰撞序列生成。 | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. 视频滑移与异常追踪** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | 连续视频时序接触分析与闭环补偿。 | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV 安全监管** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066安全策略强制执行与自主拒绝。 | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. 多机器人协同** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | 异构机器人显式等待屏障协同调度。 | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA 动作块生成** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz连续7DoF电机动作块生成与延迟测试。 | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **交互式沙盒** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | 任意图像与自定义提示词交互式测试套件。 | `python cookbook/interactive_sandbox.py` |
 
 ---
 

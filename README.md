@@ -22,6 +22,8 @@ Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
 
 ## Contents
 
+- [How to Use This Playbook](#how-to-use-this-playbook)
+- [Cookbook Testing Tracks (`cookbook/`)](#cookbook-testing-tracks-cookbook)
 - [Quick Start (`google-genai` SDK v1.x)](#quick-start)
 - [Use Cases and Prompt Gallery (35 Cards)](#use-cases-and-prompt-gallery-35-cards)
   - [1. Spatial Grounding and 2D/3D Pointing (Cards 1–7)](#1-spatial-grounding-and-2d3d-pointing)
@@ -39,6 +41,31 @@ Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
 - [Embodied Reasoning Principles](#embodied-reasoning-principles)
 - [Interactive Suite CLI and Testing](#interactive-suite-cli-and-testing)
 - [Contributing](#contributing)
+
+---
+
+## How to Use This Playbook
+
+This repository serves as a modular playbook and practical cookbook for testing, benchmarking, and integrating Google DeepMind's Gemini Robotics physical AI models:
+
+1. **Interactive Terminal Dashboard (`python cli.py`):** Launch the interactive CLI to test all 35 prompt cards and 6 cookbook recipes with live inference or grounded offline telemetry.
+2. **Modular Cookbook Recipes (`cookbook/`):** Run standalone Python recipes to test specific capabilities (spatial perception, whole-body posture, video slip tracking, safety governor, fleet orchestration).
+3. **Custom Testing Sandbox (`python cookbook/interactive_sandbox.py`):** Provide any custom camera image or text query to immediately test and evaluate model outputs.
+4. **ROS 2 Integration (`ros2_gemini_bridge`):** Connect robot camera topics directly to Gemini perception and planning nodes.
+
+---
+
+## Cookbook Testing Tracks (`cookbook/`)
+
+| Track / Recipe | Recipe File | Description | Quick Execution |
+| :--- | :--- | :--- | :--- |
+| **1. Spatial Perception & 6DoF Grasping** | [`cookbook/01_spatial_perception_recipe.py`](./cookbook/01_spatial_perception_recipe.py) | 2D pointing, 3D metric bounding boxes, and approach vectors. | `python cookbook/01_spatial_perception_recipe.py` |
+| **2. Kinematic Task Planning** | [`cookbook/02_kinematic_planning_recipe.py`](./cookbook/02_kinematic_planning_recipe.py) | Pydantic whole-body stance selection and collision-free sequences. | `python cookbook/02_kinematic_planning_recipe.py` |
+| **3. Video Slip & Anomaly Tracking** | [`cookbook/03_continuous_video_slip_recipe.py`](./cookbook/03_continuous_video_slip_recipe.py) | Temporal contact reasoning, slip detection, and closed-loop trims. | `python cookbook/03_continuous_video_slip_recipe.py` |
+| **4. ASIMOV Safety Governor** | [`cookbook/04_asimov_safety_guard_recipe.py`](./cookbook/04_asimov_safety_guard_recipe.py) | ISO/TS 15066 safety policy enforcement and proactive refusal. | `python cookbook/04_asimov_safety_guard_recipe.py` |
+| **5. Multi-Agent Fleet Sync** | [`cookbook/05_multi_agent_fleet_recipe.py`](./cookbook/05_multi_agent_fleet_recipe.py) | Heterogeneous fleet synchronization with explicit wait barriers. | `python cookbook/05_multi_agent_fleet_recipe.py` |
+| **6. 20Hz VLA Action Chunking** | [`cookbook/06_vla_action_chunking_recipe.py`](./cookbook/06_vla_action_chunking_recipe.py) | 20Hz continuous 7DoF motor action chunk generation. | `python cookbook/06_vla_action_chunking_recipe.py` |
+| **Interactive Sandbox** | [`cookbook/interactive_sandbox.py`](./cookbook/interactive_sandbox.py) | Interactive CLI test harness for custom images and prompts. | `python cookbook/interactive_sandbox.py` |
 
 ---
 

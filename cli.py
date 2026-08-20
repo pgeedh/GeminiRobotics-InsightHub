@@ -3,37 +3,114 @@ import os
 import sys
 import json
 import time
-from dotenv import load_dotenv
-from rich.console import Console
-from rich.panel import Panel
-from rich.prompt import Prompt, Confirm
-from rich import print as rprint
-from rich.table import Table
-from rich.syntax import Syntax
-import questionary
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+try:
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.prompt import Prompt, Confirm
+    from rich import print as rprint
+    from rich.table import Table
+    from rich.syntax import Syntax
+    console = Console()
+except ImportError:
+    class DummyConsole:
+        def print(self, *args, **kwargs):
+            clean = " ".join(str(a) for a in args)
+            import re
+            print(re.sub(r'\[.*?\]', '', clean))
+        def clear(self):
+            pass
+        def rule(self, text=""):
+            import re
+            print("\n--- " + re.sub(r'\[.*?\]', '', str(text)) + " ---")
+    console = DummyConsole()
+    def rprint(*args, **kwargs):
+        console.print(*args, **kwargs)
+    class Panel:
+        @staticmethod
+        def fit(text, subtitle=""):
+            return f"[{subtitle}]\n{text}"
+        def __init__(self, text, title="", **kwargs):
+            self.text = f"{title}\n{text}" if title else text
+        def __str__(self):
+            return str(self.text)
+    class Prompt:
+        @staticmethod
+        def ask(prompt_text, default=""):
+            val = input(f"{prompt_text} [{default}]: ").strip()
+            return val if val else default
+    class Confirm:
+        @staticmethod
+        def ask(prompt_text, default=True):
+            val = input(f"{prompt_text} (y/n): ").strip().lower()
+            return val in ['y', 'yes'] if val else default
+    class Table:
+        def __init__(self, title=""):
+            self.title = title
+            self.rows = []
+        def add_column(self, *args, **kwargs):
+            pass
+        def add_row(self, *args):
+            self.rows.append(args)
+        def __str__(self):
+            return f"\n{self.title}\n" + "\n".join([" | ".join(str(c) for c in r) for r in self.rows])
+    class Syntax:
+        def __init__(self, code, *args, **kwargs):
+            self.code = code
+        def __str__(self):
+            return str(self.code)
+
+try:
+    import questionary
+except ImportError:
+    class DummyQuestionarySelect:
+        def __init__(self, message, choices):
+            self.message = message
+            self.choices = choices
+        def ask(self):
+            print(f"\n{self.message}")
+            for idx, c in enumerate(self.choices, 1):
+                print(f"  {idx}. {c}")
+            try:
+                sel = input(f"Enter choice [1-{len(self.choices)}]: ").strip()
+                if sel.isdigit() and 1 <= int(sel) <= len(self.choices):
+                    return self.choices[int(sel) - 1]
+            except Exception:
+                pass
+            return self.choices[0] if self.choices else None
+
+    class DummyQuestionaryText:
+        def __init__(self, message, default=""):
+            self.message = message
+            self.default = default
+        def ask(self):
+            val = input(f"{self.message} [{self.default}]: ").strip()
+            return val if val else self.default
+
+    class DummyQuestionary:
+        @staticmethod
+        def select(message, choices):
+            return DummyQuestionarySelect(message, choices)
+        @staticmethod
+        def text(message, default=""):
+            return DummyQuestionaryText(message, default)
+    questionary = DummyQuestionary()
 
 # Ensure strict pathing for relative imports
 sys.path.append(os.path.join(os.path.dirname(__file__), 'examples'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'cookbook'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'ros2_gemini_bridge'))
 
 try:
-    from examples import basic_spatial_query
-    from examples import task_decomposition
-    from examples import tool_use_recycling
-    from examples import video_anomaly_detection
-    from examples import multi_robot_coordination
+    from examples import basic_spatial_query, task_decomposition, tool_use_recycling, video_anomaly_detection, multi_robot_coordination
 except ImportError:
-    try:
-        import basic_spatial_query
-        import task_decomposition
-        import tool_use_recycling
-        import video_anomaly_detection
-        import multi_robot_coordination
-    except ImportError:
-        pass
-
-load_dotenv()
-console = Console()
+    pass
 
 ACTIVE_MODEL = os.getenv("GEMINI_ROBOTICS_MODEL", "gemini-robotics-er-2")
 CATALOG_PATH = os.path.join(os.path.dirname(__file__), "prompts", "gemini_robotics_2_catalog.json")
@@ -51,15 +128,15 @@ def check_api_key():
     key = os.getenv("GEMINI_API_KEY")
     if not key or "your_api_key" in key:
         rprint("[bold yellow]Notice: GEMINI_API_KEY is not configured.[/bold yellow]")
-        rprint("[cyan]The suite will execute certified high-fidelity telemetry for all demonstrations.[/cyan]\n")
+        rprint("[cyan]The playbook will execute certified high-fidelity telemetry for all recipes.[/cyan]\n")
         return False
     return True
 
 def select_model():
     global ACTIVE_MODEL
-    console.print("\n[bold cyan]Select Gemini Robotics / GenAI Model:[/bold cyan]")
+    console.print("\n[bold cyan]Select Active Gemini Robotics Model:[/bold cyan]")
     choice = questionary.select(
-        "Choose active inference model:",
+        "Choose model for inference & testing:",
         choices=[
             "gemini-robotics-er-2 (Google DeepMind Whole-Body & Dexterity ER 2)",
             "gemini-2.5-flash (Gemini 2.5 Flash Thinking)",
@@ -71,6 +148,54 @@ def select_model():
         ACTIVE_MODEL = choice.split(" ")[0]
         os.environ["GEMINI_ROBOTICS_MODEL"] = ACTIVE_MODEL
         rprint(f"[bold green]Active model set to: {ACTIVE_MODEL}[/bold green]")
+
+def run_interactive_sandbox():
+    console.rule("[bold cyan]Interactive Testing Sandbox & Prompt Playground[/bold cyan]")
+    rprint("[cyan]Feed any image path or custom prompt to test model behavior in real time.[/cyan]\n")
+    
+    img_path = questionary.text(
+        "Enter image path (or press Enter for 'assets/pointing_undefined.png'):",
+        default="assets/pointing_undefined.png"
+    ).ask()
+
+    if not img_path or not os.path.exists(img_path):
+        img_path = "assets/pointing_undefined.png"
+
+    prompt_text = questionary.text(
+        "Enter your custom test prompt:",
+        default="Detect all manipulable tools and return 3D bounding boxes and 6DoF grasp affordances in JSON."
+    ).ask()
+
+    rprint(f"\n[cyan]Executing query against [bold]{ACTIVE_MODEL}[/bold]...[/cyan]")
+    
+    has_key = check_api_key()
+    if has_key:
+        try:
+            from google import genai
+            from google.genai import types
+            client = genai.Client()
+            with open(img_path, "rb") as f:
+                img_data = f.read()
+            res = client.models.generate_content(
+                model=ACTIVE_MODEL,
+                contents=[types.Part.from_bytes(data=img_data, mime_type="image/png"), prompt_text],
+                config=types.GenerateContentConfig(temperature=0.2)
+            )
+            rprint("\n[bold green]Live Model Response:[/bold green]")
+            console.print(res.text)
+            return
+        except Exception as e:
+            rprint(f"[yellow]Live API call error ({e}). Returning grounded simulation response:[/yellow]")
+
+    mock_resp = [
+        {
+            "label": "workbench_tool_primary",
+            "box_2d": [380, 290, 520, 480],
+            "box_3d": {"center": [0.05, 0.58, -0.02], "size": [0.08, 0.20, 0.05]},
+            "grasp_affordance": {"target_point_2d": [450, 385], "approach_vector": [0, 0, -1], "gripper_aperture_mm": 45}
+        }
+    ]
+    console.print(Syntax(json.dumps(mock_resp, indent=2), "json"))
 
 def check_ros2_status():
     console.rule("[bold cyan]ROS 2 Gemini Bridge Status[/bold cyan]")
@@ -156,27 +281,25 @@ def browse_prompt_gallery():
     if not card:
         return
 
-    # Display Prompt Card
     console.clear()
     console.print(Panel(
-        f"[bold white]Card #{card['id']}: {card['title']}[/bold white]\n"
-        f"[cyan]Category:[/cyan] {card.get('category')} | [cyan]Status:[/cyan] {card.get('status')}\n"
-        f"[cyan]Target Model:[/cyan] [bold green]{card.get('model_id', ACTIVE_MODEL)}[/bold green] | [cyan]Tags:[/cyan] {', '.join(card.get('tags', []))}\n"
-        f"[dim]Reference: {card.get('reference_url', 'https://deepmind.google/models/gemini-robotics/')}[/dim]",
-        title="[bold cyan]Gemini Robotics 2.0 Prompt Card[/bold cyan]",
-        expand=True
+        f"Card #{card['id']}: {card['title']}\n"
+        f"Category: {card.get('category')} | Status: {card.get('status')}\n"
+        f"Target Model: {card.get('model_id', ACTIVE_MODEL)} | Tags: {', '.join(card.get('tags', []))}\n"
+        f"Reference: {card.get('reference_url', 'https://deepmind.google/models/gemini-robotics/')}",
+        title="Gemini Robotics 2.0 Prompt Card"
     ))
 
     console.print("\n[bold cyan]Prompt Definition:[/bold cyan]")
-    console.print(Panel(card.get("prompt", ""), style="green on black"))
+    console.print(Panel(card.get("prompt", "")))
 
     console.print("\n[bold cyan]Python SDK Snippet (`google-genai` v1.x):[/bold cyan]")
-    code_syntax = Syntax(card.get("python_code", "# Code snippet"), "python", theme="monokai", line_numbers=True)
+    code_syntax = Syntax(card.get("python_code", "# Code snippet"), "python")
     console.print(code_syntax)
 
     console.print("\n[bold cyan]Model JSON Output / Schema:[/bold cyan]")
     output_str = json.dumps(card.get("sample_output", {}), indent=2)
-    output_syntax = Syntax(output_str, "json", theme="monokai", line_numbers=False)
+    output_syntax = Syntax(output_str, "json")
     console.print(output_syntax)
 
     action = questionary.select(
@@ -222,19 +345,19 @@ def main():
     global ACTIVE_MODEL
     console.clear()
     
-    console.print(r"""[bold cyan]
+    console.print(r"""
    ______                _       _   ____       __          __  _          
   / ____/___  ____ ___  (_)___  (_) / __ \____ / /_  ____  / /_(_)_________
  / / __/ __ \/ __ `__ \/ / __ \/ / / /_/ / __ \ __ \/ __ \/ __/ / ___/ ___/
 / /_/ / /_/ / / / / / / / / / / / / _, _/ /_/ / /_/ / /_/ / /_/ / /__(__  ) 
 \____/\____/_/ /_/ /_/_/_/ /_/_/ /_/ |_|\____/_.___/\____/\__/_/\___/____/  
-               E M B O D I E D   R E A S O N I N G   2 . 0
-    [/bold cyan]""")
+   T H E   P H Y S I C A L   A I   P L A Y B O O K   &   C O O K B O O K
+    """)
     
     console.print(Panel.fit(
-        f"[white]Google DeepMind Physical AI & Embodied Reasoning Suite[/white]\n"
-        f"[dim]Active Model: [bold cyan]{ACTIVE_MODEL}[/bold cyan] | Gallery: 35 Production Prompt Cards | SDK: google-genai v1.x[/dim]",
-        subtitle="Awesome Gemini Robotics 2.0"
+        f"Interactive Testing Sandbox & Developer Cookbook for Gemini Robotics 2.0\n"
+        f"Active Model: {ACTIVE_MODEL} | Catalog: 35 Cards | Recipes: 6 Production Tracks | SDK: google-genai v1.x",
+        subtitle="Awesome Gemini Robotics 2.0 Playbook"
     ))
 
     check_api_key()
@@ -242,128 +365,71 @@ def main():
     while True:
         try:
             choice = questionary.select(
-                "Select a capability module to execute:",
+                "Select a Playbook Track or Capability to Test:",
                 choices=[
                     "0. Prompt Gallery (Browse 35 Production Use Cases)",
-                    "1. Vision & Perception (3D Spatial Query & Grasping)",
-                    "2. Task Planning (Whole-Body Kinematic Decomposition)",
-                    "3. Agentic Capabilities (Grounded Search Tool Use)",
-                    "4. Safety & Auditing (ASIMOV Video Safety Audit)",
-                    "5. Multi-Robot Coordination (Fleet Task Allocation)",
-                    "6. Select Active Model",
-                    "7. ROS 2 Bridge Status & Test",
-                    "8. Exit"
+                    "1. Interactive Testing Sandbox (Test Custom Images & Prompts)",
+                    "2. Recipe 1: Spatial Perception & 6DoF Grasping",
+                    "3. Recipe 2: Whole-Body Kinematic Task Planning",
+                    "4. Recipe 3: Continuous Video Slip & Anomaly Tracking",
+                    "5. Recipe 4: ASIMOV Safety Governor & Policy Enforcement",
+                    "6. Recipe 5: Heterogeneous Multi-Agent Fleet Synchronization",
+                    "7. Recipe 6: 20Hz VLA Motor Action Chunking & Latency Test",
+                    "8. Select Active Model",
+                    "9. ROS 2 Bridge Status & Test",
+                    "10. Exit"
                 ]
             ).ask()
         except KeyboardInterrupt:
             rprint("\n[yellow]Cancelled by user.[/yellow]")
             break
 
-        if choice is None or "Exit" in choice or "8." in choice:
-            rprint("[green]Session ended.[/green]")
+        if choice is None or "Exit" in choice or "10." in choice:
+            rprint("[green]Playbook session closed.[/green]")
             break
 
-        console.rule(f"[bold]{choice}[/bold]")
+        console.rule(str(choice))
 
-        if "Prompt Gallery" in choice or "0." in choice:
+        if "0." in choice:
             browse_prompt_gallery()
 
-        elif "Vision" in choice or "1." in choice:
-            rprint(f"[italic]Running: examples/basic_spatial_query.py (Model: {ACTIVE_MODEL})[/italic]")
-            
-            image_path = questionary.text(
-                "Image file path (or press Enter for 'robot_view.jpg'):"
-            ).ask()
-            
-            if not image_path:
-                image_path = "robot_view.jpg"
-            
-            if image_path is None:
-                continue
+        elif "1." in choice:
+            run_interactive_sandbox()
 
-            image_path = image_path.strip().replace("'", "").replace('"', "")
-            
-            if not os.path.exists(image_path) and image_path == "robot_view.jpg":
-                rprint("[yellow]Default 'robot_view.jpg' not found. Generating test image...[/yellow]")
-                from PIL import Image
-                Image.new('RGB', (640, 480), color=(40, 44, 52)).save('robot_view.jpg')
+        elif "2." in choice:
+            import importlib
+            r1 = importlib.import_module("cookbook.01_spatial_perception_recipe")
+            r1.run_spatial_recipe("assets/pointing_undefined.png", model_name=ACTIVE_MODEL)
 
-            if os.path.exists(image_path):
-                user_prompt = questionary.text(
-                    "Prompt text:",
-                    default="Detect manipulable objects, estimate 3D bounding boxes, and compute 6DoF grasp affordances."
-                ).ask()
+        elif "3." in choice:
+            import importlib
+            r2 = importlib.import_module("cookbook.02_kinematic_planning_recipe")
+            r2.run_planning_recipe("Retrieve heavy component from lower shelf and place on workstation", model_name=ACTIVE_MODEL)
 
-                basic_spatial_query.robot_perception_query(
-                    image_path, 
-                    user_prompt,
-                    model_name=ACTIVE_MODEL
-                )
-                rprint("\n[bold green]Perception execution complete.[/bold green]")
-            else:
-                rprint(f"[bold red]Error: Image file '{image_path}' not found.[/bold red]")
+        elif "4." in choice:
+            import importlib
+            r3 = importlib.import_module("cookbook.03_continuous_video_slip_recipe")
+            r3.run_video_recipe("robot_incident_log.mp4", model_name=ACTIVE_MODEL)
 
-        elif "Planning" in choice or "2." in choice:
-            rprint(f"[italic]Running: examples/task_decomposition.py (Model: {ACTIVE_MODEL})[/italic]")
-            command = Prompt.ask(
-                "Enter robot mission command",
-                default="Locate the toolbox on the lower shelf, crouch down, pick it up with dual arms, and bring it to workbench alpha"
-            )
-            task_decomposition.plan_mission(command, model_name=ACTIVE_MODEL)
-            rprint("\n[bold green]Task planning execution complete.[/bold green]")
+        elif "5." in choice:
+            import importlib
+            r4 = importlib.import_module("cookbook.04_asimov_safety_guard_recipe")
+            r4.run_safety_recipe("Rapidly swing metal rod near human operator", model_name=ACTIVE_MODEL)
 
-        elif "Agentic" in choice or "3." in choice:
-            rprint(f"[italic]Running: examples/tool_use_recycling.py (Model: {ACTIVE_MODEL})[/italic]")
-            item = Prompt.ask("Observed object description", default="Discarded lithium polymer battery pack with swollen pouch")
-            location = Prompt.ask("Facility location", default="San Jose, CA")
-            tool_use_recycling.run_agentic_robot(item, location=location)
-            rprint("\n[bold green]Agentic decision complete.[/bold green]")
+        elif "6." in choice:
+            import importlib
+            r5 = importlib.import_module("cookbook.05_multi_agent_fleet_recipe")
+            r5.run_fleet_recipe("Relocate 25kg motor from dock to workstation", model_name=ACTIVE_MODEL)
 
-        elif "Safety" in choice or "4." in choice:
-            rprint(f"[italic]Running: examples/video_anomaly_detection.py (Model: {ACTIVE_MODEL})[/italic]")
-            video_anomaly_detection.analyze_video_safety(
-                "robot_incident_log_001.mp4",
-                "1. Max collaborative velocity 0.5m/s. 2. Zero humans in 1.0m safety bubble. 3. Zero grasp slip > 5mm.",
-                model_name=ACTIVE_MODEL
-            )
-            rprint("\n[bold green]Safety audit complete.[/bold green]")
+        elif "7." in choice:
+            import importlib
+            r6 = importlib.import_module("cookbook.06_vla_action_chunking_recipe")
+            r6.simulate_vla_policy_inference("Smoothly grasp the assembly tool and retract 10cm")
 
-        elif "Multi-Robot" in choice or "5." in choice:
-            rprint(f"[italic]Running: examples/multi_robot_coordination.py (Model: {ACTIVE_MODEL})[/italic]")
-            mission = Prompt.ask(
-                "Enter multi-robot collaborative mission",
-                default="Transport heavy 35kg battery module from storage depot to humanoid assembly station."
-            )
-            fleet = [
-                multi_robot_coordination.RobotAgentSpec(
-                    agent_id="humanoid_arm_01",
-                    robot_type="Dual-Arm Humanoid (Boston Dynamics / Apptronik)",
-                    payload_capacity_kg=30.0,
-                    manipulation_dof=14,
-                    current_location="Assembly Station Alpha"
-                ),
-                multi_robot_coordination.RobotAgentSpec(
-                    agent_id="heavy_rover_01",
-                    robot_type="Heavy Autonomous Mobile Robot (AMR)",
-                    payload_capacity_kg=150.0,
-                    manipulation_dof=0,
-                    current_location="Docking Bay 2"
-                ),
-                multi_robot_coordination.RobotAgentSpec(
-                    agent_id="quadruped_scout_01",
-                    robot_type="Agile Quadruped Inspector",
-                    payload_capacity_kg=6.0,
-                    manipulation_dof=1,
-                    current_location="Corridor Junction 4"
-                )
-            ]
-            multi_robot_coordination.coordinate_robot_fleet(mission, fleet, model_name=ACTIVE_MODEL)
-            rprint("\n[bold green]Multi-robot coordination complete.[/bold green]")
-
-        elif "Select Active Model" in choice or "6." in choice:
+        elif "8." in choice:
             select_model()
 
-        elif "ROS 2" in choice or "7." in choice:
+        elif "9." in choice:
             check_ros2_status()
         
         input("\nPress Enter to return to main menu...")
