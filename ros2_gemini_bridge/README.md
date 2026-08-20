@@ -1,6 +1,6 @@
 # ROS 2 Gemini Robotics Bridge (`ros2_gemini_bridge`)
 
-This package provides native **ROS 2 Humble / Iron / Jazzy** nodes connecting robotic sensor topics (cameras, RGB-D streams, goal commands) directly to Google DeepMind's **Gemini Robotics ER 2** and **ER 1.5** models.
+This package provides native **ROS 2 Humble / Iron / Jazzy** nodes connecting robotic sensor topics (cameras, RGB-D streams, goal commands) directly to Google DeepMind's **Gemini Robotics 2.0** and **Gemini Robotics ER 2** models.
 
 ---
 
@@ -19,7 +19,7 @@ This package provides native **ROS 2 Humble / Iron / Jazzy** nodes connecting ro
 ```bash
 # In your ROS 2 colcon workspace (e.g. ~/ros2_ws)
 cd ~/ros2_ws/src
-ln -s /path/to/GeminiRobotics_ER1.5-InsightHub/ros2_gemini_bridge .
+ln -s /path/to/ros2_gemini_bridge .
 cd ~/ros2_ws
 colcon build --packages-select ros2_gemini_bridge
 source install/setup.bash
@@ -28,7 +28,7 @@ source install/setup.bash
 ### 2. Configure Environment
 ```bash
 export GEMINI_API_KEY="your-gemini-api-key"
-export GEMINI_ROBOTICS_MODEL="gemini-robotics-er-2"  # or gemini-robotics-er-1.5-preview
+export GEMINI_ROBOTICS_MODEL="gemini-robotics-er-2"
 ```
 
 ### 3. Run Nodes
@@ -59,6 +59,6 @@ ros2 topic pub --once /gemini/goal_command std_msgs/msg/String "data: 'Find the 
 
 ### `gemini_planner_node`
 - **Subscribed**:
-  - `/gemini/goal_command` (`std_msgs/msg/String`) - High-level task command
+  - `/gemini/goal_command` (`std_msgs/msg/String`) - Natural language mission command
 - **Published**:
-  - `/gemini/execution_plan` (`std_msgs/msg/String`) - JSON structured multi-step plan
+  - `/gemini/execution_plan` (`std_msgs/msg/String`) - Decomposed plan JSON with ASIMOV safety checks

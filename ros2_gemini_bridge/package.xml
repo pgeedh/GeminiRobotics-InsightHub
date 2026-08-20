@@ -2,8 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>ros2_gemini_bridge</name>
-  <version>1.0.0</version>
-  <description>ROS 2 bridge nodes for Google DeepMind Gemini Robotics ER 2 and ER 1.5</description>
+  <version>2.0.0</version>
+  <description>ROS 2 bridge nodes for Google DeepMind Gemini Robotics 2.0 and Gemini Robotics ER 2</description>
   <maintainer email="pgeedh@users.noreply.github.com">Pruthvi Geedh</maintainer>
   <license>Apache-2.0</license>
 

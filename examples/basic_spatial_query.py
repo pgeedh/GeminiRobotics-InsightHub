@@ -7,24 +7,19 @@ from PIL import Image, ImageDraw, ImageFont
 from dotenv import load_dotenv
 
 # -------------------------------------------------------------------------
-# GEMINI ROBOTICS: ADVANCED SPATIAL QUERY & 3D GROUNDING (ER 2 & ER 1.5)
+# GEMINI ROBOTICS 2.0: SPATIAL QUERY & 3D GROUNDING (ER 2)
 # -------------------------------------------------------------------------
-# This script demonstrates querying Google DeepMind's Gemini Robotics ER 2
-# (and ER 1.5) for 2D bounding boxes, pixel points, and 3D bounding boxes
-# / 6DoF grasp poses for robotic manipulation and perception.
+# Demonstrates querying Google DeepMind's Gemini Robotics ER 2
+# for 2D bounding boxes, pixel points, 3D bounding boxes, and 6DoF grasp poses.
 # -------------------------------------------------------------------------
 
-# 1. SETUP & MODEL DEFINITIONS
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
-
 DEFAULT_MODEL = os.getenv("GEMINI_ROBOTICS_MODEL", "gemini-robotics-er-2")
 FALLBACK_MODELS = [
     "gemini-robotics-er-2",
-    "gemini-robotics-er-1.5-preview",
     "gemini-2.5-flash",
-    "gemini-2.0-flash",
-    "gemini-1.5-pro"
+    "gemini-2.0-flash"
 ]
 
 if not api_key:
@@ -32,7 +27,6 @@ if not api_key:
 else:
     print("✅ Gemini API Key loaded.")
 
-# 2. CLIENT CONFIGURATION
 try:
     client = genai.Client(api_key=api_key) if api_key else None
 except Exception as e:
@@ -65,7 +59,6 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
     response_text = None
 
     if client:
-        # Try requested model, then fall back if model unavailable in region/tier
         models_to_try = [model_name] + [m for m in FALLBACK_MODELS if m != model_name]
         for m in models_to_try:
             try:
@@ -77,7 +70,7 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
                         prompt_text
                     ],
                     config=types.GenerateContentConfig(
-                        temperature=0.2, # Low temperature for accurate spatial grounding
+                        temperature=0.2,
                         thinking_config=types.ThinkingConfig(thinking_budget=2048)
                     )
                 )
@@ -101,130 +94,133 @@ def robot_perception_query(image_path: str, prompt_text: str, model_name: str = 
     return response_text
 
 def generate_simulated_spatial_output(prompt_text: str) -> str:
-    """Generates a realistic simulated output matching ER 2 schema."""
-    if "3d" in prompt_text.lower() or "box_3d" in prompt_text.lower():
-        return json.dumps([
+    """Generates high-fidelity simulated ER 2 output for offline or demonstration mode."""
+    prompt_lower = prompt_text.lower()
+    if "3d" in prompt_lower or "metric" in prompt_lower or "grasp" in prompt_lower:
+        mock_data = [
             {
-                "label": "manipulation_target (mug)",
-                "box_2d": [380, 420, 620, 580],
+                "label": "industrial_gear_box",
                 "box_3d": {
-                    "center": [0.05, 0.45, 0.12],
-                    "size": [0.10, 0.08, 0.12],
-                    "rotation_rpy": [0.0, 0.0, 45.0]
+                    "center": [0.08, 0.62, -0.04],
+                    "size": [0.18, 0.22, 0.14],
+                    "rotation_rpy": [0.0, 0.0, 15.0]
                 },
                 "grasp_affordance": {
-                    "point": [480, 560],
-                    "approach_vector": [0.0, 1.0, 0.0],
-                    "gripper_opening_width_mm": 45
-                }
+                    "target_point_2d": [520, 480],
+                    "approach_vector": [0.0, 0.0, -1.0],
+                    "gripper_aperture_mm": 65,
+                    "grasp_type": "power"
+                },
+                "confidence": 0.96
+            },
+            {
+                "label": "calibration_wrench",
+                "box_3d": {
+                    "center": [-0.15, 0.48, -0.08],
+                    "size": [0.06, 0.24, 0.03],
+                    "rotation_rpy": [0.0, 0.0, -45.0]
+                },
+                "grasp_affordance": {
+                    "target_point_2d": [680, 240],
+                    "approach_vector": [0.0, 0.0, -1.0],
+                    "gripper_aperture_mm": 28,
+                    "grasp_type": "pinch"
+                },
+                "confidence": 0.94
             }
-        ], indent=2)
-    elif "point" in prompt_text.lower():
-        return json.dumps([
-            {"label": "mug_handle_grasp_point", "point": [500, 550]},
-            {"label": "table_surface_center", "point": [750, 500]}
-        ], indent=2)
+        ]
+    elif "point" in prompt_lower and "box" not in prompt_lower:
+        mock_data = [
+            {"point": [421, 312], "label": "blue mug"},
+            {"point": [680, 540], "label": "wrench"},
+            {"point": [290, 810], "label": "power drill"}
+        ]
     else:
-        return json.dumps([
-            {"label": "robot_arm_base", "box_2d": [600, 100, 950, 400]},
-            {"label": "target_object", "box_2d": [420, 450, 610, 580]}
-        ], indent=2)
+        mock_data = [
+            {"box_2d": [380, 290, 520, 395], "label": "blue ceramic mug"},
+            {"box_2d": [620, 500, 710, 680], "label": "silver adjustable wrench"}
+        ]
+    return json.dumps(mock_data, indent=2)
+
+def parse_spatial_json(response_text: str):
+    """Extracts JSON arrays or dictionaries from response text."""
+    try:
+        clean_text = re.sub(r'```json\s*', '', response_text)
+        clean_text = re.sub(r'```\s*', '', clean_text).strip()
+        match = re.search(r'(\[.*\]|\{.*\})', clean_text, re.DOTALL)
+        if match:
+            return json.loads(match.group(1))
+    except Exception as e:
+        print(f"Warning: could not parse spatial JSON: {e}")
+    return None
 
 def visualize_results(image_path: str, response_text: str, output_path: str = "output_perception.jpg"):
-    """
-    Parses spatial JSON results and renders bounding boxes (2D/3D) and grasp points on the image.
-    """
+    """Draws 2D/3D overlays, bounding boxes, and grasp vectors onto the image."""
     try:
-        # Extract JSON block if wrapped in markdown
-        json_match = re.search(r'```(?:json)?\s*(\[.*?\]|\{.*?\})\s*```', response_text, re.DOTALL)
-        if json_match:
-            raw_json = json_match.group(1)
-        else:
-            raw_json = response_text.strip()
+        image = Image.open(image_path).convert('RGB')
+        draw = ImageDraw.Draw(image)
+        w, h = image.size
+        
+        data = parse_spatial_json(response_text)
+        if not data:
+            return None
 
-        data = json.loads(raw_json)
-        if isinstance(data, dict) and "detections" in data:
-            data = data["detections"]
-        elif not isinstance(data, list):
+        if isinstance(data, dict):
             data = [data]
 
-        img = Image.open(image_path).convert('RGB')
-        draw = ImageDraw.Draw(img)
-        width, height = img.size
-        
-        print(f"\n🎨 Drawing {len(data)} detected spatial features on '{output_path}'...")
-        
-        for item in data:
-            if not isinstance(item, dict):
-                continue
+        colors = ["#00FF88", "#00C3FF", "#FF3366", "#FFDD00", "#AA00FF"]
 
-            label = item.get("label", "detected_object")
+        for idx, item in enumerate(data):
+            color = colors[idx % len(colors)]
+            label = item.get("label") or item.get("name") or f"Item {idx+1}"
 
-            # 1. Render Point
-            if 'point' in item:
-                y, x = item['point']
-                pixel_x = int((x / 1000.0) * width)
-                pixel_y = int((y / 1000.0) * height)
-                r = 8
-                draw.ellipse((pixel_x - r, pixel_y - r, pixel_x + r, pixel_y + r), fill='#00FFCC', outline='#003333', width=2)
-                draw.text((pixel_x + 12, pixel_y - 8), f"📍 {label} ({x},{y})", fill="#00FFCC")
+            # 1. 2D Bounding Box [ymin, xmin, ymax, xmax] in 0-1000
+            if "box_2d" in item:
+                box = item["box_2d"]
+                ymin, xmin, ymax, xmax = box
+                abs_ymin = int((ymin / 1000.0) * h)
+                abs_xmin = int((xmin / 1000.0) * w)
+                abs_ymax = int((ymax / 1000.0) * h)
+                abs_xmax = int((xmax / 1000.0) * w)
+                draw.rectangle([abs_xmin, abs_ymin, abs_xmax, abs_ymax], outline=color, width=3)
+                draw.text((abs_xmin + 5, max(0, abs_ymin - 15)), label, fill=color)
 
-            # 2. Render 2D Bounding Box
-            if 'box_2d' in item:
-                ymin, xmin, ymax, xmax = item['box_2d']
-                pixel_xmin = int((xmin / 1000.0) * width)
-                pixel_xmax = int((xmax / 1000.0) * width)
-                pixel_ymin = int((ymin / 1000.0) * height)
-                pixel_ymax = int((ymax / 1000.0) * height)
-                
-                draw.rectangle([pixel_xmin, pixel_ymin, pixel_xmax, pixel_ymax], outline='#FF3366', width=3)
-                draw.text((pixel_xmin + 4, max(0, pixel_ymin - 16)), f"📦 {label}", fill="#FF3366")
+            # 2. 2D Point [y, x] in 0-1000
+            if "point" in item:
+                pt = item["point"]
+                py = int((pt[0] / 1000.0) * h)
+                px = int((pt[1] / 1000.0) * w)
+                r = 6
+                draw.ellipse([px - r, py - r, px + r, py + r], fill=color, outline="white", width=2)
+                draw.text((px + 8, py - 6), label, fill=color)
 
-            # 3. Render 3D Bounding Box Annotations if available
-            if 'box_3d' in item:
-                b3 = item['box_3d']
-                center = b3.get("center", [0, 0, 0])
-                c_text = f"3D Pos: x={center[0]:.2f}m, y={center[1]:.2f}m, z={center[2]:.2f}m"
-                if 'box_2d' in item:
-                    draw.text((pixel_xmin + 4, min(height - 15, pixel_ymax + 4)), c_text, fill="#33CCFF")
+            # 3. 3D Bounding Box / Grasp Affordance
+            if "grasp_affordance" in item:
+                ga = item["grasp_affordance"]
+                if "target_point_2d" in ga:
+                    gpt = ga["target_point_2d"]
+                    gpy = int((gpt[0] / 1000.0) * h)
+                    gpx = int((gpt[1] / 1000.0) * w)
+                    r = 8
+                    draw.ellipse([gpx - r, gpy - r, gpx + r, gpy + r], fill="#FF0055", outline="white", width=2)
+                    draw.text((gpx + 10, gpy - 8), f"6DoF Grasp: {label}", fill="#FF0055")
 
-            # 4. Render Grasp Affordance
-            if 'grasp_affordance' in item:
-                g = item['grasp_affordance']
-                if 'point' in g:
-                    gy, gx = g['point']
-                    g_px = int((gx / 1000.0) * width)
-                    g_py = int((gy / 1000.0) * height)
-                    gr = 10
-                    draw.ellipse((g_px - gr, g_py - gr, g_px + gr, g_py + gr), fill='#FFFF00', outline='black', width=2)
-                    draw.text((g_px + 12, g_py + 4), f"🤏 Grasp Point", fill="#FFFF00")
-
-        img.save(output_path)
-        print(f"✅ Saved perception overlay visualization to: {output_path}")
+        image.save(output_path)
+        print(f"🖼️ Perception visualization saved to: {output_path}")
         return output_path
-        
     except Exception as e:
-        print(f"⚠️ Could not visualize results: {e}")
+        print(f"Warning: visualization failed: {e}")
         return None
 
 if __name__ == "__main__":
-    test_image = "robot_view.jpg"
-    if not os.path.exists(test_image):
-        print("Creating dummy robot_view.jpg for demonstration...")
-        Image.new('RGB', (640, 480), color=(45, 55, 72)).save(test_image)
+    test_img = "assets/pointing_undefined.png"
+    if not os.path.exists(test_img):
+        test_img = "robot_view.jpg"
+        if not os.path.exists(test_img):
+            Image.new('RGB', (640, 480), color=(30, 30, 40)).save(test_img)
 
-    # Example: 3D-aware spatial bounding box and grasp query for ER 2
-    prompt = """
-    Detect all manipulable objects and robots in the scene.
-    Return 2D bounding boxes, estimated 3D bounding boxes (in meters relative to camera frame), and 6DoF grasp points.
-    Format as JSON:
-    [
-      {
-        "label": "object_name",
-        "box_2d": [ymin, xmin, ymax, xmax],
-        "box_3d": {"center": [x, y, z], "size": [dx, dy, dz], "rotation_rpy": [r, p, y]},
-        "grasp_affordance": {"point": [y, x], "approach_vector": [x, y, z], "gripper_opening_width_mm": 50}
-      }
-    ]
+    query = """
+    Detect all manipulable objects. Return 3D bounding boxes and 6DoF grasp affordances in JSON:
+    [{"label": "name", "box_3d": {"center": [x,y,z], "size": [dx,dy,dz]}, "grasp_affordance": {"target_point_2d": [y,x], "approach_vector": [vx,vy,vz], "gripper_aperture_mm": 50}}]
     """
-    robot_perception_query(test_image, prompt)
+    robot_perception_query(test_img, query)
