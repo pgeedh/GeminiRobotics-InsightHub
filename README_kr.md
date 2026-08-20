@@ -276,6 +276,38 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 4. **ASIMOV 안전 불변식**: 사람과의 안전 반경(< 1.2m) 침범 시 즉시 감속/거부하도록 시스템 지침에 설정합니다.
 5. **다중 에이전트 동기화 배리어**: 분산 협업 시 물리적 충돌을 방지하기 위해 명시적 대기 배리어를 설정합니다.
 
+## 기여 안내
+
+커뮤니티 기여를 적극 환영합니다. 새로운 프롬프트 카드, 벤치마크 평가, 하드웨어 어댑터 제안은 [`CONTRIBUTING.md`](./CONTRIBUTING.md)를 참고해 주세요.
+
+---
+
+## 라이선스 및 이미지 출처
+
+- **텍스트 및 코드**: [MIT 라이선스](./LICENSE) 하에 배포됩니다.
+- **이미지 및 시각 데모**: `[Verified]`로 표시된 데모 이미지는 Google DeepMind의 공식 기술 보고서 및 블로그에서 인용되었으며, 교육 및 연구 목적으로만 사용됩니다. 재배포 시 원본 라이선스를 확인하십시오. `[Custom Scenario]` 플레이스홀더는 `assets/` 디렉터리의 실제 로봇 이미지로 교체할 수 있습니다.
+
+---
+
+## 주요 참고 출처
+
+- **Google DeepMind Physical AI**: [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) — 기술 아키텍처, 전신 휴머노이드 제어 및 양팔 조작.
+- **Google Developers Blog**: [Building Physical Agents with Gemini Robotics](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/) — 공간 그라운딩, 포인팅 및 기구학적 프롬프트 패턴.
+- **Google AI for Developers**: [Gemini Robotics API 문서](https://ai.google.dev/gemini-api/docs/robotics-overview) — 공간 토큰, 좌표계 및 API 가이드.
+- **연구 논문**: *"Gemini Robotics: Bringing AI into the Physical World"* ([arXiv:2503.20020](https://arxiv.org/abs/2503.20020)).
+
+---
+
+## 감사의 글
+
+본 저장소의 활용 사례와 레시피는 물리적 AI 및 로보틱스 개발자 커뮤니티의 오픈소스 공유를 기반으로 합니다. 모든 기여자 및 연구진에게 깊은 감사를 표합니다:
+
+- [@GoogleDeepMind](https://x.com/GoogleDeepMind)
+- [@GeminiApp](https://x.com/GeminiApp)
+- Open X-Embodiment 및 ROS 2 로보틱스 커뮤니티
+
+새로운 프롬프트 발견이나 로보틱스 활용 사례가 있다면 언제든지 PR이나 이슈를 통해 공유해 주시기 바랍니다.
+
 ---
 
 <p align="center">

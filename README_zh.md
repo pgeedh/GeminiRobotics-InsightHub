@@ -277,6 +277,38 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 4. **ASIMOV 安全不变量**: 在系统提示词中硬性约束人机协作安全气泡（半径 > 1.2m）与碰撞降速策略。
 5. **多智能体同步屏障**: 分布式协作中设置显式状态屏障，防止物理执行竞争冲突。
 
+## 贡献指南
+
+欢迎社区贡献！如需提交新的提示词卡片、基准测试评估或硬件桥接适配，请参阅 [`CONTRIBUTING.md`](./CONTRIBUTING.md)。
+
+---
+
+## 许可证与图像署名
+
+- **文本与代码**: 遵循 [MIT 许可证](./LICENSE) 开源。
+- **图像与视觉演示**: 标有 `[Verified]` 的示例图像均来自 Google DeepMind 的公开技术报告和博客，在此仅作为学术演示与教育参考；如需二次分发请核对上游授权许可。`[Custom Scenario]` 占位符可替换为您自己在 `assets/` 目录下的机器人实拍截图。
+
+---
+
+## 主要参考来源
+
+- **Google DeepMind Physical AI**: [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) — 技术架构、全身人形机器人控制与双臂精细操作。
+- **Google Developers Blog**: [Building Physical Agents with Gemini Robotics](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/) — 空间定位、点位提取与运动学提示词模式。
+- **Google AI for Developers**: [Gemini Robotics API 文档](https://ai.google.dev/gemini-api/docs/robotics-overview) — 空间标记、坐标系与结构化 API 参考。
+- **研究论文**: *"Gemini Robotics: Bringing AI into the Physical World"* ([arXiv:2503.20020](https://arxiv.org/abs/2503.20020))。
+
+---
+
+## 致谢
+
+本仓库收录的应用用例、配方与提示词模式得益于 Physical AI 与机器人开发者社区的开源共享。我们向所有案例贡献者与研究团队致以诚挚的感谢：
+
+- [@GoogleDeepMind](https://x.com/GoogleDeepMind)
+- [@GeminiApp](https://x.com/GeminiApp)
+- Open X-Embodiment 与 ROS 2 机器人开源社区
+
+如果您在实践中发现了更多有趣的机器人应用场景与提示词，欢迎随时提交 PR 或 Issue 与社区共同探索！
+
 ---
 
 <p align="center">

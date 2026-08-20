@@ -276,6 +276,38 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 4. **Bất biến an toàn ASIMOV**: Luôn cài đặt khoảng cách an toàn với con người (> 1.2m) và giới hạn vận tốc trong chỉ dẫn hệ thống.
 5. **Rào cản đồng bộ đa robot**: Sử dụng rào chắn trạng thái rõ ràng để tránh xung đột vật lý giữa các robot.
 
+## Đóng góp
+
+Chúng tôi luôn chào đón sự đóng góp từ cộng đồng. Vui lòng xem [`CONTRIBUTING.md`](./CONTRIBUTING.md) để đề xuất thẻ prompt mới, đánh giá benchmark hoặc bộ chuyển đổi cầu nối phần cứng.
+
+---
+
+## Giấy phép & Ghi nhận hình ảnh
+
+- **Văn bản & Mã nguồn**: Phát hành theo [Giấy phép MIT](./LICENSE).
+- **Hình ảnh & Demo trực quan**: Các hình ảnh có nhãn `[Verified]` được trích dẫn từ các báo cáo kỹ thuật và bài viết công khai của Google DeepMind, chỉ sử dụng cho mục đích demo và giáo dục; vui lòng kiểm tra điều khoản gốc trước khi phân phối lại. Thay thế các placeholder `[Custom Scenario]` bằng ảnh thực tế từ robot của bạn trong thư mục `assets/`.
+
+---
+
+## Nguồn tài liệu chính
+
+- **Google DeepMind Physical AI**: [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) — Kiến trúc kỹ thuật, điều khiển humanoid toàn thân và thao tác hai tay tinh xảo.
+- **Google Developers Blog**: [Building Physical Agents with Gemini Robotics](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/) — Định vị không gian, trỏ điểm và mẫu prompt động học.
+- **Google AI for Developers**: [Tài liệu API Gemini Robotics](https://ai.google.dev/gemini-api/docs/robotics-overview) — Token không gian, hệ tọa độ và hướng dẫn API.
+- **Bài báo nghiên cứu**: *"Gemini Robotics: Bringing AI into the Physical World"* ([arXiv:2503.20020](https://arxiv.org/abs/2503.20020)).
+
+---
+
+## Lời cảm ơn
+
+Các trường hợp và công thức trong kho lưu trữ này được xây dựng dựa trên sự chia sẻ từ cộng đồng AI vật lý và robot. Chúng tôi xin bày tỏ lòng biết ơn chân thành đến tất cả những người đóng góp và các nhà nghiên cứu:
+
+- [@GoogleDeepMind](https://x.com/GoogleDeepMind)
+- [@GeminiApp](https://x.com/GeminiApp)
+- Cộng đồng robot Open X-Embodiment & ROS 2
+
+Nếu bạn khám phá ra các prompt hoặc ứng dụng robot mới thú vị, chúng tôi rất hoan nghênh bạn mở PR hoặc Issue để cùng mở rộng kho tài nguyên này!
+
 ---
 
 <p align="center">

@@ -41,6 +41,9 @@ Gemini Robotics 2.0 operates on a **Hierarchical Dual-Model Architecture**:
 - [Embodied Reasoning Principles](#embodied-reasoning-principles)
 - [Interactive Suite CLI and Testing](#interactive-suite-cli-and-testing)
 - [Contributing](#contributing)
+- [License and Image Attribution](#license-and-image-attribution)
+- [Primary Sources](#primary-sources)
+- [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -958,6 +961,35 @@ python3 -m unittest tests/test_structure.py
 ## Contributing
 
 Community contributions are welcome. Please refer to [`CONTRIBUTING.md`](./CONTRIBUTING.md) to propose new prompt cards, benchmark evaluations, or hardware bridge adapters.
+
+---
+
+## License and Image Attribution
+
+- **Text & Code**: Released under the [MIT License](./LICENSE).
+- **Images & Visual Demonstrations**: Demonstrations marked `[Verified]` are sourced from Google DeepMind's public research and documentation, used here strictly for demonstration and educational reference; please verify upstream terms before redistribution. Replace `[Custom Scenario]` placeholders with your own robot camera captures in `assets/`.
+
+---
+
+## Primary Sources
+
+- **Google DeepMind Physical AI**: [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) — Technical architecture, whole-body humanoid control, and bi-arm dexterity.
+- **Google Developers Blog**: [Building Physical Agents with Gemini Robotics](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/) — Core spatial grounding, point extraction, and kinematic prompting patterns.
+- **Google AI for Developers**: [Gemini Robotics API Documentation](https://ai.google.dev/gemini-api/docs/robotics-overview) — Spatial tokens, coordinate framing, and structured API guides.
+- **Research Paper**: *"Gemini Robotics: Bringing AI into the Physical World"* ([arXiv:2503.20020](https://arxiv.org/abs/2503.20020)).
+
+---
+
+## Acknowledgments
+
+The cases, recipes, and prompt patterns in this repository build upon open research and sharing from the physical AI and robotics developer communities. We express our sincere gratitude to all case contributors, roboticists, and researchers.
+
+Special thanks to the following teams for sharing their foundational works:
+- [@GoogleDeepMind](https://x.com/GoogleDeepMind)
+- [@GeminiApp](https://x.com/GeminiApp)
+- The Open X-Embodiment & ROS 2 Robotics Communities
+
+The examples in this catalog cannot cover all possible robotic scenarios. If you discover novel prompts or physical AI applications, we welcome your contributions to expand this collection.
 
 ---
 

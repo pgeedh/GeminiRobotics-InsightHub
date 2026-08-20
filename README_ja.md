@@ -277,6 +277,38 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 4. **ASIMOV安全性不変条件**: 人間近接時（< 1.2m）の減速・停止ルールをシステム指示に組み込む。
 5. **マルチロボット同期バリア**: 分散フリートでは物理的なデッドロックを防ぐ待機バリアを設ける。
 
+## コントリビューション
+
+コミュニティからの貢献を歓迎します。プロンプトカード、ベンチマーク評価、ハードウェアブリッジの提案については [`CONTRIBUTING.md`](./CONTRIBUTING.md) をご覧ください。
+
+---
+
+## ライセンスおよび画像帰属
+
+- **テキスト＆コード**: [MITライセンス](./LICENSE) に基づき公開されています。
+- **画像・視覚デモ**: `[Verified]` の表示があるデモ画像は Google DeepMind の公開ドキュメントおよびブログを参照しています（教育・デモ目的のみ）。再配布前に元のライセンス条件をご確認ください。`[Custom Scenario]` のプレースホルダーは `assets/` 配下の独自画像に置き換えてご活用ください。
+
+---
+
+## 主要な情報源
+
+- **Google DeepMind Physical AI**: [Gemini Robotics 2 & Embodied Reasoning](https://deepmind.google/models/gemini-robotics/embodied-reasoning/) — 技術アーキテクチャ、全身ヒューマノイド制御、双腕巧緻操作。
+- **Google Developers Blog**: [Building Physical Agents with Gemini Robotics](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/) — 空間グラウンディング、ポインティング、運動学プロンプトパターン。
+- **Google AI for Developers**: [Gemini Robotics API ドキュメント](https://ai.google.dev/gemini-api/docs/robotics-overview) — 空間トークン、座標系、APIリファレンス。
+- **学術論文**: *"Gemini Robotics: Bringing AI into the Physical World"* ([arXiv:2503.20020](https://arxiv.org/abs/2503.20020))。
+
+---
+
+## 謝辞
+
+本リポジトリのユースケース、レシピ、プロンプトパターンは、フィジカルAIおよびロボティクス開発者コミュニティの知見に基づいています。すべてのコントリビューターおよび研究者に深く感謝申し上げます。
+
+- [@GoogleDeepMind](https://x.com/GoogleDeepMind)
+- [@GeminiApp](https://x.com/GeminiApp)
+- Open X-Embodiment および ROS 2 コミュニティ
+
+新たなプロンプトや物理AIの発見がありましたら、ぜひPRやIssueでお知らせください。
+
 ---
 
 <p align="center">
