@@ -925,15 +925,16 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 
 ---
 
-## Embodied Reasoning Principles
+## Tips & Patterns (Embodied Reasoning)
 
-> *Read the full engineering guide: [`EMBODIED_REASONING_TIPS.md`](./EMBODIED_REASONING_TIPS.md)*
+> *Read the comprehensive engineering guide: [`EMBODIED_REASONING_TIPS.md`](./EMBODIED_REASONING_TIPS.md)*
 
-1. **Normalized vs Metric Coordinates**: Use `[0, 1000]` for 2D pixel coordinates and metric meters `[x, y, z]` for 3D bounding boxes.
-2. **Chain-of-Kinematics**: When prompting humanoids or mobile manipulators, prompt for whole-body stance selection (`crouch`, `torso_pitch`) before end-effector reaching to avoid singularities.
-3. **6DoF Approach Vectors**: Always request approach normal vectors `[vx, vy, vz]` and aperture opening limits alongside grasp points.
-4. **ASIMOV Safety Invariants**: Enforce negative safety constraints (e.g., dynamic safety bubbles, collaborative speed limits < 0.5m/s) in system instructions.
-5. **Multi-Robot Synchronization**: Include explicit wait-for-agent barriers in multi-robot task allocations to avoid physical race conditions.
+1. **Normalized Spatial Coordinates**: Prefer normalized `[y, x]` in `0–1000` for points, or `[ymin, xmin, ymax, xmax]` for bounding boxes. This keeps prompts model-friendly and implementation-agnostic. ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+2. **Thinking Budget Tuning**: Tune the thinking budget (latency vs. accuracy trade-off) depending on task complexity (e.g. 1024–2048 tokens for whole-body stance planning). ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+3. **Interleaved Text + Coordinates**: Interleave natural language descriptions with points, bounding boxes, and trajectories to produce spatially grounded plans your robot controller can directly execute. ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+4. **Grounding via Tool Calls**: Use tool calls (e.g. Google Search or Local APIs) to ground plans in dynamic real-world rules (recycling compliance, kitchen policies, facility procedures). ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+5. **Chain-of-Kinematics & Stance Selection**: When prompting humanoid or mobile robots, prompt for whole-body posture (`crouch`, `torso_pitch`) before end-effector reaching to eliminate joint singularities.
+6. **ASIMOV Safety Invariants**: Enforce negative safety constraints (e.g. 1.2m human proximity buffer, capped collaborative speeds < 0.25m/s) in system instructions.
 
 ---
 
@@ -946,9 +947,8 @@ python cli.py
 
 *CLI Modules:*
 - **Prompt Gallery Explorer**: Browse, inspect, and run all 35 prompt cards with sample or custom images
-- **Perception and 3D Spatial Query**: Real-time visual overlay generation
-- **Whole-Body Task Planner**: Autonomous Pydantic decomposition
-- **ASIMOV Safety Auditor**: Live human proximity safety verification
+- **Interactive Sandbox**: Feed any image and arbitrary test prompt with live inference
+- **6 Modular Cookbook Recipes**: Spatial perception, whole-body planning, video slip, safety governor, fleet coordination, 20Hz VLA
 - **ROS 2 Status Monitor**: Bridge sanity verification
 
 ### Run Automated Tests
@@ -960,7 +960,14 @@ python3 -m unittest tests/test_structure.py
 
 ## Contributing
 
-Community contributions are welcome. Please refer to [`CONTRIBUTING.md`](./CONTRIBUTING.md) to propose new prompt cards, benchmark evaluations, or hardware bridge adapters.
+We welcome community contributions from robotics researchers and engineers! Please refer to [`CONTRIBUTING.md`](./CONTRIBUTING.md) for full instructions.
+
+### How to Add a New Case
+Add a new folder under `cases/<short-name>/` with:
+- **`README.md`**: 1–2 sentences describing the physical scenario + the exact copy-runnable prompt.
+- **`image.jpg` / `image.png`** (or link): The scene image to feed to the model.
+- Keep prompts copy-runnable and JSON-friendly.
+- Cite your primary source(s) (official docs, blogs, research papers, or video demonstrations).
 
 ---
 

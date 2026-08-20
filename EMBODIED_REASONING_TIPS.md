@@ -2,6 +2,13 @@
 
 Engineering reference and prompt design guidelines for **Embodied Reasoning (ER)** with Google DeepMind's Gemini Robotics models. This guide covers spatial coordinate conventions, kinematic planning patterns, safety constraints, and latency optimization.
 
+## Core Tips & Best Practices
+
+1. **Normalized vs. Metric Coordinates**: Prefer normalized `[y, x]` in `0–1000` for points, or `[ymin, xmin, ymax, xmax]` for bounding boxes. This keeps prompts model-friendly, resolution-independent, and implementation-agnostic. ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+2. **Thinking Budget Tuning**: Tune the thinking budget (latency vs. accuracy trade-off) depending on task complexity (e.g. 512 tokens for quick detection, 1024–2048 tokens for deep whole-body collision avoidance). ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+3. **Interleaved Text + Coordinates**: Interleave natural language descriptions with points, bounding boxes, and trajectories to produce "spatially grounded" plans your robot low-level controller can directly execute. ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+4. **Dynamic Tool Grounding**: Use tool calls (e.g. Google Search or facility APIs) to ground plans in dynamic real-world rules (recycling policies, kitchen protocols, workspace regulations). ([Google Developers Blog](https://developers.googleblog.com/en/building-the-next-generation-of-physical-agents-with-gemini-robotics-er-15/))
+
 ---
 
 ## 1. Coordinate Framing and Spatial Grounding

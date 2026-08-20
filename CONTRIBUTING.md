@@ -1,34 +1,50 @@
 # Contributing to Awesome Gemini Robotics 2.0
 
-Contributions from researchers, roboticists, and engineers are welcome to expand this collection of prompts, schemas, and robotic workflows for Google DeepMind's **Gemini Robotics 2.0** suite.
+Contributions from researchers, roboticists, and physical AI practitioners are welcome to expand this collection of prompts, schemas, and robotic workflows for Google DeepMind's **Gemini Robotics 2.0** suite.
 
 ---
 
 ## Contribution Guidelines
 
-### 1. Adding a Use Case or Prompt Card
-To contribute a new embodied reasoning pattern or physical AI prompt:
-1. Add the prompt card schema to [`prompts/gemini_robotics_2_catalog.json`](./prompts/gemini_robotics_2_catalog.json).
-2. Document the card in [`README.md`](./README.md) with an input prompt, Python execution snippet, and sample JSON output.
-3. If applicable, add a demonstration script to `examples/` and test asset to `assets/`.
-4. Open a Pull Request titled `feat(prompt): add <use_case_name> card`.
+### 1. Adding a Case under `cases/<short-name>/`
 
-### 2. Documentation and Localizations
-- Pull Requests improving accuracy or adding translations for `README.md`, `README_ja.md`, `README_zh.md`, `README_kr.md`, `README_vn.md`, and `BENCHMARKS.md` are encouraged.
-- Ensure all translations maintain consistency with the primary schema IDs and technical terminology.
+To add a new scenario or prompt pattern, create a dedicated folder under `cases/<short-name>/` containing:
 
-### 3. Reporting Issues and Hardware Adapters
-- If a prompt or ROS 2 node requires modification for a specific robotic hardware embodiment (e.g. Franka Emika, Universal Robots, Boston Dynamics, Unitree, Apollo), open an Issue or Pull Request labeled `[HARDWARE]`.
+1. **`README.md`**:
+   - 1–2 sentences describing the physical robotic scenario and setup.
+   - The exact copy-runnable prompt definition.
+   - Sample Pydantic schema or expected JSON output.
+2. **`image.jpg` / `image.png`** (or link):
+   - The visual input frame or camera capture.
+3. **Primary Source Citation**:
+   - Cite your primary source(s) (e.g. official Google DeepMind docs, blog posts, arXiv research papers, or video demonstrations).
+
+### 2. Prompt Standards
+
+- **Model-Friendly Coordinates**: Prefer normalized `[y, x]` in `0–1000` for points, or `[ymin, xmin, ymax, xmax]` for bounding boxes.
+- **Copy-Runnable & JSON-Friendly**: Prompts must be self-contained and specify unambiguous structured output constraints.
+- **Thinking Budget Guidance**: Specify recommended thinking budget tokens (e.g., 512, 1024, 2048) if the task requires deep multi-step kinematic planning.
+
+### 3. Adding a Prompt Card to Catalog
+
+- Add the structured entry to [`prompts/gemini_robotics_2_catalog.json`](./prompts/gemini_robotics_2_catalog.json).
+- Document the card in [`README.md`](./README.md) under the appropriate category.
+
+### 4. Submitting Pull Requests
+
+- Branch naming: `feat/case-<short-name>` or `fix/docs-<language>`.
+- Title format: `feat(case): add <short-name> physical scenario`.
+- Verify that `python3 -m unittest tests/test_structure.py` passes before opening your PR.
 
 ---
 
-## Code of Conduct
+## Code of Conduct & Safety
 
-- **Safety Compliance**: All submissions must respect ASIMOV safety guidelines and ISO/TS 15066 collaborative robot safety standards. Prompts intended to bypass velocity limits, proximity barriers, or safety invariants will not be accepted.
+- **ASIMOV Safety Compliance**: All submissions must respect collaborative robot safety principles and ISO/TS 15066 guidelines. Prompts intended to bypass safety barriers or force limits will not be merged.
 - **Reproducibility**: All sample JSON outputs, schemas, and code snippets must be syntactically valid and reproducible against official Gemini Robotics models.
 
 ---
 
 <p align="center">
-  <i>Distributed under the MIT License</i>
+  <i>Curated by Pruthvi Geedh</i>
 </p>
