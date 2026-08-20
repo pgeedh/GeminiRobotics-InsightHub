@@ -1,0 +1,256 @@
+# Awesome Gemini Robotics 2.0 (Tiếng Việt) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png" align="right" width="100">
+
+[![DeepMind](https://img.shields.io/badge/Maintained%20By-Google%20DeepMind%20Trusted%20Tester-4285F4?style=for-the-badge&logo=google)](https://deepmind.google/models/gemini-robotics/embodied-reasoning/)
+[![Gemini Robotics](https://img.shields.io/badge/Model-Gemini%20Robotics%20ER%202%20%7C%201.5-blue?style=for-the-badge)](https://aistudio.google.com/)
+[![ROS 2](https://img.shields.io/badge/ROS%202-Humble%20%7C%20Iron%20%7C%20Jazzy-orange?style=for-the-badge&logo=ros)](./ros2_gemini_bridge)
+[![Interactive 3D Demo](https://img.shields.io/badge/Interactive%203D-Architecture%20Explainer-purple?style=for-the-badge&logo=three.js)](./docs/architecture_3d_explainer.html)
+[![Benchmarks](https://img.shields.io/badge/Benchmarks-ERQA%20%7C%20ASIMOV-green?style=for-the-badge)](./BENCHMARKS.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
+
+🌐 **Ngôn ngữ:** [English](./README.md) • [日本語 (Japanese)](./README_ja.md) • [中文 (Chinese)](./README_zh.md) • [한국어 (Korean)](./README_kr.md) • **Tiếng Việt (Vietnamese)**
+
+---
+
+> **🚀 Bộ sưu tập và Thư viện ứng dụng hàng đầu dành cho Gemini Robotics 2.0**
+> 
+> Bộ sưu tập do cộng đồng duy trì tập hợp các câu lệnh (prompts), lược đồ JSON, mã nguồn Python và công thức thực chiến dành cho **Google DeepMind Gemini Robotics 2.0**, **Gemini Robotics ER 2 (Embodied Reasoning - Suy luận thể nhập)** và **Gemini Robotics 2 (VLA - Thị giác-Ngôn ngữ-Hành động)**.
+> 
+> **Gemini Robotics 2.0 là gì?** Hệ thống AI vật lý hoạt động theo **Mô hình Phân tầng Kép**:
+> 1. **Bộ lập kế hoạch / Bộ não cấp cao (Gemini Robotics ER 2):** Suy luận không gian 3D, hộp bao thể tích tính bằng mét, lập kế hoạch nhiệm vụ dài hạn, phát hiện trượt rơi qua video thời gian thực và điều phối công cụ.
+> 2. **Vỏ não vận động / Bộ thực thi (Gemini Robotics 2 VLA & On-Device 2):** Điều khiển động cơ tần số cao (20Hz+) tạo quỹ đạo khớp trực tiếp cho robot hình người, tay máy và xe tự hành không độ trễ ngắt quãng.
+
+---
+
+## 📑 Mục lục
+
+- [⚡ Bắt đầu nhanh (`google-genai` SDK v1.x)](#-bắt-đầu-nhanh)
+- [🗂️ Thư viện 35 Thẻ Prompt Ứng Dụng](#-thư-viện-35-thẻ-prompt-ứng-dụng)
+  - [1. Định vị không gian & Điểm trỏ 2D/3D (Thẻ 1–7)](#1-định-vị-không-gian--điểm-trỏ-2d3d)
+  - [2. Hộp bao thể tích & Gắp 6DoF (Thẻ 8–10)](#2-hộp-bao-thể-tích--gắp-6dof)
+  - [3. Lập kế hoạch quỹ đạo & Tư thế toàn thân (Thẻ 11–14)](#3-lập-kế-hoạch-quỹ-đạo--tư-thế-toàn-thân)
+  - [4. Phân rã nhiệm vụ dài hạn & Dọn dẹp không gian (Thẻ 15–18)](#4-phân-rã-nhiệm-vụ-dài-hạn--dọn-dẹp-không-gian)
+  - [5. Khả năng tương tác & Quản trị an toàn ASIMOV (Thẻ 19–22)](#5-khả-năng-tương-tác--quản-trị-an-toàn-asimov)
+  - [6. Phân tích video liên tục & Suy luận thời gian (Thẻ 23–26)](#6-phân-tích-video-liên-tục--suy-luận-thời-gian)
+  - [7. Đo lường công nghiệp, Đồng hồ đo & Phân đoạn chi tiết (Thẻ 27–29)](#7-đo-lường-công-nghiệp-đồng-hồ-đo--phân-đoạn-chi-tiết)
+  - [8. Sử dụng công cụ & Phối hợp hạm đội robot (Thẻ 30–33)](#8-sử-dụng-công-cụ--phối-hợp-hạm-đội-robot)
+  - [9. Điều khiển động cơ Vision-Language-Action (VLA) (Thẻ 34–35)](#9-điều-khiển-động-cơ-vision-language-action-vla)
+- [📊 Bảng so chuẩn chính thức: ER 1.5 vs. ER 2](#-bảng-so-chuẩn-chính-thức)
+- [🤖 Tích hợp cầu nối ROS 2](#-tích-hợp-cầu-nối-ros-2)
+- [💡 5 Quy tắc vàng cho Suy luận thể nhập](#-5-quy-tắc-vàng-cho-suy-luận-thể-nhập)
+
+---
+
+## ⚡ Bắt đầu nhanh
+
+```python
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+MODEL_ID = "gemini-robotics-er-2"
+
+prompt = """
+Chỉ ra tối đa 10 đối tượng trong hình.
+Trả về định dạng JSON: [{"point": [y, x], "label": "<tên_đối_tượng>"}]
+Tọa độ được chuẩn hóa từ 0 đến 1000.
+"""
+
+with open("assets/pointing_undefined.png", "rb") as f:
+    img_bytes = f.read()
+
+response = client.models.generate_content(
+    model=MODEL_ID,
+    contents=[types.Part.from_bytes(data=img_bytes, mime_type="image/png"), prompt],
+    config=types.GenerateContentConfig(temperature=0.2)
+)
+
+print(response.text)
+```
+
+---
+
+## 🗂️ Thư viện 35 Thẻ Prompt Ứng Dụng
+
+### 1. Định vị không gian & Điểm trỏ 2D/3D
+
+#### 1) Phát hiện đối tượng mở không định trước ✅
+- **Prompt:** `Point to no more than 10 items in the image. Return JSON: [{"point": [y, x], "label": "<object_name>"}] normalized 0-1000.`
+
+#### 2) Lọc và trỏ vào đối tượng được chỉ định ✅
+- **Prompt:** `Get all points matching: bread, starfruit, banana. Return JSON: [{"point": [y, x], "label": "<target>"}]`
+
+#### 3) Chỉ điểm theo khái niệm trừu tượng (Hoa quả, đồ nguy hiểm) ✅
+- **Prompt:** `Get all points for any visible fruit under occlusion. Return JSON format.`
+
+#### 4) Định vị ô cờ và ma trận khe cắm 🧩
+- **Prompt:** `Get all points matching empty game board slots and pieces. Return JSON format.`
+
+#### 5) Chỉ điểm bộ phận chức năng (Cuống quả, vành cốc, tay cầm túi) ✅
+- **Prompt:** `Point to stem of banana, rim of measuring cup, and handle of bag. Return JSON list.`
+
+#### 6) Đếm số lượng kèm chuỗi suy luận trực quan (CoT) ✅
+- **Prompt:** `Point to each washer in container with visual reasoning. Return JSON format.`
+
+#### 7) Theo dõi đối tượng chuyển động trong video/GIF ✅
+- **Prompt:** `Point to target items across dynamic sequence: 'pen in gripper', 'pen on desk'. Return JSON.`
+
+---
+
+### 2. Hộp bao thể tích & Gắp 6DoF
+
+#### 8) Hộp bao 2D kèm thuộc tính phân biệt chi tiết ✅
+- **Prompt:** `Return 2D bounding boxes distinguishing objects by color, size, position: [{"box_2d": [ymin, xmin, ymax, xmax], "label": "..."}]`
+
+#### 9) Hộp bao 3D chuẩn mét [x, y, z, dx, dy, dz] ✅
+- **Prompt:** `Detect objects and return metric 3D bounding boxes in camera frame coordinates (meters) [center_m, size_m].`
+
+#### 10) Tư thế gắp 6DoF & Vector tiếp cận pháp tuyến ✅
+- **Prompt:** `Compute 6DoF grasp pose, approach normal vector [nx, ny, nz], and gripper aperture limit in mm.`
+
+---
+
+### 3. Lập kế hoạch quỹ đạo & Tư thế toàn thân
+
+#### 11) Chuỗi điểm quỹ đạo gắp đặt có thứ tự ✅
+- **Prompt:** `Generate 15 ordered trajectory waypoints to move the pen into the organizer tray: [{"point": [y, x], "label": "step_<idx>"}]`
+
+#### 12) Quỹ đạo quét dọn và lau bề mặt ✅
+- **Prompt:** `Generate 10 ordered coverage points to clean the surface with the brush without scattering debris.`
+
+#### 13) Đường dẫn chuyển động 3D tránh chướng ngại vật ✅
+- **Prompt:** `Find collision-free trajectory of 10 points maintaining 40cm clearance from floor obstacles.`
+
+#### 14) Suy luận tư thế toàn thân robot hình người (Ngồi xổm, cúi người) ✅
+- **Prompt:** `Calculate whole-body humanoid posture: crouch requirement, knee flexion, torso pitch, and active arm selection.`
+
+---
+
+### 4. Phân rã nhiệm vụ dài hạn & Dọn dẹp không gian
+
+#### 15) Xác định vật cản cần di dời để giải phóng mặt phẳng 🧩
+- **Prompt:** `Point to the primary obstructing item to move to make room for a laptop.`
+
+#### 16) Điều phối đa giai đoạn (Đóng gói hộp cơm và túi giữ nhiệt) 🧩
+- **Prompt:** `Explain multi-step packing with grounded pick and place coordinate points.`
+
+#### 17) Định vị ổ cắm điện trống sẵn sàng cắm dây 🧩
+- **Prompt:** `Point to unobstructed empty electrical wall sockets ready for plug insertion.`
+
+#### 18) Sắp xếp bàn làm việc dựa trên ảnh mẫu mục tiêu 🧩
+- **Prompt:** `Compare current messy scene (A) with target state (B) and generate step-by-step reorganization plan.`
+
+---
+
+### 5. Khả năng tương tác & Quản trị an toàn ASIMOV
+
+#### 19) Lọc đối tượng theo giới hạn tải trọng (dưới 1.5 kg / 3 lbs) 🧩
+- **Prompt:** `Filter objects safe to lift under 3.0 lbs limit without motor torque violation.`
+
+#### 20) Kiểm soát lực kẹp thích ứng cho dụng cụ thủy tinh dễ vỡ 🧩
+- **Prompt:** `Analyze glassware and prescribe grasp zone, maximum normal force (N), and acceleration limits.`
+
+#### 21) Chỉ điểm vị trí thu dọn cốc chén sau sử dụng ✅
+- **Prompt:** `Point to optimal placement location for dirty mug in kitchen.`
+
+#### 22) Quản trị an toàn ASIMOV (Tự động từ chối lệnh nguy hiểm) ✅
+- **Prompt:** `Evaluate user command safety under ISO/TS 15066: Accept or REFUSE with certified safe alternative.`
+
+---
+
+### 6. Phân tích video liên tục & Suy luận thời gian
+
+#### 23) Phân đoạn video theo mốc thời gian chi tiết ✅
+- **Prompt:** `Parse robot video into chronological steps with start/end timestamps and descriptions.`
+
+#### 24) Phóng to vi hành động ở độ phân giải mili-giây ✅
+- **Prompt:** `Zoom into interval 00:04-00:08 and analyze contact kinematics and tactile seating state.`
+
+#### 25) Xác minh thành công/thất bại nhiệm vụ và kiểm toán bất thường ✅
+- **Prompt:** `Inspect episode start vs end frames to verify task completion and explain any failure mode.`
+
+#### 26) Phát hiện vật trượt khi đang kẹp & Tái lập kế hoạch tức thời ✅
+- **Prompt:** `Detect payload slip mid-execution and output closed-loop recovery command (force + delta trim).`
+
+---
+
+### 7. Đo lường công nghiệp, Đồng hồ đo & Phân đoạn chi tiết
+
+#### 27) Đọc chỉ số đồng hồ áp suất công nghiệp (Độ chính xác 98%) ✅
+- **Prompt:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
+
+#### 28) Thực thi mã Python cắt phóng to mã vạch siêu nhỏ 🧩
+- **Prompt:** `Use code execution to crop barcode region and verify serial number.`
+
+#### 29) Mặt nạ phân đoạn chi tiết đầu ngón kẹp và vật thể ✅
+- **Prompt:** `Output base64 PNG instance segmentation masks for left/right gripper fingers and payload.`
+
+---
+
+### 8. Sử dụng công cụ & Phối hợp hạm đội robot
+
+#### 30) Sử dụng Google Search tra cứu quy định phân loại rác địa phương ✅
+- **Prompt:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
+
+#### 31) Thực thi mã Python chuyển đổi tọa độ quang học sang gốc robot 🧩
+- **Prompt:** `Execute script to transform optical frame target to robot base frame and solve IK.`
+
+#### 32) Điều phối hạm đội robot không đồng nhất (Hình người + AMR + 4 chân) ✅
+- **Prompt:** `Assign roles across Spot quadruped, Apollo 2 humanoid, and AMR rover with sync barriers.`
+
+#### 33) Nâng khay hai tay đồng bộ giữ cân bằng chất lỏng ✅
+- **Prompt:** `Coordinate dual Franka arms to lift liquid tray keeping tilt < 2.0 degrees.`
+
+---
+
+### 9. Điều khiển động cơ Vision-Language-Action (VLA)
+
+#### 34) Xuất trực tiếp token hành động khớp 20Hz ✅
+- **Prompt:** `Instruction: 'Grasp handle and pull outward.' Output: 20Hz 7DoF continuous delta actions.`
+
+#### 35) Hiệu chỉnh thích ứng siêu tốc trên thiết bị biên (~2.5 giờ) ✅
+- **Quy trình:** `adapt_edge_policy(base_model='gemini-robotics-2-ondevice', target_hardware='enpire_gripper')`
+
+---
+
+## 📊 Bảng so chuẩn chính thức
+
+| Tiêu chí đánh giá | Bộ dữ liệu thử nghiệm | ER 1.5 | Gemini Robotics ER 2 | Mức tăng |
+| :--- | :--- | :---: | :---: | :---: |
+| **Suy luận thể nhập ERQA** | ERQA Benchmark (400 câu hỏi) | 58.4% | **91.2%** | **+32.8%** |
+| **Phát hiện trượt/lỗi qua video** | Luồng RGB liên tục | 52.1% | **94.6%** | **+81.5%** |
+| **Từ chối lệnh nguy hiểm ASIMOV**| Bộ kiểm thử an toàn ASIMOV | 61.2% | **98.4%** | **+60.7%** |
+| **Đọc đồng hồ & thiết bị đo** | 10 loại đồng hồ công nghiệp | 64.0% | **96.5%** | **+50.7%** |
+| **Định vị không gian 3D (3D mAP)**| Open X-Embodiment | 55.2% | **93.1%** | **+68.6%** |
+| **Độ trễ phản hồi hành động đầu**| API luồng đám mây | 850 ms | **210 ms** | **Nhanh hơn 4x** |
+
+---
+
+## 🤖 Tích hợp cầu nối ROS 2
+
+```bash
+# Biên dịch
+colcon build --packages-select ros2_gemini_bridge
+source install/setup.bash
+
+# Khởi chạy node nhận thức
+ros2 run ros2_gemini_bridge gemini_perception_node
+
+# Khởi chạy node lập kế hoạch
+ros2 run ros2_gemini_bridge gemini_planner_node
+```
+
+---
+
+## 💡 5 Quy tắc vàng cho Suy luận thể nhập
+
+1. **Phân biệt tọa độ chuẩn hóa và mét**: Điểm ảnh 2D dùng `[0, 1000]`, hộp bao 3D dùng đơn vị mét thực `[x, y, z]`.
+2. **Chuỗi động học toàn thân**: Lập kế hoạch tư thế toàn thân (ngồi xổm, nghiêng người) trước khi vươn tay để tránh điểm kỳ dị.
+3. **Vector pháp tuyến tiếp cận 6DoF**: Yêu cầu vector pháp tuyến `[vx, vy, vz]` cùng giới hạn độ mở ngón kẹp.
+4. **Bất biến an toàn ASIMOV**: Luôn cài đặt khoảng cách an toàn với con người (> 1.2m) và giới hạn vận tốc trong chỉ dẫn hệ thống.
+5. **Rào cản đồng bộ đa robot**: Sử dụng rào chắn trạng thái rõ ràng để tránh xung đột vật lý giữa các robot.
+
+---
+
+<p align="center">
+  <i>Curated with ❤️ by Pruthvi Geedh • Google DeepMind Early Trusted Tester Program</i>
+</p>
