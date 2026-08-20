@@ -222,6 +222,20 @@ print(response.text)
 
 ## Bảng so chuẩn chính thức DeepMind
 
+<div align="center">
+
+| **ER Metrics Comparison** | **Progress Classification** |
+| :---: | :---: |
+| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_er_metrics.svg" alt="ER Metrics" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_progress_classification.svg" alt="Progress Classification" width="460"/></a> |
+
+| **Physical Agent Performance** | **Safety and Proximity Governance** |
+| :---: | :---: |
+| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_physical_agent.svg" alt="Physical Agent" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_safety_performance.svg" alt="Safety Performance" width="460"/></a> |
+
+</div>
+
+### Bảng tổng hợp so sánh: Gemini Robotics ER 2 vs SOTA
+
 | Tiêu chí đánh giá | Opus 5 | GPT 5.6 Sol | Gemini Robotics ER 1.6 | Gemini 3.6 Flash | Gemini Robotics ER 2 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Xác thực hình ảnh** | 83.6% | 83.1% | 82.9% | 83.3% | **87.7%** |

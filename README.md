@@ -794,11 +794,11 @@ Direct demonstrations from Google DeepMind's official [Gemini Robotics 2 and Emb
 
 | **ER Metrics Comparison** | **Progress Classification** |
 | :---: | :---: |
-| [![ER Metrics](./assets/benchmark_er_metrics.svg)](./BENCHMARKS.md) | [![Progress Classification](./assets/benchmark_progress_classification.svg)](./BENCHMARKS.md) |
+| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_er_metrics.svg" alt="ER Metrics" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_progress_classification.svg" alt="Progress Classification" width="460"/></a> |
 
 | **Physical Agent Performance** | **Safety and Proximity Governance** |
 | :---: | :---: |
-| [![Physical Agent](./assets/benchmark_physical_agent.svg)](./BENCHMARKS.md) | [![Safety Performance](./assets/benchmark_safety_performance.svg)](./BENCHMARKS.md) |
+| <a href="./BENCHMARKS.md"><img src="./assets/benchmark_physical_agent.svg" alt="Physical Agent" width="460"/></a> | <a href="./BENCHMARKS.md"><img src="./assets/benchmark_safety_performance.svg" alt="Safety Performance" width="460"/></a> |
 
 </div>
 
