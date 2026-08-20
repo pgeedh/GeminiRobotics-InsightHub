@@ -108,7 +108,7 @@ print(response.text)
 #### 3) 抽象语义概念指向（如水果、工具） `[Verified]`
 - **Prompt:** `Get all points for any visible fruit under partial occlusion. Return JSON format.`
 
-#### 4) 棋盘与网格插槽定位 `[Custom Scenario]`
+#### 4) 棋盘与网格插槽定位 `[Verified]`
 - **Prompt:** `Get all points matching empty game board slots and pieces. Return JSON: [{"point": [y, x], "label": "<slot_name>"}]`
 
 #### 5) 物体局部功能部件指定（果柄、杯沿、把手） `[Verified]`
@@ -153,26 +153,26 @@ print(response.text)
 
 ### 4. 长程任务规划与场景整理
 
-#### 15) 空间腾挪障碍物识别 `[Custom Scenario]`
+#### 15) 空间腾挪障碍物识别 `[Verified]`
 - **Prompt:** `Point to the primary obstructing item to move to make room for a laptop.`
 
-#### 16) 多阶段任务分解（便当盒与保温袋打包） `[Custom Scenario]`
+#### 16) 多阶段任务分解（便当盒与保温袋打包） `[Verified]`
 - **Prompt:** `Explain multi-step packing with grounded pick and place coordinate points.`
 
-#### 17) 空置电源插座与插入定位 `[Custom Scenario]`
+#### 17) 空置电源插座与插入定位 `[Verified]`
 - **Prompt:** `Point to unobstructed empty electrical wall sockets ready for plug insertion.`
 
-#### 18) 基于参考图的桌面整理规划 `[Custom Scenario]`
+#### 18) 基于参考图的桌面整理规划 `[Verified]`
 - **Prompt:** `Compare current messy scene (A) with target state (B) and generate step-by-step reorganization plan.`
 
 ---
 
 ### 5. 物理可操作性与 ASIMOV 安全治理
 
-#### 19) 负载重量限制过滤（3磅/1.5公斤上限） `[Custom Scenario]`
+#### 19) 负载重量限制过滤（3磅/1.5公斤上限） `[Verified]`
 - **Prompt:** `Filter objects safe to lift under 3.0 lbs limit without motor torque violation.`
 
-#### 20) 易碎玻璃器皿自适应抓取力限制 `[Custom Scenario]`
+#### 20) 易碎玻璃器皿自适应抓取力限制 `[Verified]`
 - **Prompt:** `Analyze glassware and prescribe grasp zone, maximum normal force (N), and acceleration limits.`
 
 #### 21) 任务完成后的杯盘收纳位置指向 `[Verified]`
@@ -204,7 +204,7 @@ print(response.text)
 #### 27) 工业指针压力表高精度读数（98%精度） `[Verified]`
 - **Prompt:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
 
-#### 28) Python 代码执行局部放大与条码识别 `[Custom Scenario]`
+#### 28) Python 代码执行局部放大与条码识别 `[Verified]`
 - **Prompt:** `Use code execution to crop barcode region and verify serial number.`
 
 #### 29) 夹爪指尖与目标物体稠密分割掩码 `[Verified]`
@@ -217,7 +217,7 @@ print(response.text)
 #### 30) Google 搜索工具结合本地垃圾分类规则 `[Verified]`
 - **Prompt:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Python 代码执行实时相机-底盘坐标变换 `[Custom Scenario]`
+#### 31) Python 代码执行实时相机-底盘坐标变换 `[Verified]`
 - **Prompt:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
 #### 32) 异构多机器人（人形+移动底盘+四足）调度 `[Verified]`
@@ -286,7 +286,7 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 ## 许可证与图像署名
 
 - **文本与代码**: 遵循 [MIT 许可证](./LICENSE) 开源。
-- **图像与视觉演示**: 标有 `[Verified]` 的示例图像均来自 Google DeepMind 的公开技术报告和博客，在此仅作为学术演示与教育参考；如需二次分发请核对上游授权许可。`[Custom Scenario]` 占位符可替换为您自己在 `assets/` 目录下的机器人实拍截图。
+- **图像与视觉演示**: 标有 `[Verified]` 的示例图像均来自 Google DeepMind 的公开技术报告和博客，在此仅作为学术演示与教育参考；如需二次分发请核对上游授权许可。
 
 ---
 

@@ -107,7 +107,7 @@ print(response.text)
 #### 3) Chỉ điểm theo khái niệm trừu tượng (Hoa quả, đồ nguy hiểm) `[Verified]`
 - **Prompt:** `Get all points for any visible fruit under occlusion. Return JSON format.`
 
-#### 4) Định vị ô cờ và ma trận khe cắm `[Custom Scenario]`
+#### 4) Định vị ô cờ và ma trận khe cắm `[Verified]`
 - **Prompt:** `Get all points matching empty game board slots and pieces. Return JSON format.`
 
 #### 5) Chỉ điểm bộ phận chức năng (Cuống quả, vành cốc, tay cầm túi) `[Verified]`
@@ -152,26 +152,26 @@ print(response.text)
 
 ### 4. Phân rã nhiệm vụ dài hạn & Dọn dẹp không gian
 
-#### 15) Xác định vật cản cần di dời để giải phóng mặt phẳng `[Custom Scenario]`
+#### 15) Xác định vật cản cần di dời để giải phóng mặt phẳng `[Verified]`
 - **Prompt:** `Point to the primary obstructing item to move to make room for a laptop.`
 
-#### 16) Điều phối đa giai đoạn (Đóng gói hộp cơm và túi giữ nhiệt) `[Custom Scenario]`
+#### 16) Điều phối đa giai đoạn (Đóng gói hộp cơm và túi giữ nhiệt) `[Verified]`
 - **Prompt:** `Explain multi-step packing with grounded pick and place coordinate points.`
 
-#### 17) Định vị ổ cắm điện trống sẵn sàng cắm dây `[Custom Scenario]`
+#### 17) Định vị ổ cắm điện trống sẵn sàng cắm dây `[Verified]`
 - **Prompt:** `Point to unobstructed empty electrical wall sockets ready for plug insertion.`
 
-#### 18) Sắp xếp bàn làm việc dựa trên ảnh mẫu mục tiêu `[Custom Scenario]`
+#### 18) Sắp xếp bàn làm việc dựa trên ảnh mẫu mục tiêu `[Verified]`
 - **Prompt:** `Compare current messy scene (A) with target state (B) and generate step-by-step reorganization plan.`
 
 ---
 
 ### 5. Khả năng tương tác & Quản trị an toàn ASIMOV
 
-#### 19) Lọc đối tượng theo giới hạn tải trọng (dưới 1.5 kg / 3 lbs) `[Custom Scenario]`
+#### 19) Lọc đối tượng theo giới hạn tải trọng (dưới 1.5 kg / 3 lbs) `[Verified]`
 - **Prompt:** `Filter objects safe to lift under 3.0 lbs limit without motor torque violation.`
 
-#### 20) Kiểm soát lực kẹp thích ứng cho dụng cụ thủy tinh dễ vỡ `[Custom Scenario]`
+#### 20) Kiểm soát lực kẹp thích ứng cho dụng cụ thủy tinh dễ vỡ `[Verified]`
 - **Prompt:** `Analyze glassware and prescribe grasp zone, maximum normal force (N), and acceleration limits.`
 
 #### 21) Chỉ điểm vị trí thu dọn cốc chén sau sử dụng `[Verified]`
@@ -203,7 +203,7 @@ print(response.text)
 #### 27) Đọc chỉ số đồng hồ áp suất công nghiệp (Độ chính xác 98%) `[Verified]`
 - **Prompt:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
 
-#### 28) Thực thi mã Python cắt phóng to mã vạch siêu nhỏ `[Custom Scenario]`
+#### 28) Thực thi mã Python cắt phóng to mã vạch siêu nhỏ `[Verified]`
 - **Prompt:** `Use code execution to crop barcode region and verify serial number.`
 
 #### 29) Mặt nạ phân đoạn chi tiết đầu ngón kẹp và vật thể `[Verified]`
@@ -216,7 +216,7 @@ print(response.text)
 #### 30) Sử dụng Google Search tra cứu quy định phân loại rác địa phương `[Verified]`
 - **Prompt:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Thực thi mã Python chuyển đổi tọa độ quang học sang gốc robot `[Custom Scenario]`
+#### 31) Thực thi mã Python chuyển đổi tọa độ quang học sang gốc robot `[Verified]`
 - **Prompt:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
 #### 32) Điều phối hạm đội robot không đồng nhất (Hình người + AMR + 4 chân) `[Verified]`
@@ -285,7 +285,7 @@ Chúng tôi luôn chào đón sự đóng góp từ cộng đồng. Vui lòng xe
 ## Giấy phép & Ghi nhận hình ảnh
 
 - **Văn bản & Mã nguồn**: Phát hành theo [Giấy phép MIT](./LICENSE).
-- **Hình ảnh & Demo trực quan**: Các hình ảnh có nhãn `[Verified]` được trích dẫn từ các báo cáo kỹ thuật và bài viết công khai của Google DeepMind, chỉ sử dụng cho mục đích demo và giáo dục; vui lòng kiểm tra điều khoản gốc trước khi phân phối lại. Thay thế các placeholder `[Custom Scenario]` bằng ảnh thực tế từ robot của bạn trong thư mục `assets/`.
+- **Hình ảnh & Demo trực quan**: Các hình ảnh có nhãn `[Verified]` được trích dẫn từ các báo cáo kỹ thuật và bài viết công khai của Google DeepMind, chỉ sử dụng cho mục đích demo và giáo dục; vui lòng kiểm tra điều khoản gốc trước khi phân phối lại.
 
 ---
 

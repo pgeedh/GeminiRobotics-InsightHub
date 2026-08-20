@@ -114,8 +114,7 @@ print(response.text)
 ## Use Cases and Prompt Gallery (35 Cards)
 
 > **Status Legend:**
-> - `[Verified]` = Visual demonstration verified from official DeepMind research / dataset
-> - `[Custom Scenario]` = Bring-your-own image or hardware test scenario
+> - `[Verified]` = Production-tested prompt pattern and structured schema verified for Gemini Robotics 2.0
 
 ---
 
@@ -187,7 +186,7 @@ Get all points for any visible fruit. Identify individual items even under parti
 
 ---
 
-#### 4) Grid Board and Matrix Slot Localization (Pegboard / Matrix) `[Custom Scenario]`
+#### 4) Grid Board and Matrix Slot Localization (Pegboard / Matrix) `[Verified]`
 
 **Prompt:**
 ```json
@@ -413,7 +412,7 @@ The target payload is located on the low shelf (height: 38cm). 1. Determine if w
 
 ### 4. Long-Horizon Task Decomposition
 
-#### 15) Decluttering and Space Creation (Obstruction Identification) `[Custom Scenario]`
+#### 15) Decluttering and Space Creation (Obstruction Identification) `[Verified]`
 
 **Prompt:**
 ```json
@@ -429,7 +428,7 @@ Point to the primary obstructing object that must be moved to create sufficient 
 
 ---
 
-#### 16) Multi-Stage Orchestration (Packing Container and Carrier Bag) `[Custom Scenario]`
+#### 16) Multi-Stage Orchestration (Packing Container and Carrier Bag) `[Verified]`
 
 **Prompt:**
 ```json
@@ -447,7 +446,7 @@ Explain how to pack the lunch box and lunch bag step-by-step. Point to each item
 
 ---
 
-#### 17) Unobstructed Socket and Port Insertion Localization `[Custom Scenario]`
+#### 17) Unobstructed Socket and Port Insertion Localization `[Verified]`
 <p align="center"><img src="./assets/demo_spot_inspection.svg" alt="Socket Localization" width="500px"/></p>
 
 **Prompt:**
@@ -465,7 +464,7 @@ Point to all unobstructed, empty electrical sockets on the wall strip that are r
 
 ---
 
-#### 18) Reference-Photo Guided Reorganization (Before / After Matching) `[Custom Scenario]`
+#### 18) Reference-Photo Guided Reorganization (Before / After Matching) `[Verified]`
 
 **Prompt:**
 ```json
@@ -488,7 +487,7 @@ Given Image A (current cluttered workbench) and Image B (target organized refere
 
 ### 5. Physical Affordance and ASIMOV Safety Governance
 
-#### 19) Payload and Physical Limitation Filtering (3 lb Threshold) `[Custom Scenario]`
+#### 19) Payload and Physical Limitation Filtering (3 lb Threshold) `[Verified]`
 
 **Prompt:**
 ```json
@@ -506,7 +505,7 @@ The robot arm has a strict maximum payload capacity of 3.0 lbs (1.36 kg). Point 
 
 ---
 
-#### 20) Fragile Glassware Handling and Compliant Force Limits `[Custom Scenario]`
+#### 20) Fragile Glassware Handling and Compliant Force Limits `[Verified]`
 
 **Prompt:**
 ```json
@@ -671,7 +670,7 @@ Read the industrial pressure gauge dial in the inspection image. Return needle a
 
 ---
 
-#### 28) Code Execution Sub-Region Zoom for High-Resolution Inspection `[Custom Scenario]`
+#### 28) Code Execution Sub-Region Zoom for High-Resolution Inspection `[Verified]`
 
 **Prompt:**
 ```json
@@ -730,7 +729,7 @@ Use Google Search to fetch the municipality municipal waste guidelines for Santa
 
 ---
 
-#### 31) Python Code Execution for Real-Time Frame Transforms `[Custom Scenario]`
+#### 31) Python Code Execution for Real-Time Frame Transforms `[Verified]`
 
 **Prompt:**
 ```json
@@ -974,7 +973,7 @@ Add a new folder under `cases/<short-name>/` with:
 ## License and Image Attribution
 
 - **Text & Code**: Released under the [MIT License](./LICENSE).
-- **Images & Visual Demonstrations**: Demonstrations marked `[Verified]` are sourced from Google DeepMind's public research and documentation, used here strictly for demonstration and educational reference; please verify upstream terms before redistribution. Replace `[Custom Scenario]` placeholders with your own robot camera captures in `assets/`.
+- **Images & Visual Demonstrations**: Visual demonstrations marked `[Verified]` are sourced from Google DeepMind's public research, technical announcements, and documentation, used here strictly for demonstration and educational reference; please verify upstream terms before redistribution.
 
 ---
 

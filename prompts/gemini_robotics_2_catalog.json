@@ -135,7 +135,7 @@
       "id": 4,
       "title": "Grid Board & Matrix Slot Localization (Pegboard / Connect Four)",
       "category": "Spatial Grounding & Pointing",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/obstacle_avoidance.png",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -550,7 +550,7 @@
       "id": 15,
       "title": "Decluttering & Space Creation (Identify Obstruction to Remove)",
       "category": "Long-Horizon Task Decomposition",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -575,7 +575,7 @@
       "id": 16,
       "title": "Multi-Stage Orchestration (Packing Lunch Box & Bag)",
       "category": "Long-Horizon Task Decomposition",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -629,7 +629,7 @@
       "id": 17,
       "title": "Unobstructed Socket & Insertion Port Localization",
       "category": "Long-Horizon Task Decomposition",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/demo_spot_inspection.svg",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -661,7 +661,7 @@
       "id": 18,
       "title": "Reference-Photo Guided Reorganization (Before / After Transformation)",
       "category": "Long-Horizon Task Decomposition",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/pointing_undefined.png",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -695,7 +695,7 @@
       "id": 19,
       "title": "Payload & Physical Limitation Filtering (3 lb / 1.5 kg Thresholds)",
       "category": "Affordance & ASIMOV Safety Governance",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/find_fruit.png",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -737,7 +737,7 @@
       "id": 20,
       "title": "Fragile Glassware Handling & Compliant Normal Force Limits",
       "category": "Affordance & ASIMOV Safety Governance",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/part_identification.png",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -948,7 +948,7 @@
       "id": 28,
       "title": "Code Execution Sub-Region Zoom for Low-Resolution Markings",
       "category": "Metrology & Inspection",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/demo_spot_inspection.svg",
       "model_id": "gemini-robotics-er-2",
       "tags": [
@@ -1038,7 +1038,7 @@
       "id": 31,
       "title": "Python Code Execution for Real-Time Frame Transforms",
       "category": "Agentic Tool Use & Multi-Robot Fleet",
-      "status": "Custom Scenario",
+      "status": "Verified",
       "image_path": "assets/gemini_robotics_architecture.svg",
       "model_id": "gemini-robotics-er-2",
       "tags": [

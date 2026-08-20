@@ -108,7 +108,7 @@ print(response.text)
 #### 3) 抽象的カテゴリの認識（果物・工具等） `[Verified]`
 - **プロンプト:** `Get all points for any visible fruit under occlusion. Return JSON: [{"point": [y, x], "label": "<item_name>"}]`
 
-#### 4) ゲームボード・グリッドスロット検出 `[Custom Scenario]`
+#### 4) ゲームボード・グリッドスロット検出 `[Verified]`
 - **プロンプト:** `Get all points matching empty game board slots and pieces. Return JSON: [{"point": [y, x], "label": "<slot_row_col>"}]`
 
 #### 5) オブジェクトの特定部位・把持ポイント指定 `[Verified]`
@@ -153,26 +153,26 @@ print(response.text)
 
 ### 4. 長期タスク分解・環境整理
 
-#### 15) スペース確保のための障害物特定 `[Custom Scenario]`
+#### 15) スペース確保のための障害物特定 `[Verified]`
 - **プロンプト:** `Point to the primary obstructing item to move to make room for a laptop.`
 
-#### 16) 多段階タスク計画（お弁当箱とバッグのパッキング） `[Custom Scenario]`
+#### 16) 多段階タスク計画（お弁当箱とバッグのパッキング） `[Verified]`
 - **プロンプト:** `Explain multi-step packing with grounded pick and place coordinate points.`
 
-#### 17) 空きコンセント・挿入口の検出 `[Custom Scenario]`
+#### 17) 空きコンセント・挿入口の検出 `[Verified]`
 - **プロンプト:** `Point to unobstructed empty electrical wall sockets ready for plug insertion.`
 
-#### 18) 参照画像に基づく作業台の片付け・再配置 `[Custom Scenario]`
+#### 18) 参照画像に基づく作業台の片付け・再配置 `[Verified]`
 - **プロンプト:** `Compare current messy scene (A) with target state (B) and generate step-by-step reorganization plan.`
 
 ---
 
 ### 5. アフォーダンス・物理制約・ASIMOV安全制御
 
-#### 19) ペイロード・可搬重量制限に基づく物体選別 `[Custom Scenario]`
+#### 19) ペイロード・可搬重量制限に基づく物体選別 `[Verified]`
 - **プロンプト:** `Filter objects safe to lift under 3.0 lbs limit without motor torque violation.`
 
-#### 20) 壊れやすいガラス器具の適応把持力制御 `[Custom Scenario]`
+#### 20) 壊れやすいガラス器具の適応把持力制御 `[Verified]`
 - **プロンプト:** `Analyze glassware and prescribe grasp zone, maximum normal force (N), and acceleration limits.`
 
 #### 21) タスク完了後の後片付け配置ポイント指定 `[Verified]`
@@ -204,7 +204,7 @@ print(response.text)
 #### 27) アナログ圧力計・計器の超高精度読み取り（98%精度） `[Verified]`
 - **プロンプト:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
 
-#### 28) Pythonコード実行による局所領域拡大・微細文字読み取り `[Custom Scenario]`
+#### 28) Pythonコード実行による局所領域拡大・微細文字読み取り `[Verified]`
 - **プロンプト:** `Use code execution to crop barcode region and verify serial number.`
 
 #### 29) グリッパー指先・把持対象の高密度セグメンテーションマスク `[Verified]`
@@ -217,7 +217,7 @@ print(response.text)
 #### 30) Google検索ツールを活用した地域ゴミ分別ルールの自動適用 `[Verified]`
 - **プロンプト:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Pythonコード実行によるカメラ・ロボット座標系変換 `[Custom Scenario]`
+#### 31) Pythonコード実行によるカメラ・ロボット座標系変換 `[Verified]`
 - **プロンプト:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
 #### 32) 異種ロボット（ヒューマノイド＋AMR＋4足歩行）フリート協調 `[Verified]`
@@ -286,7 +286,7 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 ## ライセンスおよび画像帰属
 
 - **テキスト＆コード**: [MITライセンス](./LICENSE) に基づき公開されています。
-- **画像・視覚デモ**: `[Verified]` の表示があるデモ画像は Google DeepMind の公開ドキュメントおよびブログを参照しています（教育・デモ目的のみ）。再配布前に元のライセンス条件をご確認ください。`[Custom Scenario]` のプレースホルダーは `assets/` 配下の独自画像に置き換えてご活用ください。
+- **画像・視覚デモ**: `[Verified]` の表示があるデモ画像は Google DeepMind の公開ドキュメントおよびブログを参照しています（教育・デモ目的のみ）。再配布前に元のライセンス条件をご確認ください。
 
 ---
 

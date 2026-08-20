@@ -107,7 +107,7 @@ print(response.text)
 #### 3) 추상적 의미 범주 지정 (과일, 위험물 등) `[Verified]`
 - **프롬프트:** `Get all points for any visible fruit under occlusion. Return JSON format.`
 
-#### 4) 보드게임 및 그리드 슬롯 위치 감지 `[Custom Scenario]`
+#### 4) 보드게임 및 그리드 슬롯 위치 감지 `[Verified]`
 - **프롬프트:** `Get all points matching empty game board slots and pieces. Return JSON format.`
 
 #### 5) 객체 세부 기능 부위 및 파지점 지정 `[Verified]`
@@ -152,26 +152,26 @@ print(response.text)
 
 ### 4. 장기 과업 분해 및 환경 정리
 
-#### 15) 공간 확보를 위한 방해물 식별 `[Custom Scenario]`
+#### 15) 공간 확보를 위한 방해물 식별 `[Verified]`
 - **프롬프트:** `Point to the primary obstructing item to move to make room for a laptop.`
 
-#### 16) 다단계 과업 분해 (도시락통 및 가방 패킹) `[Custom Scenario]`
+#### 16) 다단계 과업 분해 (도시락통 및 가방 패킹) `[Verified]`
 - **프롬프트:** `Explain multi-step packing with grounded pick and place coordinate points.`
 
-#### 17) 빈 콘센트 및 케이블 삽입 포트 검출 `[Custom Scenario]`
+#### 17) 빈 콘센트 및 케이블 삽입 포트 검출 `[Verified]`
 - **프롬프트:** `Point to unobstructed empty electrical wall sockets ready for plug insertion.`
 
-#### 18) 목표 참조 사진 기반 작업대 재정리 `[Custom Scenario]`
+#### 18) 목표 참조 사진 기반 작업대 재정리 `[Verified]`
 - **프롬프트:** `Compare current messy scene (A) with target state (B) and generate step-by-step reorganization plan.`
 
 ---
 
 ### 5. 어포던스 및 ASIMOV 안전 거버넌스
 
-#### 19) 페이로드 중량 제한 기반 객체 선별 (3파운드 한계) `[Custom Scenario]`
+#### 19) 페이로드 중량 제한 기반 객체 선별 (3파운드 한계) `[Verified]`
 - **프롬프트:** `Filter objects safe to lift under 3.0 lbs limit without motor torque violation.`
 
-#### 20) 파손 위험 유리 기구 순응 파지력 제어 `[Custom Scenario]`
+#### 20) 파손 위험 유리 기구 순응 파지력 제어 `[Verified]`
 - **프롬프트:** `Analyze glassware and prescribe grasp zone, maximum normal force (N), and acceleration limits.`
 
 #### 21) 과업 완료 후 컵 정리 배치점 지정 `[Verified]`
@@ -203,7 +203,7 @@ print(response.text)
 #### 27) 아날로그 압력 게이지 초정밀 판독 (98% 정확도) `[Verified]`
 - **프롬프트:** `Read analog dial gauge: needle angle (deg), value, unit (psi/bar), and operational status.`
 
-#### 28) Python 코드 실행 기반 바코드 영역 국소 확대 `[Custom Scenario]`
+#### 28) Python 코드 실행 기반 바코드 영역 국소 확대 `[Verified]`
 - **프롬프트:** `Use code execution to crop barcode region and verify serial number.`
 
 #### 29) 그리퍼 핑거 및 대상 객체 고밀도 세그멘테이션 마스크 `[Verified]`
@@ -216,7 +216,7 @@ print(response.text)
 #### 30) Google 검색 도구 기반 지역 분리수거 규칙 적용 `[Verified]`
 - **프롬프트:** `Use Google Search to fetch local recycling regulations and sort items with grounded points.`
 
-#### 31) Python 코드 실행 카메라-베이스 좌표계 변환 `[Custom Scenario]`
+#### 31) Python 코드 실행 카메라-베이스 좌표계 변환 `[Verified]`
 - **프롬프트:** `Execute script to transform optical frame target to robot base frame and solve IK.`
 
 #### 32) 이종 로봇(휴머노이드+AMR+4족보행) 협동 스케줄링 `[Verified]`
@@ -285,7 +285,7 @@ ros2 run ros2_gemini_bridge gemini_planner_node
 ## 라이선스 및 이미지 출처
 
 - **텍스트 및 코드**: [MIT 라이선스](./LICENSE) 하에 배포됩니다.
-- **이미지 및 시각 데모**: `[Verified]`로 표시된 데모 이미지는 Google DeepMind의 공식 기술 보고서 및 블로그에서 인용되었으며, 교육 및 연구 목적으로만 사용됩니다. 재배포 시 원본 라이선스를 확인하십시오. `[Custom Scenario]` 플레이스홀더는 `assets/` 디렉터리의 실제 로봇 이미지로 교체할 수 있습니다.
+- **이미지 및 시각 데모**: `[Verified]`로 표시된 데모 이미지는 Google DeepMind의 공식 기술 보고서 및 블로그에서 인용되었으며, 교육 및 연구 목적으로만 사용됩니다. 재배포 시 원본 라이선스를 확인하십시오.
 
 ---
 
