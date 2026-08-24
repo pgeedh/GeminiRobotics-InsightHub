@@ -8,11 +8,10 @@ from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 # -------------------------------------------------------------------------
-# GEMINI ROBOTICS: WHOLE-BODY TASK DECOMPOSITION & PLANNING (ER 2 & ER 1.5)
+# GEMINI ROBOTICS 2.0: WHOLE-BODY TASK DECOMPOSITION & PLANNING (ER 2)
 # -------------------------------------------------------------------------
-# This script shows how to use Gemini Robotics ER 2 as a high-level physical
-# AI brain that decomposes complex, multi-step tasks into whole-body action
-# sequences (locomotion + manipulation + safety checks + replanning).
+# Decomposes complex physical missions into structured whole-body action
+# sequences with explicit ASIMOV safety checks and parameters.
 # -------------------------------------------------------------------------
 
 load_dotenv()
@@ -21,27 +20,24 @@ api_key = os.getenv("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
 DEFAULT_MODEL = os.getenv("GEMINI_ROBOTICS_MODEL", "gemini-robotics-er-2")
 FALLBACK_MODELS = [
     "gemini-robotics-er-2",
-    "gemini-robotics-er-1.5-preview",
     "gemini-2.5-flash",
-    "gemini-2.0-flash",
-    "gemini-1.5-pro"
+    "gemini-2.0-flash"
 ]
 
 if not api_key:
-    print("⚠️ Warning: GEMINI_API_KEY not found. Running with simulation fallback.")
+    print("[INFO] GEMINI_API_KEY not configured. Running with simulated planner.")
     client = None
 else:
-    print("✅ Gemini API Key loaded.")
+    print("[INFO] Gemini API Key loaded.")
     try:
         client = genai.Client(api_key=api_key)
     except Exception as e:
-        print(f"Error initializing client: {e}")
+        print(f"[ERROR] Error initializing client: {e}")
         client = None
 
-# Structured Schema Definition for Robot Task Planning
 class PlanStep(BaseModel):
     step_id: int = Field(description="Sequential index of the step")
-    action: str = Field(description="Action primitive name (e.g., navigate_to, crouch, reach, grasp, place, verify)")
+    action: str = Field(description="Action primitive (e.g. navigate_to, crouch, reach, grasp, place, verify)")
     target: str = Field(description="Target entity or landmark name")
     parameters: Dict[str, Any] = Field(default_factory=dict, description="Execution parameters (e.g. speed, height_cm, grip_force_N)")
     safety_precondition: Optional[str] = Field(None, description="ASIMOV safety check before executing step")
@@ -54,200 +50,94 @@ class RobotTaskPlan(BaseModel):
     steps: List[PlanStep]
     recovery_plan: Optional[str] = None
 
-# ER 2 Whole-Body Robot System Prompt
 ROBOT_SYSTEM_PROMPT = """
 You are the Embodied Reasoning (ER) brain for a full-body humanoid / mobile manipulator robot.
 You control whole-body intelligence from feet to fingertips.
-
-Available Low-Level Primitives:
-1. navigate_to(target_location, clearance_m=0.5)
-2. align_base(target_pose_2d)
-3. crouch(height_percentage=0.5)
-4. stand_up()
-5. reach_arm(arm_id='left'|'right'|'dual', target_pose_3d=[x, y, z])
-6. grasp(arm_id='left'|'right', grasp_type='pinch'|'power'|'suction', force_n=15)
-7. release_gripper(arm_id='left'|'right')
-8. place_object(target_surface, arm_id='left'|'right')
-9. verify_scene_state(expected_visual_state)
-10. check_human_safety(proximity_radius_m=1.0)
-
-Safety Rules (ASIMOV-Agentic Standard):
-- Always insert a check_human_safety step before high-acceleration or heavy manipulation.
-- Verify scene state before and after critical grasps.
-- If an object is low on the floor, crouch before reaching.
-
-Given a user command, generate a structured task decomposition in JSON.
+Always decompose missions into structured kinematic steps with ASIMOV safety checks.
 """
 
-def plan_mission(user_command: str, model_name: str = DEFAULT_MODEL, current_state_notes: str = "") -> RobotTaskPlan:
-    """
-    Generates a structured whole-body task plan using Gemini Robotics ER 2.
-    """
-    print(f"\n🎯 User Command: '{user_command}'")
-    if current_state_notes:
-        print(f"📌 Current State / Context: {current_state_notes}")
-
-    full_prompt = f"""
-    {ROBOT_SYSTEM_PROMPT}
-
-    User Command: {user_command}
-    Current Environment / Robot State: {current_state_notes or 'Robot standing at docking station, batteries full, dual arms homed.'}
-
-    Generate the complete structured execution plan.
-    """
-
-    plan_data = None
-
+def plan_mission(mission_goal: str, model_name: str = DEFAULT_MODEL) -> Optional[RobotTaskPlan]:
+    print(f"\n[PLANNER] Planning robot mission: '{mission_goal}' (Model: {model_name})...")
+    
     if client:
-        models_to_try = [model_name] + [m for m in FALLBACK_MODELS if m != model_name]
-        for m in models_to_try:
-            try:
-                print(f"📡 Generating whole-body plan with {m}...")
-                response = client.models.generate_content(
-                    model=m,
-                    contents=full_prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.1, # Deterministic reasoning
-                        response_mime_type="application/json",
-                        response_schema=RobotTaskPlan,
-                        thinking_config=types.ThinkingConfig(thinking_budget=2048)
-                    )
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=[
+                    ROBOT_SYSTEM_PROMPT,
+                    f"Create an executable whole-body robot plan for: '{mission_goal}'"
+                ],
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    response_schema=RobotTaskPlan,
+                    temperature=0.1,
+                    thinking_config=types.ThinkingConfig(thinking_budget=2048)
                 )
-                
-                raw_text = response.text
-                clean_json = extract_json(raw_text)
-                plan_data = json.loads(clean_json)
-                print(f"✅ Successfully planned mission using {m}")
-                break
-            except Exception as e:
-                print(f"⚠️ Model '{m}' error: {e}")
-                continue
+            )
+            plan_obj = RobotTaskPlan.model_validate_json(response.text)
+            print_plan(plan_obj)
+            return plan_obj
+        except Exception as e:
+            print(f"[WARN] API call error: {e}. Running simulated planner...")
 
-    if not plan_data:
-        print("ℹ️ Using simulated ER 2 whole-body planner output...")
-        plan_data = generate_simulated_plan(user_command)
+    sim_plan = generate_simulated_plan(mission_goal)
+    print_plan(sim_plan)
+    return sim_plan
 
-    try:
-        parsed_plan = RobotTaskPlan(**plan_data) if isinstance(plan_data, dict) else plan_data
-    except Exception as e:
-        print(f"⚠️ Schema validation note: {e}")
-        parsed_plan = plan_data
-
-    print_plan_summary(parsed_plan)
-    return parsed_plan
-
-def replan_on_failure(original_command: str, failed_step_id: int, failure_reason: str) -> RobotTaskPlan:
-    """
-    Triggers dynamic replanning when a step execution fails or unexpected obstacles occur.
-    """
-    print(f"\n🚨 Execution Failure at Step {failed_step_id}: {failure_reason}")
-    print("🔄 Invoking Gemini Robotics ER 2 Dynamic Replanner...")
-    
-    replan_context = f"Step {failed_step_id} failed because: '{failure_reason}'. Generate an alternative recovery plan."
-    return plan_mission(original_command, current_state_notes=replan_context)
-
-def extract_json(text: str) -> str:
-    """Extracts valid JSON from markdown code fences or raw string."""
-    json_match = re.search(r'```(?:json)?\s*(\{.*?\}|\[.*?\])\s*```', text, re.DOTALL)
-    if json_match:
-        return json_match.group(1).strip()
-    return text.strip()
-
-def generate_simulated_plan(command: str) -> Dict[str, Any]:
-    """Generates a whole-body simulated plan matching Gemini Robotics ER 2 format."""
-    return {
-        "task_name": "whole_body_manipulation_mission",
-        "overall_goal": command,
-        "estimated_duration_sec": 42,
-        "steps": [
-            {
-                "step_id": 1,
-                "action": "check_human_safety",
-                "target": "workspace_perimeter",
-                "parameters": {"proximity_radius_m": 1.2},
-                "safety_precondition": "Ensure no humans within 1m before robot initiates base movement",
-                "expected_outcome": "Perimeter clear"
-            },
-            {
-                "step_id": 2,
-                "action": "navigate_to",
-                "target": "kitchen_table_zone",
-                "parameters": {"clearance_m": 0.4, "max_vel_mps": 0.6},
-                "safety_precondition": "Dynamic obstacle avoidance active",
-                "expected_outcome": "Robot base positioned 0.5m in front of table"
-            },
-            {
-                "step_id": 3,
-                "action": "verify_scene_state",
-                "target": "target_item_on_table",
-                "parameters": {"camera_view": "head_rgbd"},
-                "safety_precondition": "RGBD point cloud depth verified",
-                "expected_outcome": "Object 3D coordinates and grasp affordance computed"
-            },
-            {
-                "step_id": 4,
-                "action": "reach_arm",
-                "target": "target_item",
-                "parameters": {"arm_id": "right", "target_pose_3d": [0.05, 0.45, 0.12]},
-                "safety_precondition": "Joint velocity limits < 0.8 rad/s",
-                "expected_outcome": "Gripper positioned 3cm above object"
-            },
-            {
-                "step_id": 5,
-                "action": "grasp",
-                "target": "target_item",
-                "parameters": {"arm_id": "right", "grasp_type": "power", "force_n": 18},
-                "safety_precondition": "Tactile sensor slip feedback enabled",
-                "expected_outcome": "Object securely grasped in right hand"
-            },
-            {
-                "step_id": 6,
-                "action": "navigate_to",
-                "target": "trash_bin_zone",
-                "parameters": {"clearance_m": 0.5},
-                "safety_precondition": "Keep payload stable during locomotion",
-                "expected_outcome": "Robot positioned adjacent to receptacle"
-            },
-            {
-                "step_id": 7,
-                "action": "place_object",
-                "target": "trash_bin",
-                "parameters": {"arm_id": "right"},
-                "safety_precondition": "Check drop receptacle depth",
-                "expected_outcome": "Object released safely into trash bin"
-            }
+def generate_simulated_plan(mission_goal: str) -> RobotTaskPlan:
+    return RobotTaskPlan(
+        task_name="Heavy Part Transfer with Whole-Body Squat",
+        overall_goal=mission_goal,
+        estimated_duration_sec=32,
+        steps=[
+            PlanStep(
+                step_id=1,
+                action="navigate_to_shelf",
+                target="shelf_lower_tier_alpha",
+                parameters={"standoff_distance_m": 0.65, "speed_ms": 0.4},
+                safety_precondition="Check 1.2m human proximity buffer",
+                expected_outcome="Base located within reach envelope"
+            ),
+            PlanStep(
+                step_id=2,
+                action="whole_body_crouch",
+                target="knee_and_torso_actuators",
+                parameters={"torso_pitch_deg": 22.0, "knee_flexion_deg": 48.0},
+                safety_precondition="Center of gravity aligned with support polygon",
+                expected_outcome="Gripper level matches shelf height (38cm)"
+            ),
+            PlanStep(
+                step_id=3,
+                action="dual_arm_grasp",
+                target="heavy_toolbox",
+                parameters={"grasp_type": "bimanual_power", "force_n": 24.0},
+                safety_precondition="Verify payload < 25kg capacity limit",
+                expected_outcome="Force closure confirmed on left and right grips"
+            ),
+            PlanStep(
+                step_id=4,
+                action="stand_and_carry",
+                target="workbench_alpha",
+                parameters={"speed_ms": 0.3, "transport_height_m": 0.9},
+                safety_precondition="Maintain active slip monitoring",
+                expected_outcome="Payload deposited on workbench latches"
+            )
         ],
-        "recovery_plan": "If grasp slip is detected, reposition arm by 2cm along normal and retry with 25N force."
-    }
-
-def print_plan_summary(plan: Any):
-    print("\n📋 Generated Whole-Body Robot Plan (Gemini Robotics ER 2):")
-    print("=" * 65)
-    if isinstance(plan, RobotTaskPlan):
-        print(f"📌 Task: {plan.task_name} | Est. Duration: {plan.estimated_duration_sec}s")
-        print(f"🎯 Goal: {plan.overall_goal}")
-        print("-" * 65)
-        for s in plan.steps:
-            safety_tag = f" [🛡️ {s.safety_precondition}]" if s.safety_precondition else ""
-            print(f"  Step {s.step_id}: {s.action.upper()} -> {s.target} (Params: {s.parameters}){safety_tag}")
-        if plan.recovery_plan:
-            print(f"🔄 Recovery Strategy: {plan.recovery_plan}")
-    elif isinstance(plan, dict):
-        print(f"📌 Task: {plan.get('task_name')} | Est. Duration: {plan.get('estimated_duration_sec', 30)}s")
-        print(f"🎯 Goal: {plan.get('overall_goal')}")
-        print("-" * 65)
-        for s in plan.get("steps", []):
-            print(f"  Step {s.get('step_id')}: {s.get('action', '').upper()} -> {s.get('target')} (Params: {s.get('parameters')})")
-    print("=" * 65)
-
-if __name__ == "__main__":
-    plan = plan_mission("Find the fallen water bottle under the desk, pick it up, and place it on the shelf.")
-    
-    # Demonstrate dynamic replanning
-    print("\n--- Simulating Dynamic Replanning Scenario ---")
-    replan_on_failure(
-        original_command="Place water bottle on shelf",
-        failed_step_id=4,
-        failure_reason="Obstacle detected in reach corridor: human arm entered workspace"
+        recovery_plan="If grip slip > 5mm detected, pause base locomotion, increase grip force +10N, and lower CoG."
     )
 
+def print_plan(plan: RobotTaskPlan):
+    print("\nExecutable Whole-Body Plan:")
+    print("==================================================")
+    print(f"Goal: {plan.overall_goal}")
+    print(f"Estimated Duration: {plan.estimated_duration_sec}s")
+    for step in plan.steps:
+        print(f"  Step {step.step_id}: [{step.action}] on '{step.target}'")
+        print(f"    Params: {step.parameters}")
+        print(f"    Safety: {step.safety_precondition}")
+    if plan.recovery_plan:
+        print(f"Recovery: {plan.recovery_plan}")
+    print("==================================================")
+
+if __name__ == "__main__":
+    plan_mission("Retrieve heavy part from low shelf and place on assembly table")

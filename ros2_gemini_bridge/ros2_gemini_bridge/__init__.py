@@ -1,5 +1,6 @@
 """
-ROS 2 Bridge for Google DeepMind Gemini Robotics ER 2 and ER 1.5.
+ROS 2 Bridge for Google DeepMind Gemini Robotics 2.0 (ER 2 and VLA 2).
+Provides perception, 3D metric bounding, and planning execution nodes.
 """
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"

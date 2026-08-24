@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%" style="background:#FFFFFF; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <text x="480" y="42" font-size="22" font-weight="700" fill="#111827" text-anchor="middle">Progress classification comparison</text>
+  
+  <!-- Grid lines -->
+  <g stroke="#E5E7EB" stroke-width="1">
+    <line x1="80" y1="110" x2="900" y2="110" />
+    <line x1="80" y1="185" x2="900" y2="185" />
+    <line x1="80" y1="260" x2="900" y2="260" />
+    <line x1="80" y1="335" x2="900" y2="335" />
+    <line x1="80" y1="410" x2="900" y2="410" />
+  </g>
+  
+  <!-- Y-Axis Labels -->
+  <g font-size="12" fill="#6B7280" text-anchor="end">
+    <text x="70" y="114">80%</text>
+    <text x="70" y="189">60%</text>
+    <text x="70" y="264">40%</text>
+    <text x="70" y="339">20%</text>
+    <text x="70" y="414">0%</text>
+  </g>
+  
+  <text x="35" y="260" font-size="13" fill="#4B5563" text-anchor="middle" transform="rotate(-90 35 260)">Accuracy</text>
+  
+  <!-- Bars. Base Y = 410. 80% = 300px height. 1% = 3.75px -->
+  <g transform="translate(100, 20)">
+    <!-- Opus 5: 37.1% -> h=139.1, y=250.9 -->
+    <rect x="0" y="250.9" width="150" height="139.1" rx="4" fill="#E3E8EE" />
+    <text x="75" y="240" font-size="14" font-weight="600" fill="#4B5563" text-anchor="middle">37.1%</text>
+    <text x="75" y="420" font-size="14" font-weight="600" fill="#111827" text-anchor="middle">Opus 5</text>
+    
+    <!-- GPT 5.6 Sol: 46.2% -> h=173.2, y=216.8 -->
+    <rect x="155" y="216.8" width="150" height="173.2" rx="4" fill="#AAB4BE" />
+    <text x="230" y="206" font-size="14" font-weight="600" fill="#4B5563" text-anchor="middle">46.2%</text>
+    <text x="230" y="420" font-size="14" font-weight="600" fill="#111827" text-anchor="middle">GPT 5.6 Sol</text>
+    
+    <!-- Gemini Robotics ER 1.6: 42.7% -> h=160.1, y=229.9 -->
+    <rect x="310" y="229.9" width="150" height="160.1" rx="4" fill="#88C6FF" />
+    <text x="385" y="219" font-size="14" font-weight="600" fill="#2563EB" text-anchor="middle">42.7%</text>
+    <text x="385" y="420" font-size="14" font-weight="600" fill="#111827" text-anchor="middle">Gemini Robotics ER 1.6</text>
+    
+    <!-- Gemini 3.6 Flash: 43.9% -> h=164.6, y=225.4 -->
+    <rect x="465" y="225.4" width="150" height="164.6" rx="4" fill="#3B82F6" />
+    <text x="540" y="215" font-size="14" font-weight="600" fill="#1D4ED8" text-anchor="middle">43.9%</text>
+    <text x="540" y="420" font-size="14" font-weight="600" fill="#111827" text-anchor="middle">Gemini 3.6 Flash</text>
+    
+    <!-- Gemini Robotics ER 2.0: 57.4% -> h=215.2, y=174.8 -->
+    <rect x="620" y="174.8" width="150" height="215.2" rx="4" fill="#1D4ED8" />
+    <text x="695" y="162" font-size="15" font-weight="700" fill="#1D4ED8" text-anchor="middle">57.4%</text>
+    <text x="695" y="420" font-size="14" font-weight="700" fill="#1D4ED8" text-anchor="middle">Gemini Robotics ER 2.0</text>
+  </g>
+</svg>

@@ -1,14 +1,12 @@
-# 🧠 Interesting & Experimental Prompts (Gemini Robotics 2 & ER 1.5)
+# Advanced Physical AI Prompts: Gemini Robotics 2.0 and ER 2
 
-This collection pushes the boundaries of what **Gemini Robotics ER 2** and **ER 1.5** can achieve. These prompts go far beyond simple "pick and place" and explore 3D physics reasoning, whole-body kinematics, multi-agent fleet collaboration, and ASIMOV-Agentic safety protocols.
-
-> **🧪 Experimental**: These prompts leverage the model's world model, 3D spatial grounding, and embodied commonsense reasoning.
+A curated collection of advanced embodied reasoning prompts for **Gemini Robotics 2.0** and **Gemini Robotics ER 2**, demonstrating 3D physical reasoning, whole-body kinematics, multi-agent fleet collaboration, and ASIMOV safety protocols.
 
 ---
 
-## 🦾 Whole-Body Kinematics & Posture Reasoning
+## 1. Whole-Body Kinematics and Posture Reasoning
 
-### 1. The "Low-Clearance Retriever" (Crouch + Reach)
+### The Low-Clearance Retriever (Crouch and Reach)
 *Prompts the robot to determine whether a target requires bending knees, crouching, or using dual arms.*
 
 **Prompt:**
@@ -25,9 +23,9 @@ The target object (torque wrench) has fallen under the conveyor belt frame (clea
 
 ---
 
-## 🤝 Multi-Robot Fleet Handoff & Coordination
+## 2. Multi-Robot Fleet Handoff and Coordination
 
-### 2. The "Synchronized Pallet Loader" (Humanoid + AMR Rover)
+### The Synchronized Pallet Loader (Humanoid + AMR Rover)
 *Coordinates two heterogeneous robots with spatial synchronization barriers.*
 
 **Prompt:**
@@ -45,9 +43,9 @@ Goal: Transfer the 20kg heavy transmission part from the shelf to Robot B's payl
 
 ---
 
-## 🏗️ 3D Affordance & Dexterous Grasping
+## 3. 3D Affordance and Dexterous Grasping
 
-### 3. The "Fragile Glassware Handler" (Compliance & Slip Margin)
+### The Fragile Glassware Handler (Compliance and Slip Margin)
 *Evaluates grasping surfaces and specifies normal grip forces based on material physics.*
 
 **Prompt:**
@@ -63,23 +61,23 @@ For each item:
 Format: [{"item": "wine_glass", "grasp_point_3d": [x,y,z], "force_limit_n": 4.5, "approach_vector": [0,0,-1]}]
 ```
 
-### 4. The "Hazmat Navigator" (Dynamic Safety Envelope)
+### The Hazmat Navigator (Dynamic Safety Envelope)
 *Planning collision-free paths around hazardous items (chemicals, heat sources, high-voltage).*
 
 **Prompt:**
 ```text
 I am manipulating a high-temperature heat gun (active nozzle > 300°C).
 Plot a 3D spline trajectory from the tool holster to the heat shrink tubing.
-CRITICAL ASIMOV CONSTRAINT:
+ASIMOV Safety Constraint:
 - Maintain at least 30cm clearance from flammable solvents and optical cables.
 - Point to the hazardous areas first, then output the 8 3D waypoints [x, y, z] avoiding them.
 ```
 
 ---
 
-## 🛡️ ASIMOV-Agentic Safety & Refusal
+## 4. ASIMOV Safety Governance and Refusal
 
-### 5. The "Unsafe Command Auditor" (Autonomous Refusal)
+### The Unsafe Command Auditor (Autonomous Refusal)
 *Tests the model's ability to refuse physical actions that violate human safety.*
 
 **Prompt:**
@@ -93,9 +91,9 @@ Current Scene: An operator is standing 80cm to the left of the robot arm.
 
 ---
 
-## 🕵️ Temporal & Forensic Video Analysis
+## 5. Temporal and Video Forensic Analysis
 
-### 6. "What Went Wrong?" (Grasp Failure Root-Cause Analysis)
+### Root-Cause Grasp Failure Analysis
 *Debugging failed physical executions using temporal video reasoning.*
 
 **Prompt:**
@@ -110,5 +108,6 @@ Analyze the failure:
 
 ---
 
-*Curated for Gemini Robotics 2 & ER 1.5 Early Access Program.*
-
+<p align="center">
+  <i>Curated for Gemini Robotics 2.0 & ER 2 by Pruthvi Geedh</i>
+</p>

@@ -17,7 +17,7 @@ setup(
     zip_safe=True,
     maintainer='Pruthvi Geedh',
     maintainer_email='pgeedh@users.noreply.github.com',
-    description='ROS 2 bridge nodes for Google DeepMind Gemini Robotics ER 2 and ER 1.5',
+    description='ROS 2 bridge nodes for Google DeepMind Gemini Robotics 2.0 (ER 2 and VLA 2)',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={

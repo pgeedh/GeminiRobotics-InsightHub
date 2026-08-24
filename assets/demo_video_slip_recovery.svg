@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="clipBg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a13" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="redAlertGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <style>
+      .telemetry-txt { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #38bdf8; }
+      .label-txt { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 700; fill: #f8fafc; }
+
+      /* Object slip oscillation */
+      @keyframes slipObject {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        35% { transform: translateY(14px) rotate(4deg); }
+        55% { transform: translateY(4px) rotate(0deg); }
+      }
+      /* Warning Alert Flashing */
+      @keyframes alertFlash {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 1.0; }
+      }
+      /* Gripper Clamp Re-squeeze */
+      @keyframes gripperSqueeze {
+        0%, 100% { transform: scaleX(1.0); }
+        40% { transform: scaleX(1.0); }
+        60% { transform: scaleX(0.92); }
+      }
+      .slipping-can { animation: slipObject 3s ease-in-out infinite; }
+      .alert-box { animation: alertFlash 1.5s ease-in-out infinite; }
+      .gripper-jaws { transform-origin: 150px 140px; animation: gripperSqueeze 3s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <rect width="540" height="320" rx="12" fill="url(#clipBg4)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Top UI Bar -->
+  <rect x="0" y="0" width="540" height="36" rx="12" fill="#090d16"/>
+  <circle cx="20" cy="18" r="4.5" fill="#eab308"/>
+  <text x="32" y="22" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#eab308">CLOSED-LOOP VIDEO AUDIT</text>
+  <text x="195" y="22" class="label-txt">Continuous Raw Video Grasp Slip Detection</text>
+  <rect x="465" y="10" width="55" height="16" rx="4" fill="#ef4444"/>
+  <text x="473" y="22" font-family="sans-serif" font-size="10" font-weight="bold" fill="#fff">RECOVERY</text>
+
+  <!-- Video Stream Canvas Frame -->
+  <rect x="35" y="55" width="230" height="225" rx="8" fill="#090d16" stroke="#334155"/>
+  <text x="48" y="76" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">FEED: /camera/wrist_rgb [30fps]</text>
+
+  <!-- Slipping Soda Can / Object -->
+  <g class="slipping-can">
+    <rect x="125" y="130" width="50" height="85" rx="10" fill="#dc2626" stroke="#ef4444" stroke-width="2"/>
+    <ellipse cx="150" cy="135" rx="20" ry="6" fill="#fca5a5"/>
+    <text x="135" y="175" font-family="sans-serif" font-size="11" font-weight="bold" fill="#fff">COLA</text>
+  </g>
+
+  <!-- Gripper Jaws Articulation -->
+  <g class="gripper-jaws">
+    <!-- Left Pad -->
+    <rect x="110" y="135" width="14" height="40" rx="3" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+    <!-- Right Pad -->
+    <rect x="176" y="135" width="14" height="40" rx="3" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+    <!-- Palm Mount -->
+    <rect x="120" y="105" width="60" height="30" rx="4" fill="#0f172a" stroke="#0284c7"/>
+  </g>
+
+  <!-- Dynamic Slip Warning Callout Overlay -->
+  <rect x="65" y="235" width="170" height="32" rx="6" fill="#450a0a" stroke="#ef4444" stroke-width="1.5" class="alert-box" filter="url(#redAlertGlow)"/>
+  <text x="75" y="255" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f87171">⚠️ SLIP DETECTED: +12mm</text>
+
+  <!-- Right Side Inspection Telemetry HUD -->
+  <rect x="290" y="55" width="230" height="225" rx="8" fill="#090d16" stroke="#1e293b"/>
+  <text x="302" y="76" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#94a3b8">VIDEO STATE REASONING</text>
+  <line x1="302" y1="84" x2="505" y2="84" stroke="#1e293b"/>
+  <text x="302" y="104" class="telemetry-txt" fill="#ef4444">● Event: TACTILE_SLIP (t=00:03.2)</text>
+  <text x="302" y="124" class="telemetry-txt">Velocity Delta: +0.08 m/s</text>
+  <text x="302" y="144" class="telemetry-txt">Displacement: 12.4 mm (Down)</text>
+  <text x="302" y="164" class="telemetry-txt" fill="#eab308">Original Grip Force: 12 N</text>
+  <text x="302" y="184" class="telemetry-txt" fill="#4ade80">Corrective Force: 24 N (+100%)</text>
+  <text x="302" y="204" class="telemetry-txt" fill="#4ade80">Stabilization State: RECOVERED</text>
+  <text x="302" y="224" class="telemetry-txt">Drop Prevented: TRUE</text>
+  <text x="302" y="244" class="telemetry-txt">Replanning Loop: 220 ms</text>
+  <text x="302" y="264" class="telemetry-txt">Status: SUCCESS_RESUME</text>
+</svg>
